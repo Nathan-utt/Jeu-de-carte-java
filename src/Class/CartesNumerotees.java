@@ -40,7 +40,7 @@ public class CartesNumerotees extends Carte {
 		super();
 		this.setCouleur(couleur);
 		this.setHauteur(hauteur);
-		this.name = hauteur.get;
+		this.name = this.getHauteur().;
 		this.hauteur = hauteur;
 		this.couleur = couleur;
 	}
