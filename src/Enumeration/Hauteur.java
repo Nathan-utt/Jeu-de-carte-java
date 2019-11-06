@@ -1,5 +1,5 @@
 package Enumeration;
 
 public enum Hauteur {
-		Joker, As, Deux, Trois, Quatre,
+	Joker, As, Deux, Trois, Quatre, 
 }
