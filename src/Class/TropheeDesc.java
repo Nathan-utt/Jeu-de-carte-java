@@ -6,7 +6,7 @@ public class TropheeDesc {
 	private TropheeEnum tropheeDesc;
 	private Enum infoSupp;
 
-	public TropheeEnum getTrophee() {
+	public TropheeEnum getTropheeDesc() {
 		return tropheeDesc;
 	}
 	

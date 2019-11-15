@@ -2,6 +2,7 @@ package Class;
 
 import Enumeration.Couleur;
 import Enumeration.Hauteur;
+import Enumeration.TropheeEnum;
 
 public class CartesNumerotees extends Carte {
 	private TropheeDesc trophee;
@@ -35,19 +36,26 @@ public class CartesNumerotees extends Carte {
             }
         }
     }
+    
+    public void setTrophee(TropheeDesc trophee) {
+    	for (TropheeEnum t : TropheeEnum.values()) {
+            if (t.name().equals(trophee.getTropheeDesc().name())) {
+                this.trophee = trophee;
+            }
+        }
+    }
 	
 	public CartesNumerotees(TropheeDesc trophee, Hauteur hauteur, Couleur couleur) {
 		super();
 		this.setCouleur(couleur);
 		this.setHauteur(hauteur);
-		this.name = hauteur.get;
-		this.hauteur = hauteur;
-		this.couleur = couleur;
+		this.name = this.getHauteur()+" de "+this.getCouleur();
+		this.setTrophee(trophee);
 	}
 	
 	@Override
 	public String toString() {
-		return "CartesNumerotees [trophee=" + trophee + ", hauteur=" + hauteur + ", couleur=" + couleur + "]";
+		return name;
 	}
 
 	@Override
