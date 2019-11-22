@@ -9,6 +9,8 @@ public class CartesNumerotees extends Carte {
 	private Hauteur hauteur;
 	private Couleur couleur;
 	
+	//Getter/Setter
+	
 	public TropheeDesc getTrophee() {
 		return trophee;
 	}
@@ -44,18 +46,20 @@ public class CartesNumerotees extends Carte {
             }
         }
     }
+    
+    //Constructeur
 	
 	public CartesNumerotees(TropheeDesc trophee, Hauteur hauteur, Couleur couleur) {
 		super();
 		this.setCouleur(couleur);
 		this.setHauteur(hauteur);
-		this.name = this.getHauteur()+" de "+this.getCouleur();
+		this.setName(this.getHauteur()+" de "+this.getCouleur());
 		this.setTrophee(trophee);
 	}
 	
 	@Override
 	public String toString() {
-		return name;
+		return this.getName();
 	}
 
 	@Override

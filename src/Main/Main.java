@@ -1,6 +1,7 @@
 package Main;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import Class.MaitreDuJeu;
 
@@ -8,8 +9,19 @@ public class Main {
 
 	public static void main(String[] args) {
 		MaitreDuJeu mdj = new MaitreDuJeu();
-		String[] choices = {"As de coeur","As de pique","Deux de carreau","Carte 1","Carte 2","Carte 3"};
-		mdj.askForChoice(choices);
+		mdj.playerCreation();
+		
+		
+		System.out.println(mdj.getPlayers());
+		//Game setup
+		
+		//Play all turns
+		
+		//Distribute trophees
+		
+		//Determine winner
+		
+		
 	}
 
 }
