@@ -9,6 +9,8 @@ public class CartesNumerotees extends Carte {
 	private Hauteur hauteur;
 	private Couleur couleur;
 	
+	//Getter/Setter
+	
 	public TropheeDesc getTrophee() {
 		return trophee;
 	}
@@ -44,18 +46,34 @@ public class CartesNumerotees extends Carte {
             }
         }
     }
+    
+    //Constructor
 	
 	public CartesNumerotees(TropheeDesc trophee, Hauteur hauteur, Couleur couleur) {
 		super();
 		this.setCouleur(couleur);
 		this.setHauteur(hauteur);
-		this.name = this.getHauteur()+" de "+this.getCouleur();
+		if (this.getHauteur().equals(Hauteur.Joker)) {
+			this.setName(this.getHauteur().toString());
+		} else {
+			this.setName(this.getHauteur()+" de "+this.getCouleur());
+		}
 		this.setTrophee(trophee);
+	}
+	
+	//probleme avec les couleurs (Quatre de trefle < Quatre de coeur)
+	public boolean isGreaterThan(CartesNumerotees carte) {
+		if (this.hauteur.ordinal() > carte.getHauteur().ordinal()) {
+			return true;
+		} else if (this.hauteur.ordinal() == carte.hauteur.ordinal() && this.couleur.ordinal() > carte.getCouleur().ordinal()) {
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
 	public String toString() {
-		return name;
+		return this.getName();
 	}
 
 	@Override
