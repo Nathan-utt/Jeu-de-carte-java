@@ -47,14 +47,28 @@ public class CartesNumerotees extends Carte {
         }
     }
     
-    //Constructeur
+    //Constructor
 	
 	public CartesNumerotees(TropheeDesc trophee, Hauteur hauteur, Couleur couleur) {
 		super();
 		this.setCouleur(couleur);
 		this.setHauteur(hauteur);
-		this.setName(this.getHauteur()+" de "+this.getCouleur());
+		if (this.getHauteur().equals(Hauteur.Joker)) {
+			this.setName(this.getHauteur().toString());
+		} else {
+			this.setName(this.getHauteur()+" de "+this.getCouleur());
+		}
 		this.setTrophee(trophee);
+	}
+	
+	//probleme avec les couleurs (Quatre de trefle < Quatre de coeur)
+	public boolean isGreaterThan(CartesNumerotees carte) {
+		if (this.hauteur.ordinal() > carte.getHauteur().ordinal()) {
+			return true;
+		} else if (this.hauteur.ordinal() == carte.hauteur.ordinal() && this.couleur.ordinal() > carte.getCouleur().ordinal()) {
+			return true;
+		}
+		return false;
 	}
 	
 	@Override

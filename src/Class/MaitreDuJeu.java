@@ -13,20 +13,58 @@ import Enumeration.TropheeEnum;
 public class MaitreDuJeu {
 	
 	private ArrayList<Joueur> Players;
-	public Scanner sc = new Scanner(System.in);
 	private HashSet<Carte> jeuDeCarte;
+	private Deck remainingDeck;
+	private Deck distributionDeck;
+	private Deck trophees;
+	private Joueur currentPlayer;
+	
+	public static Scanner sc = new Scanner(System.in);
+	
 	
 	//Constructor
 	
 	public MaitreDuJeu() {
 		super();
-		Players = new ArrayList<Joueur>();
+		this.Players = new ArrayList<Joueur>();
+		this.playerCreation();
+		this.jeuDeCarte = new HashSet<Carte>();
+		this.setJeuDeCarte();
+		this.remainingDeck = new Deck(17);
+		this.setRemainingDeck();
+		this.trophees = new Deck(2-this.Players.size()%3);
+		this.setTrophees();
+		this.distributionDeck = new Deck(this.Players.size()*2);
+		this.setDistributionDeck();
 	}
 
 	//Setter/Getter
 	
+	
+	
 	public HashSet<Carte> getJeuDeCarte() {
 		return jeuDeCarte;
+	}
+	
+	public void setRemainingDeck() {
+		Iterator<Carte> iteJeuDeCarte = this.jeuDeCarte.iterator();
+		while (iteJeuDeCarte.hasNext()) {
+			Carte carte = (Carte) iteJeuDeCarte.next();
+			if (carte.getClass().equals(CartesNumerotees.class)) this.remainingDeck.putCardLast(carte);
+		}
+		this.remainingDeck.shuffleDeck(1000);
+	}
+	
+	public void setTrophees() {
+		while (this.trophees.getDeck().size() < this.trophees.getMaxCards()) {
+			this.trophees.putCardFirst(this.remainingDeck.getFirstCard());
+		}
+	}
+	
+	public void setDistributionDeck() {
+		while (this.distributionDeck.getDeck().size() < this.distributionDeck.getMaxCards()) {
+			this.distributionDeck.putCardFirst(this.remainingDeck.getFirstCard());
+		}
 	}
 
 	public void setJeuDeCarte() {
@@ -53,27 +91,67 @@ public class MaitreDuJeu {
 	public ArrayList<Joueur> getPlayers() {
 		return Players;
 	}
-
-	public void setPlayers(ArrayList<Joueur> players) {
-		Players = players;
-	}
 	
 	public void addPlayer(Joueur player) {
 		Players.add(player);
 	}
 	
+	public Deck getRemainingDeck() {
+		return remainingDeck;
+	}
+
+	public Deck getDistributionDeck() {
+		return distributionDeck;
+	}
+	
+	public Deck getTrophees() {
+		return trophees;
+	}
+	
 	//Function
+	
+	public void distribute() {
+		for (int i = 0; i < 2; i++) {
+			Iterator<Joueur> iteJoueur = this.Players.iterator();
+			while (iteJoueur.hasNext()) {
+				Joueur joueur = (Joueur) iteJoueur.next();
+				Carte distributedCard = this.distributionDeck.getFirstCard();
+				distributedCard.setVisible(true);
+				joueur.getHand().putCardLast(distributedCard);
+			}
+		}
+	}
+	
+	public void getCardsBack() {
+		Iterator<Joueur> iteJoueur = this.Players.iterator();
+		while (iteJoueur.hasNext()) {
+			Joueur joueur = (Joueur) iteJoueur.next();
+			Carte returnedCard = joueur.getOffer().getFirstCard();
+			returnedCard.setVisible(false);
+			this.distributionDeck.putCardFirst(returnedCard);
+		}
+	}
+	
+	public void getCardsRemainingToJest() {
+		Iterator<Joueur> iteJoueur = this.Players.iterator();
+		while (iteJoueur.hasNext()) {
+			Joueur joueur = (Joueur) iteJoueur.next();
+			Carte returnedCard = joueur.getOffer().getFirstCard();
+			returnedCard.setVisible(true);
+			joueur.getJest().putCardFirst(returnedCard);
+		}
+	}
 
 	public void playerCreation() {
 		Integer numberOfPlayers = 0;
 		Integer computerCount = 1;
 		
 		System.out.println("Avec combien de joueurs voulez vous jouer?");
-		numberOfPlayers = Integer.parseInt(this.askForChoice(new ArrayList<String>(Arrays.asList(new String[] {"3","4"})))); 
+		numberOfPlayers = Integer.parseInt(MaitreDuJeu.askForChoice(new ArrayList<String>(Arrays.asList(new String[] {"3","4"})))); 
 			
 		for (int pn = 1; pn <= numberOfPlayers; pn++) {
 			System.out.println("Le joueur "+pn+" est-il un joueur ou un ordinateur?");
-			if (this.askForChoice(new ArrayList<String>(Arrays.asList(new String[] {"Joueur","Ordinateur"}))) == "Joueur") {
+			if (MaitreDuJeu.askForChoice(new ArrayList<String>(Arrays.asList(new String[] {"Joueur","Ordinateur"}))) == "Joueur") {
 				String entered = "";
 				Boolean flag = false;
 				do {
@@ -95,7 +173,7 @@ public class MaitreDuJeu {
 		}
 	}
 	
-	public String askForChoice(ArrayList<String> choices) {
+	public static String askForChoice(ArrayList<String> choices) {
 		HashSet<Integer> idMatched = null;
 		do {
 			if (idMatched != null && idMatched.isEmpty()) {
@@ -132,5 +210,42 @@ public class MaitreDuJeu {
 			finalChoice = choices.get(id);
 		}
 		return finalChoice;
+	}
+	
+	public Joueur comparePlayersOffer(HashSet<Joueur> players) {
+		Iterator<Joueur> itePlayers = players.iterator();
+		Joueur maxJoueur = null;
+		while (itePlayers.hasNext()) {
+			Joueur joueur = (Joueur) itePlayers.next();
+			if (maxJoueur == null) {
+				maxJoueur = joueur;
+			} else if (((CartesNumerotees) joueur.getOffer().getDeck().get(1)).isGreaterThan((CartesNumerotees) maxJoueur.getOffer().getDeck().get(1))) {
+				maxJoueur = joueur;
+			}
+		}
+		return maxJoueur;
+	}
+	
+	public void takingOffers() {
+		Joueur playerThatShouldChooseNow = null;
+		HashSet<Joueur> remainingPlayers = new HashSet<Joueur>(this.Players);
+		HashSet<Joueur> alreadyChoosePlayers = new HashSet<Joueur>();
+		for (int i = 0; i < this.Players.size(); i++) {
+			if (playerThatShouldChooseNow == null || alreadyChoosePlayers.contains(playerThatShouldChooseNow)) {
+				playerThatShouldChooseNow = this.comparePlayersOffer(remainingPlayers);
+			}
+			alreadyChoosePlayers.add(playerThatShouldChooseNow);
+			System.out.println("A toi "+playerThatShouldChooseNow.getPseudo()+", choisit une carte parmis toutes celles restantes.");
+			playerThatShouldChooseNow = playerThatShouldChooseNow.takeOffer(remainingPlayers);
+		}
+	}
+	
+	public void makingOffers() {
+		Iterator<Joueur> itePlayer = this.Players.iterator();
+		while (itePlayer.hasNext()) {
+			Joueur joueur = (Joueur) itePlayer.next();
+			System.out.println("A toi "+joueur.getPseudo());
+			joueur.makeOffer();
+		}
 	}
 }
