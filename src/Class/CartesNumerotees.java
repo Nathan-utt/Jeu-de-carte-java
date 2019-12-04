@@ -49,8 +49,8 @@ public class CartesNumerotees extends Carte {
     
     //Constructor
 	
-	public CartesNumerotees(TropheeDesc trophee, Hauteur hauteur, Couleur couleur) {
-		super();
+	public CartesNumerotees(TropheeDesc trophee, Hauteur hauteur, Couleur couleur,Boolean extension) {
+		super(extension);
 		this.setCouleur(couleur);
 		this.setHauteur(hauteur);
 		if (this.getHauteur().equals(Hauteur.Joker)) {
@@ -61,11 +61,11 @@ public class CartesNumerotees extends Carte {
 		this.setTrophee(trophee);
 	}
 	
-	//probleme avec les couleurs (Quatre de trefle < Quatre de coeur)
+	
 	public boolean isGreaterThan(CartesNumerotees carte) {
 		if (this.hauteur.ordinal() > carte.getHauteur().ordinal()) {
 			return true;
-		} else if (this.hauteur.ordinal() == carte.hauteur.ordinal() && this.couleur.ordinal() > carte.getCouleur().ordinal()) {
+		} else if (this.hauteur.ordinal() == carte.getHauteur().ordinal() && this.couleur.ordinal() > carte.getCouleur().ordinal()) {
 			return true;
 		}
 		return false;
@@ -73,7 +73,11 @@ public class CartesNumerotees extends Carte {
 	
 	@Override
 	public String toString() {
-		return this.getName();
+		if (this.isVisible()) {
+			return this.getName();
+		} else {
+			return "Carte cachée";
+		}
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package Class;
 public abstract class Carte {
 	private String name;
 	private Boolean visible;
+	private Boolean isExtension;
 	
 	public Boolean isVisible() {
 		return visible;
@@ -20,8 +21,14 @@ public abstract class Carte {
 		this.name = name;
 	}
 
-	public Carte() {
-		this.visible = false;
+	public Boolean getIsExtension() {
+		return isExtension;
 	}
+
+	public Carte(Boolean extension) {
+		this.visible = false;
+		this.isExtension = extension;
+	}
+	
 	
 }

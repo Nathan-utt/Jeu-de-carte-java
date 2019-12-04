@@ -1,7 +1,7 @@
 package Enumeration;
 
 public enum Hauteur {
-	Joker("Joker"), As("As"), Deux("Deux"), Trois("Trois"), Quatre("Quatre");
+	Joker("Joker"), As("As"), Deux("Deux"), Trois("Trois"), Quatre("Quatre"), Cinq("Cinq"), Six("Six"), Sept("Sept");
 	
 private String desc ;  
     

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
+import Class.Carte;
+import Class.CartesNumerotees;
 import Class.Joueur;
 import Class.MaitreDuJeu;
 
@@ -13,6 +15,12 @@ public class Main {
 		MaitreDuJeu mdj = new MaitreDuJeu();
 		boolean flag = true;
 		//Gestion d'une partie
+		Iterator<Carte> iteTrophees = mdj.getTrophees().getDeck().iterator();
+		System.out.println("Les trophées pour cette partie sont :");
+		while (iteTrophees.hasNext()) {
+			Carte carte = (Carte) iteTrophees.next();
+			System.out.println("- "+((CartesNumerotees)carte).getName()+" -> "+((CartesNumerotees)carte).getTrophee());
+		}
 		while (flag) {
 			mdj.distribute();
 			mdj.makingOffers();
@@ -26,7 +34,14 @@ public class Main {
 			}
 		}
 		
+		
+		
+		mdj.awardTrophees();
+		
+		Joueur winner = mdj.getWinner();
+		
 		System.out.println("================================Recap Partie=========================================");
+		System.out.println("=============================Winner : "+winner.getPseudo()+"======================================");
 		System.out.println("--------------------------------Distribution deck------------------------------------");
 		System.out.println(mdj.getDistributionDeck().getDeck());
 		System.out.println("--------------------------------Remaining deck---------------------------------------");
@@ -35,6 +50,7 @@ public class Main {
 		Iterator<Joueur> itePlayers = mdj.getPlayers().iterator();
 		while (itePlayers.hasNext()) {
 			Joueur joueur = (Joueur) itePlayers.next();
+			System.out.println("----------------------------"+joueur.getPseudo()+" score "+mdj.getScore(joueur, true)+"-----------------------------------");
 			System.out.println("--------------------------------"+joueur.getPseudo()+" jest---------------------------------------");
 			System.out.println(joueur.getJest().getDeck());
 			System.out.println("--------------------------------"+joueur.getPseudo()+" hand---------------------------------------");

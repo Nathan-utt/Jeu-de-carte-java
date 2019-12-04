@@ -11,8 +11,8 @@ public class CarteRegle extends Carte{
 		this.texte = texte;
 	}
 
-	public CarteRegle(String texte) {
-		super();
+	public CarteRegle(String texte,Boolean extension) {
+		super(extension);
 		this.setName("règles");
 		this.texte = texte;
 	}

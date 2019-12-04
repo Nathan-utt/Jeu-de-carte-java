@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import Enumeration.Couleur;
+import Enumeration.Hauteur;
+import Enumeration.TropheeEnum;
 
 public class Joueur {
 	private String pseudo;
@@ -71,7 +74,7 @@ public class Joueur {
 		this.number = number;
 		this.hand = new Deck(2);
 		this.offer = new Deck(2);
-		this.jest = new Deck(16);
+		this.jest = new Deck(20);
 	}
 	
 	//Function
@@ -89,7 +92,6 @@ public class Joueur {
 		visibleCard.setVisible(true);
 		this.offer.putCardFirst(visibleCard);
 		this.offer.putCardFirst(hiddenCard);
-		System.out.println("debug" +this.offer.getDeck());
 	}
 	
 	public Joueur takeOffer(HashSet<Joueur> players) {
@@ -113,8 +115,236 @@ public class Joueur {
 		players.remove(chosenFrom);
 		Carte chosen = (chosenFrom.getOffer().getDeck().get(1).getName() == answer) ? chosenFrom.getOffer().getCard(1) : chosenFrom.getOffer().getCard(0);
 		chosen.setVisible(true);
+		System.out.println("Tu as obtenu : "+chosen);
 		this.jest.putCardFirst(chosen);
 		return chosenFrom;
+	}
+	
+	public Integer calculateScoreBase(Boolean withJoker,Boolean extension) {
+		Iterator<Carte> iteCards = this.jest.getDeck().iterator();
+		Integer score = 0;
+		Integer countHeart = 0;
+		Boolean hasJoker = false;
+		HashSet<Hauteur> alreadyEncounteredHauteur = new HashSet<Hauteur>();
+		Integer[] colorCount = {0,0,0,0};
+		HashSet<Couleur> aceEncountered = new HashSet<Couleur>();
+		while (iteCards.hasNext()) {
+			Carte carte = (Carte) iteCards.next();
+			if (carte.getClass().equals(CartesNumerotees.class)) {
+				CartesNumerotees card =  (CartesNumerotees)carte;
+				switch (card.getCouleur()) {
+				case Coeur :
+					if (card.getHauteur() == Hauteur.As) {
+						aceEncountered.add(card.getCouleur());
+					}
+					colorCount[card.getCouleur().ordinal()] += 1;
+					countHeart += card.getHauteur().ordinal();
+					break;
+				case Pique :
+					if (card.getHauteur() == Hauteur.As) {
+						aceEncountered.add(card.getCouleur());
+					}
+					if (alreadyEncounteredHauteur.contains(card.getHauteur())) {
+						score += 2;
+					} else {
+						alreadyEncounteredHauteur.add(card.getHauteur());
+					}
+					colorCount[card.getCouleur().ordinal()] += 1;
+					score += card.getHauteur().ordinal();
+					break;
+				case Trefle:
+					if (card.getHauteur() == Hauteur.As) {
+						aceEncountered.add(card.getCouleur());
+					}
+					if (alreadyEncounteredHauteur.contains(card.getHauteur())) {
+						score += 2;
+					} else {
+						alreadyEncounteredHauteur.add(card.getHauteur());
+					}
+					colorCount[card.getCouleur().ordinal()] += 1;
+					score += card.getHauteur().ordinal();
+					break;	
+				case Carreau:
+					if (card.getHauteur() == Hauteur.As) {
+						aceEncountered.add(card.getCouleur());
+					}
+					colorCount[card.getCouleur().ordinal()] += 1;
+					score -= card.getHauteur().ordinal();
+					break;
+				default:
+					hasJoker = true;
+					break;
+				}
+			}
+		}
+		
+		
+		
+		Iterator<Couleur> iteAs = aceEncountered.iterator();
+		while (iteAs.hasNext()) {
+			Couleur couleur = (Couleur) iteAs.next();
+			if (colorCount[couleur.ordinal()] == 1 && (couleur == Couleur.Pique || couleur == Couleur.Trefle)) score += extension ? 6 : 4;
+			if (colorCount[couleur.ordinal()] == 1 && couleur == Couleur.Carreau) score -= extension ? 6 : 4;
+			if (colorCount[couleur.ordinal()] == 1 && couleur == Couleur.Coeur) countHeart += extension ? 6 : 4;
+		}
+		
+		
+		if (hasJoker && withJoker) {
+			if (countHeart == 1+2+3+4) {
+				score += countHeart;
+			} else {
+				score -= countHeart;
+			}
+		}
+		
+		return score; 
+	}
+	
+	public Integer calculateScoreReversed(Boolean withJoker,Boolean extension) {
+		Iterator<Carte> iteCards = this.jest.getDeck().iterator();
+		Integer score = 0;
+		Integer countHeart = 0;
+		Boolean hasJoker = false;
+		HashSet<Hauteur> alreadyEncounteredHauteur = new HashSet<Hauteur>();
+		Integer[] colorCount = {0,0,0,0};
+		HashSet<Couleur> aceEncountered = new HashSet<Couleur>();
+		while (iteCards.hasNext()) {
+			Carte carte = (Carte) iteCards.next();
+			if (carte.getClass().equals(CartesNumerotees.class)) {
+				CartesNumerotees card =  (CartesNumerotees)carte;
+				switch (card.getCouleur()) {
+				case Coeur :
+					if (card.getHauteur() == Hauteur.As) {
+						aceEncountered.add(card.getCouleur());
+					}
+					colorCount[card.getCouleur().ordinal()] += 1;
+					countHeart += card.getHauteur().ordinal();
+					break;
+				case Pique :
+					if (card.getHauteur() == Hauteur.As) {
+						aceEncountered.add(card.getCouleur());
+					}
+					if (alreadyEncounteredHauteur.contains(card.getHauteur())) {
+						score -= 2;
+					} else {
+						alreadyEncounteredHauteur.add(card.getHauteur());
+					}
+					colorCount[card.getCouleur().ordinal()] += 1;
+					score -= card.getHauteur().ordinal();
+					break;
+				case Trefle:
+					if (card.getHauteur() == Hauteur.As) {
+						aceEncountered.add(card.getCouleur());
+					}
+					if (alreadyEncounteredHauteur.contains(card.getHauteur())) {
+						score -= 2;
+					} else {
+						alreadyEncounteredHauteur.add(card.getHauteur());
+					}
+					colorCount[card.getCouleur().ordinal()] += 1;
+					score -= card.getHauteur().ordinal();
+					break;	
+				case Carreau:
+					if (card.getHauteur() == Hauteur.As) {
+						aceEncountered.add(card.getCouleur());
+					}
+					colorCount[card.getCouleur().ordinal()] += 1;
+					score += card.getHauteur().ordinal();
+					break;
+				default:
+					hasJoker = true;
+					break;
+				}
+			}
+		}
+		
+		Iterator<Couleur> iteAs = aceEncountered.iterator();
+		while (iteAs.hasNext()) {
+			Couleur couleur = (Couleur) iteAs.next();
+			if (colorCount[couleur.ordinal()] == 1 && (couleur == Couleur.Pique || couleur == Couleur.Trefle)) score += extension ? 6 : 4;
+			if (colorCount[couleur.ordinal()] == 1 && couleur == Couleur.Carreau) score -= extension ? 6 : 4;
+			if (colorCount[couleur.ordinal()] == 1 && couleur == Couleur.Coeur) countHeart += extension ? 6 : 4;
+		}
+		
+		
+		if (hasJoker && withJoker) {
+			if (countHeart == 1+2+3+4) {
+				score -= countHeart;
+			} else {
+				score += countHeart;
+			}
+		}
+		
+		return score; 
+	}
+	
+	public Integer getInfoForThrophees(TropheeEnum trophee,Enum infoSupp){
+		CartesNumerotees toReturn = null;
+		Integer count = 0;
+		Iterator<Carte> iteJest = this.jest.getDeck().iterator();
+		
+		switch (trophee) {
+		case plusGrand:
+			while (iteJest.hasNext()) {
+				Carte carte = (Carte) iteJest.next();
+				if (carte.getClass().equals(CartesNumerotees.class)) {
+					CartesNumerotees card = (CartesNumerotees) carte;
+					if (card.getCouleur() == (Couleur)infoSupp) {
+						if (toReturn == null) {
+							toReturn = card;
+						} else {
+							if (card.isGreaterThan(toReturn)) {
+								toReturn = card;
+							}
+						}
+					}
+				}
+			}
+			count = toReturn == null ? 0 : toReturn.getHauteur().ordinal();
+			break;
+		case plusPetit:
+			while (iteJest.hasNext()) {
+				Carte carte = (Carte) iteJest.next();
+				if (carte.getClass().equals(CartesNumerotees.class)) {
+					CartesNumerotees card = (CartesNumerotees) carte;
+					if (card.getCouleur() == (Couleur)infoSupp) {
+						if (toReturn == null) {
+							toReturn = card;
+						} else {
+							if (toReturn.isGreaterThan(card)) {
+								toReturn = card;
+							}
+						}
+					}
+				}
+			}
+			count = toReturn == null ? 0 : toReturn.getHauteur().ordinal();
+			break;
+		case majorite:
+			while (iteJest.hasNext()) {
+				Carte carte = (Carte) iteJest.next();
+				if (carte.getClass().equals(CartesNumerotees.class)) {
+					CartesNumerotees card = (CartesNumerotees) carte;
+					if (card.getHauteur().equals((Hauteur)infoSupp)) {
+						count += 1;
+					}
+				}
+			}
+			break;
+		case joker:
+			while (iteJest.hasNext()) {
+				Carte carte = (Carte) iteJest.next();
+				if (carte.getClass().equals(CartesNumerotees.class)) {
+					CartesNumerotees card = (CartesNumerotees) carte;
+					if (card.getHauteur() == Hauteur.Joker) {
+						count += 1;
+					}
+				}
+			}
+			break;
+		}
+		
+		return count;
 	}
 	
 	@Override

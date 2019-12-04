@@ -42,6 +42,12 @@ public class TropheeDesc {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return this.infoSupp == null ? this.tropheeDesc.getShortDesc()+" : "+this.tropheeDesc.getLongDesc() : this.tropheeDesc.getShortDesc()+" : "+this.tropheeDesc.getLongDesc()+" sur les "+this.infoSupp;
+	}
+	
 	
 	
 }

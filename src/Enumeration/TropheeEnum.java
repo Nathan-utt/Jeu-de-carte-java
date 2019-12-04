@@ -1,9 +1,9 @@
 package Enumeration;
 
 public enum TropheeEnum {
-	plusGrand("Plus Haute","Joeueur avec la plus haute valeur de cette couleur"),
+	plusGrand("Plus Haute","Joueur avec la plus haute valeur de cette couleur"),
 	plusPetit("Plus Basse","Joueur avec la plus petite valeur de cette couleur"),
-	majorite("Majorité","Joueur avec la plus petite valeur de cette couleur"),
+	majorite("Majorité","Joueur avec la plus grande quantité de cette hauteur"),
 	joker("Joker","Joueur possédant le Joker"),
 	bestJest("Meilleur Jest","Joueur avec le meilleur Jest avec le Joker"),
 	bestJestNoJoker("Meilleur Jest Sans Joker","Joueur avec le meilleur Jest sans le Joker");
