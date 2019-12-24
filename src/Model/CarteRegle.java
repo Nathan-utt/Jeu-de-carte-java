@@ -1,4 +1,4 @@
-package Class;
+package Model;
 
 public class CarteRegle extends Carte{
 	private String texte;

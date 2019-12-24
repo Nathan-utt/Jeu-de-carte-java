@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
-import Class.Carte;
-import Class.CartesNumerotees;
-import Class.Joueur;
-import Class.MaitreDuJeu;
+import Model.Carte;
+import Model.CartesNumerotees;
+import Model.Joueur;
+import Model.MaitreDuJeu;
 
 public class Main {
 
@@ -50,7 +50,7 @@ public class Main {
 		Iterator<Joueur> itePlayers = mdj.getPlayers().iterator();
 		while (itePlayers.hasNext()) {
 			Joueur joueur = (Joueur) itePlayers.next();
-			System.out.println("----------------------------"+joueur.getPseudo()+" score "+mdj.getScore(joueur, true)+"-----------------------------------");
+			System.out.println("----------------------------"+joueur.getPseudo()+" score "+mdj.getSv().getScore(joueur, true)+"-----------------------------------");
 			System.out.println("--------------------------------"+joueur.getPseudo()+" jest---------------------------------------");
 			System.out.println(joueur.getJest().getDeck());
 			System.out.println("--------------------------------"+joueur.getPseudo()+" hand---------------------------------------");

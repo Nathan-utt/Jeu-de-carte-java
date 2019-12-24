@@ -1,4 +1,4 @@
-package Class;
+package Model;
 
 public abstract class Carte {
 	private String name;

@@ -1,17 +1,16 @@
-package Class;
+package Model;
 
 import Enumeration.Couleur;
 import Enumeration.Hauteur;
-import Enumeration.TropheeEnum;
 
 public class CartesNumerotees extends Carte {
-	private TropheeDesc trophee;
+	private Trophee trophee;
 	private Hauteur hauteur;
 	private Couleur couleur;
 	
 	//Getter/Setter
 	
-	public TropheeDesc getTrophee() {
+	public Trophee getTrophee() {
 		return trophee;
 	}
 	
@@ -39,17 +38,13 @@ public class CartesNumerotees extends Carte {
         }
     }
     
-    public void setTrophee(TropheeDesc trophee) {
-    	for (TropheeEnum t : TropheeEnum.values()) {
-            if (t.name().equals(trophee.getTropheeDesc().name())) {
-                this.trophee = trophee;
-            }
-        }
+    public void setTrophee(Trophee trophee) {
+    	this.trophee = trophee;
     }
     
     //Constructor
 	
-	public CartesNumerotees(TropheeDesc trophee, Hauteur hauteur, Couleur couleur,Boolean extension) {
+	public CartesNumerotees(Trophee trophee, Hauteur hauteur, Couleur couleur,Boolean extension) {
 		super(extension);
 		this.setCouleur(couleur);
 		this.setHauteur(hauteur);

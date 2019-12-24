@@ -1,4 +1,4 @@
-package Class;
+package Model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 import Enumeration.Couleur;
 import Enumeration.Hauteur;
-import Enumeration.TropheeEnum;
 import Enumeration.Variante;
 
 public class MaitreDuJeu {
@@ -21,6 +20,7 @@ public class MaitreDuJeu {
 	private Joueur currentPlayer;
 	private Variante usedVariante;
 	private Boolean playingWithExtension;
+	private ScoreVisitor sv;
 	
 	public static Scanner sc = new Scanner(System.in);
 	
@@ -34,6 +34,7 @@ public class MaitreDuJeu {
 		this.Players = new ArrayList<Joueur>();
 		this.playerCreation();
 		this.jeuDeCarte = new HashSet<Carte>();
+		this.sv = new ScoreVisitor(playingWithExtension,this.usedVariante == Variante.Reversed);
 		this.setJeuDeCarte(this.usedVariante == Variante.Random ? true : false);
 		this.remainingDeck = new Deck(this.playingWithExtension ? 29 : 17);
 		this.setRemainingDeck();
@@ -82,6 +83,10 @@ public class MaitreDuJeu {
 		return jeuDeCarte;
 	}
 	
+	public ScoreVisitor getSv() {
+		return this.sv;
+	}
+	
 	public void setRemainingDeck() {
 		System.out.println("jeu");
 		Iterator<Carte> iteJeuDeCarte = this.jeuDeCarte.iterator();
@@ -112,22 +117,22 @@ public class MaitreDuJeu {
 
 	public void setJeuDeCarte(Boolean random) {
 		if (random) {
-			ArrayList<TropheeDesc> trophees = new ArrayList<TropheeDesc>(Arrays.asList(new TropheeDesc[] {
-					new TropheeDesc(TropheeEnum.bestJest,null),
-					new TropheeDesc(TropheeEnum.joker,null),
-					new TropheeDesc(TropheeEnum.majorite,Hauteur.As),
-					new TropheeDesc(TropheeEnum.majorite,Hauteur.Deux),
-					new TropheeDesc(TropheeEnum.majorite,Hauteur.Trois),
-					new TropheeDesc(TropheeEnum.majorite,Hauteur.Quatre),
-					new TropheeDesc(TropheeEnum.plusGrand,Couleur.Carreau),
-					new TropheeDesc(TropheeEnum.plusGrand,Couleur.Coeur),
-					new TropheeDesc(TropheeEnum.plusGrand,Couleur.Pique),
-					new TropheeDesc(TropheeEnum.plusGrand,Couleur.Trefle),
-					new TropheeDesc(TropheeEnum.plusPetit,Couleur.Carreau),
-					new TropheeDesc(TropheeEnum.plusPetit,Couleur.Coeur),
-					new TropheeDesc(TropheeEnum.plusPetit,Couleur.Pique),
-					new TropheeDesc(TropheeEnum.plusPetit,Couleur.Trefle),
-					new TropheeDesc(TropheeEnum.bestJestNoJoker,null)
+			ArrayList<Trophee> trophees = new ArrayList<Trophee>(Arrays.asList(new Trophee[] {
+					new TropheeBest(sv),
+					new TropheeJoker(),
+					new TropheeMajority(Hauteur.As),
+					new TropheeMajority(Hauteur.Deux),
+					new TropheeMajority(Hauteur.Trois),
+					new TropheeMajority(Hauteur.Quatre),
+					new TropheeHighest(Couleur.Carreau),
+					new TropheeHighest(Couleur.Coeur),
+					new TropheeHighest(Couleur.Pique),
+					new TropheeHighest(Couleur.Trefle),
+					new TropheeLowest(Couleur.Carreau),
+					new TropheeLowest(Couleur.Coeur),
+					new TropheeLowest(Couleur.Pique),
+					new TropheeLowest(Couleur.Trefle),
+					new TropheeBestNoJoker(sv)
 					}));
 			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Joker,Couleur.Null,false));
 			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.As,Couleur.Coeur,false));
@@ -160,36 +165,36 @@ public class MaitreDuJeu {
 			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Six,Couleur.Trefle,true));
 			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Sept,Couleur.Trefle,true));
 		} else {
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.bestJest,null),Hauteur.Joker,Couleur.Null,false));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.joker,null),Hauteur.As,Couleur.Coeur,false));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.joker,null),Hauteur.Deux,Couleur.Coeur,false));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.joker,null),Hauteur.Trois,Couleur.Coeur,false));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.joker,null),Hauteur.Quatre,Couleur.Coeur,false));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.majorite,Hauteur.Quatre),Hauteur.As,Couleur.Carreau,false));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.plusGrand,Couleur.Carreau),Hauteur.Deux,Couleur.Carreau,false));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.plusPetit,Couleur.Carreau),Hauteur.Trois,Couleur.Carreau,false));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.bestJestNoJoker,null),Hauteur.Quatre,Couleur.Carreau,false));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.plusGrand,Couleur.Trefle),Hauteur.As,Couleur.Pique,false));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.majorite,Hauteur.Trois),Hauteur.Deux,Couleur.Pique,false));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.majorite,Hauteur.Deux),Hauteur.Trois,Couleur.Pique,false));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.plusPetit,Couleur.Trefle),Hauteur.Quatre,Couleur.Pique,false));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.plusGrand,Couleur.Pique),Hauteur.As,Couleur.Trefle,false));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.plusPetit,Couleur.Coeur),Hauteur.Deux,Couleur.Trefle,false));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.plusGrand,Couleur.Coeur),Hauteur.Trois,Couleur.Trefle,false));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.plusPetit,Couleur.Pique),Hauteur.Quatre,Couleur.Trefle,false));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeBest(sv),Hauteur.Joker,Couleur.Null,false));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeJoker(),Hauteur.As,Couleur.Coeur,false));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeJoker(),Hauteur.Deux,Couleur.Coeur,false));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeJoker(),Hauteur.Trois,Couleur.Coeur,false));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeJoker(),Hauteur.Quatre,Couleur.Coeur,false));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeMajority(Hauteur.Quatre),Hauteur.As,Couleur.Carreau,false));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeHighest(Couleur.Carreau),Hauteur.Deux,Couleur.Carreau,false));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeLowest(Couleur.Carreau),Hauteur.Trois,Couleur.Carreau,false));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeBestNoJoker(sv),Hauteur.Quatre,Couleur.Carreau,false));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeHighest(Couleur.Trefle),Hauteur.As,Couleur.Pique,false));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeMajority(Hauteur.Trois),Hauteur.Deux,Couleur.Pique,false));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeMajority(Hauteur.Deux),Hauteur.Trois,Couleur.Pique,false));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeLowest(Couleur.Trefle),Hauteur.Quatre,Couleur.Pique,false));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeHighest(Couleur.Pique),Hauteur.As,Couleur.Trefle,false));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeLowest(Couleur.Coeur),Hauteur.Deux,Couleur.Trefle,false));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeHighest(Couleur.Coeur),Hauteur.Trois,Couleur.Trefle,false));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeLowest(Couleur.Pique),Hauteur.Quatre,Couleur.Trefle,false));
 			
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.joker,null),Hauteur.Cinq,Couleur.Coeur,true));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.joker,null),Hauteur.Six,Couleur.Coeur,true));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.joker,null),Hauteur.Sept,Couleur.Coeur,true));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.plusGrand,Couleur.Carreau),Hauteur.Cinq,Couleur.Carreau,true));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.majorite,Hauteur.Six),Hauteur.As,Couleur.Carreau,true));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.plusPetit,Couleur.Carreau),Hauteur.Sept,Couleur.Carreau,true));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.plusPetit,Couleur.Carreau),Hauteur.Cinq,Couleur.Pique,true));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.bestJestNoJoker,null),Hauteur.Six,Couleur.Pique,true));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.plusGrand,Couleur.Trefle),Hauteur.Sept,Couleur.Pique,true));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.majorite,Hauteur.Trois),Hauteur.Cinq,Couleur.Trefle,true));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.majorite,Hauteur.Deux),Hauteur.Six,Couleur.Trefle,true));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeDesc(TropheeEnum.plusPetit,Couleur.Trefle),Hauteur.Sept,Couleur.Trefle,true));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeJoker(),Hauteur.Cinq,Couleur.Coeur,true));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeJoker(),Hauteur.Six,Couleur.Coeur,true));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeJoker(),Hauteur.Sept,Couleur.Coeur,true));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeHighest(Couleur.Carreau),Hauteur.Cinq,Couleur.Carreau,true));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeMajority(Hauteur.Six),Hauteur.As,Couleur.Carreau,true));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeLowest(Couleur.Carreau),Hauteur.Sept,Couleur.Carreau,true));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeLowest(Couleur.Carreau),Hauteur.Cinq,Couleur.Pique,true));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeBestNoJoker(sv),Hauteur.Six,Couleur.Pique,true));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeHighest(Couleur.Trefle),Hauteur.Sept,Couleur.Pique,true));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeMajority(Hauteur.Trois),Hauteur.Cinq,Couleur.Trefle,true));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeMajority(Hauteur.Deux),Hauteur.Six,Couleur.Trefle,true));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeLowest(Couleur.Trefle),Hauteur.Sept,Couleur.Trefle,true));
 		}	
 		this.jeuDeCarte.add(new CarteRegle("Pique et Trèfle rajoute des points correspondant à leur Hauteur. Un Pique et un Trèfle de même Hauteur rajoute deux points. Les Carreaux enlèvent des points égal à leur Hauteur. Le Joker et les quatres Coeurs ensemblent valent autant de point que la Hauteur des Coeurs, sinon ils enlèvent des points. Le joker sans aucun coeur rapporte quatre points.",false));
 	}
@@ -355,82 +360,17 @@ public class MaitreDuJeu {
 		}
 	}
 	
-	public Integer getScore(Joueur player,Boolean withJoker) {
-		if (this.usedVariante == Variante.Reversed) {
-			return player.calculateScoreReversed(withJoker,this.playingWithExtension);
-		} else {
-			return player.calculateScoreBase(withJoker,this.playingWithExtension);
-		}
-	}
-	
 	public void awardTrophees() {
-		Joueur[] awardedPlayer = {null,null};
-		Integer[] valuePlayer = {0,0};
-		
-		Integer count = 0;
-		
-		
 		Iterator<Carte> iteTrophees = this.trophees.getDeck().iterator();
 		while (iteTrophees.hasNext()) {
 			Iterator<Joueur> iteJoueur = this.Players.iterator();
 			Carte carte = (Carte) iteTrophees.next();
-			if (carte.getClass().equals(CartesNumerotees.class)) {
+			if (carte instanceof CartesNumerotees) {
 				CartesNumerotees card =  (CartesNumerotees)carte;
-				switch (card.getTrophee().getTropheeDesc()) {
-				case bestJest:
-					while (iteJoueur.hasNext()) {
-						Joueur joueur = (Joueur) iteJoueur.next();
-						if (awardedPlayer[count] == null) {
-							awardedPlayer[count] = joueur;
-							valuePlayer[count] = this.getScore(joueur,true);
-						} else {
-							if (this.getScore(joueur,true) > valuePlayer[count]) {
-								awardedPlayer[count] = joueur;
-								valuePlayer[count] = this.getScore(joueur,true);
-							}
-						}
-					}
-					break;
-				case bestJestNoJoker:
-					while (iteJoueur.hasNext()) {
-						Joueur joueur = (Joueur) iteJoueur.next();
-						if (awardedPlayer[count] == null) {
-							awardedPlayer[count] = joueur;
-							valuePlayer[count] = this.getScore(joueur,false);
-						} else {
-							if (this.getScore(joueur,true) > valuePlayer[count]) {
-								awardedPlayer[count] = joueur;
-								valuePlayer[count] = this.getScore(joueur,false);
-							}
-						}
-					}
-					break;
-				default:
-					while (iteJoueur.hasNext()) {
-						Joueur joueur = (Joueur) iteJoueur.next();
-						if (awardedPlayer[count] == null) {
-							awardedPlayer[count] = joueur;
-							valuePlayer[count] = joueur.getInfoForThrophees(card.getTrophee().getTropheeDesc(), card.getTrophee().getInfoSupp());
-						} else {
-							if (joueur.getInfoForThrophees(card.getTrophee().getTropheeDesc(), card.getTrophee().getInfoSupp()) > valuePlayer[count]) {
-								awardedPlayer[count] = joueur;
-								valuePlayer[count] = joueur.getInfoForThrophees(card.getTrophee().getTropheeDesc(), card.getTrophee().getInfoSupp());
-							}
-						}
-					}
-					break;
-				}
+				Joueur awardedPlayer = card.getTrophee().award(this.Players);
+				awardedPlayer.getJest().putCardFirst(carte);
+				System.out.println(awardedPlayer.getPseudo()+" a recu le trophee "+carte+" -> "+((CartesNumerotees)carte).getTrophee().getName());
 			}
-			count += 1;
-		}
-		
-		iteTrophees = this.trophees.getDeck().iterator();
-		Integer playerNumber = 0;
-		while (iteTrophees.hasNext()) {
-			Carte carte = (Carte) iteTrophees.next();
-			awardedPlayer[playerNumber].getJest().putCardFirst(carte);
-			System.out.println(awardedPlayer[playerNumber].getPseudo()+" a recu le trophee "+carte+" -> "+((CartesNumerotees)carte).getTrophee());
-			playerNumber++;
 		}
 	}
 	
@@ -444,11 +384,11 @@ public class MaitreDuJeu {
 			Joueur joueur = (Joueur) iteJoueur.next();
 			if (winner == null) {
 				winner = joueur;
-				scoreWinner = this.getScore(joueur, true);
+				scoreWinner = sv.getScore(joueur, true);
 			} else {
-				if (this.getScore(joueur, true) > scoreWinner) {
+				if (sv.getScore(joueur, true) > scoreWinner) {
 					winner = joueur;
-					scoreWinner = this.getScore(joueur, true);
+					scoreWinner = sv.getScore(joueur, true);
 				}
 			}
 		}
