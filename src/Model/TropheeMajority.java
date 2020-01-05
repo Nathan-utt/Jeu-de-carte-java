@@ -13,6 +13,7 @@ public class TropheeMajority extends Trophee {
 	
 	public TropheeMajority(Hauteur value) {
 		this.value = value;
+		this.setImg("/img/trophee/trophe-majorite-"+value.getDesc());
 		this.setName("Majorité");
 		this.setDescription("Joueur avec la plus grande quantité de cette hauteur");
 	}

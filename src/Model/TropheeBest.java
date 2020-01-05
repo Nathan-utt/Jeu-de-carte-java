@@ -13,6 +13,7 @@ public class TropheeBest extends Trophee {
 	
 	public TropheeBest(ScoreVisitor sv) {
 		this.sv = sv;
+		this.setImg("/img/trophee/trophe-premier");
 		this.setName("Meilleur Jest Avec Joker");
 		this.setDescription("Joueur avec le meilleur Jest avec le Joker");
 	}
@@ -34,6 +35,6 @@ public class TropheeBest extends Trophee {
 				}
 			}
 		}
-		return this.breakTies((HashSet<Joueur>) awardedPlayer.keySet());
+		return this.breakTies(awardedPlayer.keySet());
 	}
 }

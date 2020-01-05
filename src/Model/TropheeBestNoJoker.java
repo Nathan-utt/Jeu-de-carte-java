@@ -11,6 +11,7 @@ public class TropheeBestNoJoker extends Trophee{
 	
 	public TropheeBestNoJoker(ScoreVisitor sv) {
 		this.sv = sv;
+		this.setImg("/img/trophee/trophe-premier-sans-joker");
 		this.setName("Meilleur Jest Sans Joker");
 		this.setDescription("Joueur avec le meilleur Jest sans le Joker");
 	}
@@ -32,6 +33,6 @@ public class TropheeBestNoJoker extends Trophee{
 				}
 			}
 		}
-		return this.breakTies((HashSet<Joueur>) awardedPlayer.keySet());
+		return this.breakTies(awardedPlayer.keySet());
 	}
 }

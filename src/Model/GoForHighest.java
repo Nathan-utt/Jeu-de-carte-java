@@ -60,7 +60,6 @@ public class GoForHighest extends Strategy {
 		Joueur chosenFrom = offers.get(highestCard);
 		players.remove(chosenFrom);
 		Carte chosen = (chosenFrom.getOffer().getDeck().get(1).getName() == highestCard.getName()) ? chosenFrom.getOffer().getCard(1) : chosenFrom.getOffer().getCard(0);
-		System.out.println("L'ordinateur "+player.getPseudo()+" a pris : "+chosen+" de "+chosenFrom.getPseudo());
 		highestCard.setVisible(true);
 		player.getJest().putCardFirst(chosen);
 		return chosenFrom;

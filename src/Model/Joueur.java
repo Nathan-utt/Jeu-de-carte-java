@@ -78,14 +78,7 @@ public class Joueur {
 	
 	//Function
 	
-	public void makeOffer() {
-		ArrayList<String> choices = new ArrayList<String>();
-		choices.add(this.hand.getDeck().get(0).getName());
-		choices.add(this.hand.getDeck().get(1).getName());
-		System.out.println("Vous avez un "+choices.get(0)+" et un "+choices.get(1)+" dans votre main.");
-		System.out.println("Choississez la carte que vous souhaitez offrir face cachée, l'autre sera offerte face visible.");
-		String answer = MaitreDuJeu.askForChoice(choices);
-		Carte hiddenCard = this.hand.getCard(choices.indexOf(answer));
+	public void makeOffer(Carte hiddenCard) {
 		hiddenCard.setVisible(false);
 		Carte visibleCard = this.hand.getFirstCard();
 		visibleCard.setVisible(true);
@@ -93,30 +86,9 @@ public class Joueur {
 		this.offer.putCardFirst(hiddenCard);
 	}
 	
-	public Joueur takeOffer(HashSet<Joueur> players) {
-		Iterator<Joueur> itePlayers = players.iterator();
-		ArrayList<String> choices = new ArrayList<String>();
-		HashMap<String,Joueur> offers = new HashMap<String,Joueur>();
-		while (itePlayers.hasNext()) {
-			Joueur joueur = (Joueur) itePlayers.next();
-			if (joueur != this || players.size() == 1) {
-				Iterator<Carte> iteDeck = joueur.getOffer().getDeck().iterator();
-				while (iteDeck.hasNext()) {
-					Carte carte = (Carte) iteDeck.next();
-					offers.put((carte.isVisible() ? carte.getName() : joueur.pseudo+" Carte cachée"),joueur);
-				}
-				System.out.println(joueur.getPseudo()+" propose "+joueur.seeOffer());
-				choices.addAll(joueur.constructOffer());
-			}
-		}
-		String answer = MaitreDuJeu.askForChoice(choices);
-		Joueur chosenFrom = offers.get(answer);
-		players.remove(chosenFrom);
-		Carte chosen = (chosenFrom.getOffer().getDeck().get(1).getName() == answer) ? chosenFrom.getOffer().getCard(1) : chosenFrom.getOffer().getCard(0);
+	public void takeOffer(Carte chosen) {
 		chosen.setVisible(true);
-		System.out.println("Tu as obtenu : "+chosen);
 		this.jest.putCardFirst(chosen);
-		return chosenFrom;
 	}
 	
 	public Integer accept(ScoreVisitor sv,Boolean withJoker) {

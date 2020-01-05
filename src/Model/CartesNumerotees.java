@@ -1,5 +1,11 @@
 package Model;
 
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import Enumeration.Couleur;
 import Enumeration.Hauteur;
 
@@ -54,6 +60,7 @@ public class CartesNumerotees extends Carte {
 			this.setName(this.getHauteur()+" de "+this.getCouleur());
 		}
 		this.setTrophee(trophee);
+		this.setImg("/img/card/"+this.getName().replace(" ", "").toLowerCase());
 	}
 	
 	
@@ -96,6 +103,40 @@ public class CartesNumerotees extends Carte {
 		return true;
 	}
 	
-	
+	public BufferedImage getWholeImage() {
+		if (this.isVisible()) {
+			BufferedImage imageCard = null;
+			try {
+				imageCard = ImageIO.read(getClass().getResource(this.getImg()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			BufferedImage imageTrophee = null;
+			try {
+				imageTrophee = ImageIO.read(getClass().getResource(this.getTrophee().getImg()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			int w = Math.max(imageCard.getWidth(), imageTrophee.getWidth());
+			int h = Math.max(imageCard.getHeight(), imageTrophee.getHeight());
+			BufferedImage combined = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+			
+			Graphics g = combined.getGraphics();
+			g.drawImage(imageCard, 0, 0, null);
+			g.drawImage(imageTrophee, 0, 0, null);
+			
+			return combined;
+		} else {
+			try {
+				return ImageIO.read(getClass().getResource(this.getImg()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			};
+		}
+		return null;
+	}
 	
 }

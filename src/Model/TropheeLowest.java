@@ -12,6 +12,7 @@ public class TropheeLowest extends Trophee {
 	
 	public TropheeLowest(Couleur color) {
 		this.color = color;
+		this.setImg("/img/trophee/trophe-petit-"+color.getDesc().toLowerCase());
 		this.setName("Plus Basse");
 		this.setDescription("Joueur avec la plus petite valeur de cette couleur");
 	}

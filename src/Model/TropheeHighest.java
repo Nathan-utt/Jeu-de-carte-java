@@ -11,6 +11,7 @@ public class TropheeHighest extends Trophee {
 	
 	public TropheeHighest(Couleur color) {
 		this.color = color;
+		this.setImg("/img/trophee/trophe-grand-"+color.getDesc().toLowerCase());
 		this.setName("Plus Haute");
 		this.setDescription("Joueur avec la plus haute valeur de cette couleur");
 	}

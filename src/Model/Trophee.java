@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import Enumeration.Hauteur;
 
@@ -11,12 +12,19 @@ import Enumeration.Hauteur;
 public class Trophee {
 	private String name;
 	private String description;
+	private String img;
 
 	public String getName() {
 		return name;
 	}
 
-
+	public void setImg(String img) {
+		this.img = img;
+	}
+	
+	public String getImg() {
+		return img+".png";
+	}
 
 	public void setName(String name) {
 		this.name = name;
@@ -40,7 +48,7 @@ public class Trophee {
 		return players.get(0);	
 	}
 	
-	public Joueur breakTies(HashSet<Joueur> players) {
+	public Joueur breakTies(Set<Joueur> players) {
 		Joueur awardedPlayer = null;
 		Iterator<Joueur> iteJoueur = players.iterator();
 		while (iteJoueur.hasNext()) {
