@@ -1,9 +1,15 @@
-package Class;
+package Model;
 
 public abstract class Carte {
 	private String name;
 	private Boolean visible;
 	private Boolean isExtension;
+	private String img;
+	private String backImg = "/img/card/back.png";
+	
+	public void setImg(String img) {
+		this.img = img+".png";
+	}
 	
 	public Boolean isVisible() {
 		return visible;
@@ -28,6 +34,14 @@ public abstract class Carte {
 	public Carte(Boolean extension) {
 		this.visible = false;
 		this.isExtension = extension;
+	}
+	
+	public String getImg(){
+		if (this.visible) {
+			return this.img;
+		} else {
+			return this.backImg;
+		}
 	}
 	
 	

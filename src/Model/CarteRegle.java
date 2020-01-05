@@ -1,4 +1,4 @@
-package Class;
+package Model;
 
 public class CarteRegle extends Carte{
 	private String texte;
@@ -13,7 +13,8 @@ public class CarteRegle extends Carte{
 
 	public CarteRegle(String texte,Boolean extension) {
 		super(extension);
-		this.setName("règles");
+		this.setName("Règles");
+		this.setImg("/img/card/"+this.getName().replace(" ", "").toLowerCase());
 		this.texte = texte;
 	}
 }

@@ -1,17 +1,22 @@
-package Class;
+package Model;
+
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import Enumeration.Couleur;
 import Enumeration.Hauteur;
-import Enumeration.TropheeEnum;
 
 public class CartesNumerotees extends Carte {
-	private TropheeDesc trophee;
+	private Trophee trophee;
 	private Hauteur hauteur;
 	private Couleur couleur;
 	
 	//Getter/Setter
 	
-	public TropheeDesc getTrophee() {
+	public Trophee getTrophee() {
 		return trophee;
 	}
 	
@@ -39,17 +44,13 @@ public class CartesNumerotees extends Carte {
         }
     }
     
-    public void setTrophee(TropheeDesc trophee) {
-    	for (TropheeEnum t : TropheeEnum.values()) {
-            if (t.name().equals(trophee.getTropheeDesc().name())) {
-                this.trophee = trophee;
-            }
-        }
+    public void setTrophee(Trophee trophee) {
+    	this.trophee = trophee;
     }
     
     //Constructor
 	
-	public CartesNumerotees(TropheeDesc trophee, Hauteur hauteur, Couleur couleur,Boolean extension) {
+	public CartesNumerotees(Trophee trophee, Hauteur hauteur, Couleur couleur,Boolean extension) {
 		super(extension);
 		this.setCouleur(couleur);
 		this.setHauteur(hauteur);
@@ -59,6 +60,7 @@ public class CartesNumerotees extends Carte {
 			this.setName(this.getHauteur()+" de "+this.getCouleur());
 		}
 		this.setTrophee(trophee);
+		this.setImg("/img/card/"+this.getName().replace(" ", "").toLowerCase());
 	}
 	
 	
@@ -101,6 +103,40 @@ public class CartesNumerotees extends Carte {
 		return true;
 	}
 	
-	
+	public BufferedImage getWholeImage() {
+		if (this.isVisible()) {
+			BufferedImage imageCard = null;
+			try {
+				imageCard = ImageIO.read(getClass().getResource(this.getImg()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			BufferedImage imageTrophee = null;
+			try {
+				imageTrophee = ImageIO.read(getClass().getResource(this.getTrophee().getImg()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			int w = Math.max(imageCard.getWidth(), imageTrophee.getWidth());
+			int h = Math.max(imageCard.getHeight(), imageTrophee.getHeight());
+			BufferedImage combined = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+			
+			Graphics g = combined.getGraphics();
+			g.drawImage(imageCard, 0, 0, null);
+			g.drawImage(imageTrophee, 0, 0, null);
+			
+			return combined;
+		} else {
+			try {
+				return ImageIO.read(getClass().getResource(this.getImg()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			};
+		}
+		return null;
+	}
 	
 }
