@@ -1,11 +1,13 @@
 package Model;
 
 import java.io.Console;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Observable;
+import java.util.Random;
 import java.util.Scanner;
 
 import Enumeration.Couleur;
@@ -13,7 +15,8 @@ import Enumeration.Hauteur;
 import Enumeration.Status;
 import Enumeration.Variante;
 
-public class MaitreDuJeu extends Observable {
+
+public class MaitreDuJeu extends Observable implements Serializable{
 	
 	private ArrayList<Joueur> Players;
 	private HashSet<Joueur> remainingPlayers;
@@ -27,9 +30,6 @@ public class MaitreDuJeu extends Observable {
 	private Boolean playingWithExtension;
 	private ScoreVisitor sv;
 	private Status status;
-	
-	public static Scanner sc = new Scanner(System.in);
-	
 	
 	//Constructor
 	
@@ -45,6 +45,7 @@ public class MaitreDuJeu extends Observable {
 	
 	
 	public void startGame() {
+		this.clearAll();
 		this.alreadyChoosePlayers = new HashSet<Joueur>();
 		this.remainingPlayers = new HashSet<Joueur>(this.Players);
 		this.sv = new ScoreVisitor(playingWithExtension,this.usedVariante == Variante.Reversed);
@@ -55,6 +56,11 @@ public class MaitreDuJeu extends Observable {
 		this.setTrophees();
 		this.distributionDeck = new Deck(this.Players.size()*2);
 		this.setDistributionDeck();
+	}
+	
+	public void clearAll() {
+		this.currentPlayer = null;
+		this.jeuDeCarte = new HashSet<Carte>();
 	}
 	
 	public Status getStatus() {
@@ -197,36 +203,37 @@ public class MaitreDuJeu extends Observable {
 					new TropheeLowest(Couleur.Trefle),
 					new TropheeBestNoJoker(sv)
 					}));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Joker,Couleur.Null,false));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.As,Couleur.Coeur,false));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Deux,Couleur.Coeur,false));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Trois,Couleur.Coeur,false));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Quatre,Couleur.Coeur,false));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.As,Couleur.Carreau,false));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Deux,Couleur.Carreau,false));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Trois,Couleur.Carreau,false));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Quatre,Couleur.Carreau,false));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.As,Couleur.Pique,false));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Deux,Couleur.Pique,false));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Trois,Couleur.Pique,false));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Quatre,Couleur.Pique,false));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.As,Couleur.Trefle,false));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Deux,Couleur.Trefle,false));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Trois,Couleur.Trefle,false));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Quatre,Couleur.Trefle,false));
+			Random r = new Random();
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.Joker,Couleur.Null,false));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.As,Couleur.Coeur,false));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.Deux,Couleur.Coeur,false));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.Trois,Couleur.Coeur,false));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.Quatre,Couleur.Coeur,false));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.As,Couleur.Carreau,false));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.Deux,Couleur.Carreau,false));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.Trois,Couleur.Carreau,false));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.Quatre,Couleur.Carreau,false));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.As,Couleur.Pique,false));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.Deux,Couleur.Pique,false));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.Trois,Couleur.Pique,false));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.Quatre,Couleur.Pique,false));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.As,Couleur.Trefle,false));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.Deux,Couleur.Trefle,false));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.Trois,Couleur.Trefle,false));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.Quatre,Couleur.Trefle,false));
 			
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Cinq,Couleur.Coeur,true));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Six,Couleur.Coeur,true));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Sept,Couleur.Coeur,true));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Cinq,Couleur.Carreau,true));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.As,Couleur.Carreau,true));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Sept,Couleur.Carreau,true));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Cinq,Couleur.Pique,true));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Six,Couleur.Pique,true));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Sept,Couleur.Pique,true));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Cinq,Couleur.Trefle,true));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Six,Couleur.Trefle,true));
-			this.jeuDeCarte.add(new CartesNumerotees(trophees.get((int)Math.random()*trophees.size()),Hauteur.Sept,Couleur.Trefle,true));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.Cinq,Couleur.Coeur,true));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.Six,Couleur.Coeur,true));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.Sept,Couleur.Coeur,true));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.Cinq,Couleur.Carreau,true));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.As,Couleur.Carreau,true));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.Sept,Couleur.Carreau,true));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.Cinq,Couleur.Pique,true));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.Six,Couleur.Pique,true));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.Sept,Couleur.Pique,true));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.Cinq,Couleur.Trefle,true));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.Six,Couleur.Trefle,true));
+			this.jeuDeCarte.add(new CartesNumerotees(trophees.get(r.nextInt(trophees.size())),Hauteur.Sept,Couleur.Trefle,true));
 		} else {
 			this.jeuDeCarte.add(new CartesNumerotees(new TropheeBest(sv),Hauteur.Joker,Couleur.Null,false));
 			this.jeuDeCarte.add(new CartesNumerotees(new TropheeJoker(),Hauteur.As,Couleur.Coeur,false));
@@ -250,7 +257,7 @@ public class MaitreDuJeu extends Observable {
 			this.jeuDeCarte.add(new CartesNumerotees(new TropheeJoker(),Hauteur.Six,Couleur.Coeur,true));
 			this.jeuDeCarte.add(new CartesNumerotees(new TropheeJoker(),Hauteur.Sept,Couleur.Coeur,true));
 			this.jeuDeCarte.add(new CartesNumerotees(new TropheeHighest(Couleur.Carreau),Hauteur.Cinq,Couleur.Carreau,true));
-			this.jeuDeCarte.add(new CartesNumerotees(new TropheeMajority(Hauteur.Six),Hauteur.As,Couleur.Carreau,true));
+			this.jeuDeCarte.add(new CartesNumerotees(new TropheeMajority(Hauteur.Quatre),Hauteur.As,Couleur.Carreau,true));
 			this.jeuDeCarte.add(new CartesNumerotees(new TropheeLowest(Couleur.Carreau),Hauteur.Sept,Couleur.Carreau,true));
 			this.jeuDeCarte.add(new CartesNumerotees(new TropheeLowest(Couleur.Carreau),Hauteur.Cinq,Couleur.Pique,true));
 			this.jeuDeCarte.add(new CartesNumerotees(new TropheeBestNoJoker(sv),Hauteur.Six,Couleur.Pique,true));
@@ -375,6 +382,22 @@ public class MaitreDuJeu extends Observable {
 		}
 		
 		return winner;
+	}
+
+	public void reload(SaveData savedata) {
+		this.Players = savedata.getPlayers();
+		this.remainingPlayers = savedata.getRemainingPlayers();
+		this.alreadyChoosePlayers = savedata.getAlreadyChoosePlayers();
+		this.remainingDeck = savedata.getRemainingDeck();
+		this.distributionDeck = savedata.getDistributionDeck();
+		this.trophees = savedata.getTrophees();
+		this.currentPlayer = savedata.getCurrentPlayer();
+		this.usedVariante = savedata.getUsedVariante();
+		this.playingWithExtension = savedata.getPlayingWithExtension();
+		this.sv = savedata.getSv();
+		this.status = savedata.getStatus();
+		this.setChanged();
+		this.notifyObservers(this.status);
 	}
 	
 }

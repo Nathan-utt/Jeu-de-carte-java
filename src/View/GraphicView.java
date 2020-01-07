@@ -54,7 +54,7 @@ public class GraphicView implements Observer {
 	
 	public static Integer[] FIRSTJESTPOSITION = {10,50};
 	public Integer[] FIRSTHANDPOSITION = {0,0};
-	public Integer[] DECKPOSITION = {0,50};
+	public Integer[] TROPHEEPOSITION = {0,50};
 	public Integer[][] PLAYEROFFER = {{10,400},{400,400},{800,400}};
 
 	private JFrame frame;
@@ -171,7 +171,7 @@ public class GraphicView implements Observer {
 		
 		this.FIRSTHANDPOSITION[0] = frame.getWidth()/2-180;
 		this.FIRSTHANDPOSITION[1] = frame.getHeight()-260;
-		this.DECKPOSITION[0] = frame.getWidth()-180;
+		this.TROPHEEPOSITION[0] = frame.getWidth()-180;
 		
 		mainGame = new JPanel();
 		frame.getContentPane().add(mainGame, BorderLayout.CENTER);
@@ -253,9 +253,14 @@ public class GraphicView implements Observer {
 	}
 	
 	public void baseSetup() {
-		JLabel lblNewLabel = new JLabel("Your Jest");
+		JLabel lblNewLabel = new JLabel("Ton Jest");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel.setBounds(10, 10, 90, 40);
+		mainGame.add(lblNewLabel);
+		
+		lblNewLabel = new JLabel("Trophées");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel.setBounds(TROPHEEPOSITION[0], 10, 90, 40);
 		mainGame.add(lblNewLabel);
 	}
 
@@ -303,7 +308,7 @@ public class GraphicView implements Observer {
 							instanceMdj.setStatus(Status.choosingForOffer);
 						} else {
 							Iterator<Carte> iteHand = instanceMdj.getCurrentPlayer().getHand().getDeck().iterator();
-							Iterator<Carte> iteJest = instanceMdj.getCurrentPlayer().getJest().getDeck().iterator();
+							
 							Integer number = 0;
 							while (iteHand.hasNext()) {
 								Carte carte = (Carte) iteHand.next();
@@ -336,13 +341,28 @@ public class GraphicView implements Observer {
 								number++;
 							}
 							
+							Iterator<Carte> iteJest = instanceMdj.getCurrentPlayer().getJest().getDeck().iterator();
 							number = 0;
 							while (iteJest.hasNext()) {
 								Carte carte = (Carte) iteJest.next();
 								CartesNumerotees cartenum = (CartesNumerotees) carte;
 								JLabel lbl = new JLabel("");
-								lbl.setIcon(new ImageIcon(cartenum.getWholeImage()));
-								lbl.setBounds(FIRSTJESTPOSITION[0]+number*190, FIRSTJESTPOSITION[1], 170, 240);
+								lbl.setIcon(new ImageIcon(cartenum.getWholeImage().getScaledInstance(100, 140, java.awt.Image.SCALE_SMOOTH)));
+								lbl.setBounds(FIRSTJESTPOSITION[0]+number*120, FIRSTJESTPOSITION[1], 100, 140);
+								currentJest.put(lbl,carte);
+								mainGame.add(lbl);
+								number++;
+							}
+							
+							Iterator<Carte> iteTrophee = instanceMdj.getTrophees().getDeck().iterator();
+							number = 0;
+							while (iteTrophee.hasNext()) {
+								Carte carte = (Carte) iteTrophee.next();
+								CartesNumerotees cartenum = (CartesNumerotees) carte;
+								JLabel lbl = new JLabel("");
+								lbl.setIcon(new ImageIcon(cartenum.getWholeImage().getScaledInstance(100, 140, java.awt.Image.SCALE_SMOOTH)));
+								lbl.setBounds(TROPHEEPOSITION[0]-number*120, TROPHEEPOSITION[1], 100, 140);
+								lbl.setToolTipText(cartenum.getTrophee().getDescription());
 								currentJest.put(lbl,carte);
 								mainGame.add(lbl);
 								number++;
@@ -416,8 +436,22 @@ public class GraphicView implements Observer {
 								Carte carte = (Carte) iteJest.next();
 								CartesNumerotees cartenum = (CartesNumerotees) carte;
 								JLabel lbl = new JLabel("");
-								lbl.setIcon(new ImageIcon(cartenum.getWholeImage()));
-								lbl.setBounds(FIRSTJESTPOSITION[0]+number*190, FIRSTJESTPOSITION[1], 170, 240);
+								lbl.setIcon(new ImageIcon(cartenum.getWholeImage().getScaledInstance(100, 140, java.awt.Image.SCALE_SMOOTH)));
+								lbl.setBounds(FIRSTJESTPOSITION[0]+number*120, FIRSTJESTPOSITION[1], 100, 140);
+								currentJest.put(lbl,carte);
+								mainGame.add(lbl);
+								number++;
+							}
+							
+							Iterator<Carte> iteTrophee = instanceMdj.getTrophees().getDeck().iterator();
+							number = 0;
+							while (iteTrophee.hasNext()) {
+								Carte carte = (Carte) iteTrophee.next();
+								CartesNumerotees cartenum = (CartesNumerotees) carte;
+								JLabel lbl = new JLabel("");
+								lbl.setIcon(new ImageIcon(cartenum.getWholeImage().getScaledInstance(100, 140, java.awt.Image.SCALE_SMOOTH)));
+								lbl.setBounds(TROPHEEPOSITION[0]-number*120, TROPHEEPOSITION[1], 100, 140);
+								lbl.setToolTipText(cartenum.getTrophee().getDescription());
 								currentJest.put(lbl,carte);
 								mainGame.add(lbl);
 								number++;
@@ -437,9 +471,9 @@ public class GraphicView implements Observer {
 						Iterator<Carte> iteJest = joueur.getJest().getDeck().iterator();
 						int number = 0;
 						
-						lblPlayer = new JLabel(joueur.getPseudo()+" : ");
+						lblPlayer = new JLabel(joueur.getPseudo()+" (Score : "+instanceMdj.getSv().getScore(joueur, true)+") : ");
 						lblPlayer.setFont(new Font("Tahoma", Font.PLAIN, 20));
-						lblPlayer.setBounds(10, 5+numberp*250, 100, 40);
+						lblPlayer.setBounds(10, 5+numberp*150, 400, 40);
 						mainGame.add(lblPlayer);
 						
 						
@@ -447,8 +481,8 @@ public class GraphicView implements Observer {
 							Carte carte = (Carte) iteJest.next();
 							CartesNumerotees cartenum = (CartesNumerotees) carte;
 							JLabel lbl = new JLabel("");
-							lbl.setIcon(new ImageIcon(cartenum.getWholeImage()));
-							lbl.setBounds(FIRSTJESTPOSITION[0]+number*190, 10+numberp*250, 170, 240);
+							lbl.setIcon(new ImageIcon(cartenum.getWholeImage().getScaledInstance(100, 140, java.awt.Image.SCALE_SMOOTH)));
+							lbl.setBounds(FIRSTJESTPOSITION[0]+number*120, 10+numberp*150, 100, 140);
 							if (joueur == winner) {
 								lbl.setBorder(BorderFactory.createLineBorder(Color.YELLOW, 5));
 							}

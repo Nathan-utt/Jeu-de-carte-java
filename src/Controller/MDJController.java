@@ -14,6 +14,8 @@ import Enumeration.Variante;
 import Model.Joueur;
 import Model.JoueurVirtuel;
 import Model.MaitreDuJeu;
+import Model.ResourceManager;
+import Model.SaveData;
 
 public class MDJController {
 	private MaitreDuJeu mdj;
@@ -40,7 +42,17 @@ public class MDJController {
 			}
 		});
 		this.load = load;
+		load.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				loadGame();
+			}
+		});
 		this.save = save;
+		save.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				saveGame();
+			}
+		});
 		this.modeMenu = modeMenu;
 		this.standard = standard;
 		this.reversed = reversed;
@@ -50,7 +62,26 @@ public class MDJController {
 		this.joueursText = joueursText;
 		this.joueursType = joueursType;
 	}
+	
+	public void saveGame() {
+		try {
+			SaveData savedata = new SaveData(mdj.getPlayers(), mdj.getRemainingPlayers(), mdj.getAlreadyChoosePlayers(), mdj.getRemainingDeck(), mdj.getDistributionDeck(), mdj.getTrophees(), mdj.getCurrentPlayer(), mdj.getUsedVariante(), mdj.getPlayingWithExtension(), mdj.getSv(), mdj.getStatus());
+			ResourceManager.save(savedata,"save.txt");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
+	public void loadGame() {
+		try {
+			SaveData savedata = (SaveData) ResourceManager.load("save.txt");
+			mdj.reload(savedata);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public void launchGame() {
 		if (!modeMenu.getText().equals("Mode") && !playerMenu.getText().equals("Joueur")) {
 			int computerCount = 0;

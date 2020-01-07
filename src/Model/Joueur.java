@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -8,7 +9,7 @@ import java.util.Iterator;
 import Enumeration.Couleur;
 import Enumeration.Hauteur;
 
-public class Joueur {
+public class Joueur implements Serializable {
 	private String pseudo;
 	private Integer number;
 	private Deck hand;

@@ -342,10 +342,6 @@ public class ConsoleView implements Observer, Runnable {
 					System.out.println("----------------------------"+joueur.getPseudo()+" score "+mdj.getSv().getScore(joueur, true)+"-----------------------------------");
 					System.out.println("--------------------------------"+joueur.getPseudo()+" jest---------------------------------------");
 					System.out.println(joueur.getJest().getDeck());
-					System.out.println("--------------------------------"+joueur.getPseudo()+" hand---------------------------------------");
-					System.out.println(joueur.getHand().getDeck());
-					System.out.println("--------------------------------"+joueur.getPseudo()+" offer---------------------------------------");
-					System.out.println(joueur.getOffer().getDeck());
 				}
 				break;
 			default:
