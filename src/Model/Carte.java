@@ -1,6 +1,8 @@
 package Model;
 
-public abstract class Carte {
+import java.io.Serializable;
+
+public abstract class Carte implements Serializable {
 	private String name;
 	private Boolean visible;
 	private Boolean isExtension;

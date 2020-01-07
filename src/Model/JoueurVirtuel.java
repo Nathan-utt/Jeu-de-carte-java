@@ -8,7 +8,7 @@ public class JoueurVirtuel extends Joueur{
 	
 	public JoueurVirtuel(String pseudo, Integer number) {
 		super(pseudo, number);
-		strat = new GoForHighest();
+		strat = Math.floor(Math.random()) == 0 ? new HideRandomPickBest() : new HideBestPickRandom(); 
 	}
 
 	public void makeOffer() {

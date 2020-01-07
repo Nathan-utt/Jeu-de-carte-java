@@ -1,12 +1,13 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import Enumeration.Couleur;
 import Enumeration.Hauteur;
 
-public class Deck {
+public class Deck implements Serializable{
 	private ArrayList<Carte> deck;
 	private Integer maxCards;
 

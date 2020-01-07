@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,7 +10,7 @@ import java.util.Set;
 import Enumeration.Hauteur;
 
 
-public class Trophee {
+public class Trophee implements Serializable {
 	private String name;
 	private String description;
 	private String img;

@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-public class GoForHighest extends Strategy {
+public class HideRandomPickBest extends Strategy {
 
 	@Override
 	public void makeOffer(Joueur player) {
@@ -15,7 +15,7 @@ public class GoForHighest extends Strategy {
 		choices.add(player.getHand().getDeck().get(1).getName());
 		String answer;
 		
-		answer = player.getHand().getDeck().get((int)(Math.random()*1)).getName();
+		answer = player.getHand().getDeck().get((int) Math.round(Math.random())).getName();
 		
 		Carte hiddenCard = player.getHand().getCard(choices.indexOf(answer));
 		hiddenCard.setVisible(false);
@@ -35,7 +35,7 @@ public class GoForHighest extends Strategy {
 				Iterator<Carte> iteDeck = joueur.getOffer().getDeck().iterator();
 				while (iteDeck.hasNext()) {
 					Carte carte = (Carte) iteDeck.next();
-					offers.put(carte,joueur);
+					if (carte.isVisible()) offers.put(carte,joueur);
 				}
 			}
 		}

@@ -1,12 +1,13 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 
 import Enumeration.Couleur;
 import Enumeration.Hauteur;
 
-public class ScoreVisitor {
+public class ScoreVisitor implements Serializable{
 	private Boolean extension;
 	private Boolean reversed;
 	
