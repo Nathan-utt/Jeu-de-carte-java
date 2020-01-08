@@ -278,19 +278,14 @@ public class ConsoleView implements Observer, Runnable {
 				if (this.runningThread != null) this.runningThread.interrupt();
 				Joueur currPlayer = instanceMdj.getCurrentPlayer();
 				if (currPlayer != null) {
-					if (currPlayer instanceof JoueurVirtuel) {
-						((JoueurVirtuel)currPlayer).makeOffer();
-						mdj.setStatus(Status.choosingForOffer);
-					} else {
-						this.writeToConsole("A toi "+currPlayer.getPseudo()+", choisit une carte.");
-						ArrayList<String> choices = new ArrayList<String>();
-						choices.add(currPlayer.getHand().getDeck().get(0).getName());
-						choices.add(currPlayer.getHand().getDeck().get(1).getName());
-						this.writeToConsole("Vous avez un "+choices.get(0)+" et un "+choices.get(1)+" dans votre main.");
-						this.writeToConsole("Choississez la carte que vous souhaitez offrir face cachée, l'autre sera offerte face visible.");
-						runningThread = new Thread(this);
-						runningThread.start();
-					}
+					this.writeToConsole("A toi "+currPlayer.getPseudo()+", choisit une carte.");
+					ArrayList<String> choices = new ArrayList<String>();
+					choices.add(currPlayer.getHand().getDeck().get(0).getName());
+					choices.add(currPlayer.getHand().getDeck().get(1).getName());
+					this.writeToConsole("Vous avez un "+choices.get(0)+" et un "+choices.get(1)+" dans votre main.");
+					this.writeToConsole("Choississez la carte que vous souhaitez offrir face cachée, l'autre sera offerte face visible.");
+					runningThread = new Thread(this);
+					runningThread.start();
 				}
 				break;
 			case takingOffer:
@@ -298,15 +293,9 @@ public class ConsoleView implements Observer, Runnable {
 				if (this.runningThread != null) this.runningThread.interrupt();
 				currPlayer = instanceMdj.getCurrentPlayer();
 				if (currPlayer != null) {
-					if (currPlayer instanceof JoueurVirtuel) {
-						mdj.setCurrentPlayer(((JoueurVirtuel)currPlayer).takeOffer(instanceMdj.getRemainingPlayers()));
-						System.out.println("L'ordinateur "+currPlayer.getPseudo()+" a pris : "+currPlayer.getJest().getDeck().get(0)+" de "+mdj.getCurrentPlayer().getPseudo());
-						mdj.setStatus(Status.choosingForTaking);
-					} else {
-						this.writeToConsole("A toi "+currPlayer.getPseudo()+", choisit une carte parmis toutes celles restantes.");
-						runningThread = new Thread(this);
-						runningThread.start();
-					}
+					this.writeToConsole("A toi "+currPlayer.getPseudo()+", choisit une carte parmis toutes celles restantes.");
+					runningThread = new Thread(this);
+					runningThread.start();
 				}
 				break;
 			case awardTrophees:

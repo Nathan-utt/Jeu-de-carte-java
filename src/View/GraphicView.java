@@ -198,8 +198,10 @@ public class GraphicView implements Observer {
 		p3 = new JMenuItem("3 Joueur");
 		p3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				playerMenu.setText(p3.getText());
-				setPlayers(3);
+				if (!playerMenu.getText().equals(p3.getText())) {
+					playerMenu.setText(p3.getText());
+					setPlayers(3);
+				}
 			}
 		});
 		playerMenu.add(p3);
@@ -207,8 +209,10 @@ public class GraphicView implements Observer {
 		p4 = new JMenuItem("4 Joueur");
 		p4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				playerMenu.setText(p4.getText());
-				setPlayers(4);
+				if (!playerMenu.getText().equals(p4.getText())) {
+					playerMenu.setText(p4.getText());
+					setPlayers(4);
+				}
 			}
 		});
 		playerMenu.add(p4);
@@ -303,70 +307,65 @@ public class GraphicView implements Observer {
 					
 					Joueur currPlayer = instanceMdj.getCurrentPlayer();
 					if (currPlayer != null) {
-						if (currPlayer instanceof JoueurVirtuel) {
-							((JoueurVirtuel)currPlayer).makeOffer();
-							instanceMdj.setStatus(Status.choosingForOffer);
-						} else {
-							Iterator<Carte> iteHand = instanceMdj.getCurrentPlayer().getHand().getDeck().iterator();
-							
-							Integer number = 0;
-							while (iteHand.hasNext()) {
-								Carte carte = (Carte) iteHand.next();
-								CartesNumerotees cartenum = (CartesNumerotees) carte;
-								JLabel lbl = new JLabel("");
-								lbl.setIcon(new ImageIcon(cartenum.getWholeImage()));
-								lbl.setBounds(FIRSTHANDPOSITION[0]+number*190, FIRSTHANDPOSITION[1], 170, 240);
-								lbl.addMouseListener(new MouseAdapter() {
-									@Override
-									public void mouseClicked(MouseEvent e) {
-										JLabel lbl = (JLabel) e.getSource();
-										Carte hiddenCard = instanceMdj.getCurrentPlayer().getHand().getCard(instanceMdj.getCurrentPlayer().getHand().getDeck().indexOf(currentHand.get(lbl)));
-										instanceMdj.getCurrentPlayer().makeOffer(hiddenCard);
-										instanceMdj.setStatus(Status.choosingForOffer);
-									}
-									@Override
-									public void mouseEntered(MouseEvent e) {
-										JLabel lbl = (JLabel) e.getSource();
-										lbl.setIcon(new ImageIcon(getClass().getResource("/img/card/back.png")));
-									}
-									@Override
-									public void mouseExited(MouseEvent e) {
-										JLabel lbl = (JLabel) e.getSource();
-										CartesNumerotees card = (CartesNumerotees) currentHand.get(lbl);
-										lbl.setIcon(new ImageIcon(card.getWholeImage()));
-									}
-								});
-								currentHand.put(lbl,carte);
-								mainGame.add(lbl);
-								number++;
-							}
-							
-							Iterator<Carte> iteJest = instanceMdj.getCurrentPlayer().getJest().getDeck().iterator();
-							number = 0;
-							while (iteJest.hasNext()) {
-								Carte carte = (Carte) iteJest.next();
-								CartesNumerotees cartenum = (CartesNumerotees) carte;
-								JLabel lbl = new JLabel("");
-								lbl.setIcon(new ImageIcon(cartenum.getWholeImage().getScaledInstance(100, 140, java.awt.Image.SCALE_SMOOTH)));
-								lbl.setBounds(FIRSTJESTPOSITION[0]+number*120, FIRSTJESTPOSITION[1], 100, 140);
-								currentJest.put(lbl,carte);
-								mainGame.add(lbl);
-								number++;
-							}
-							
-							Iterator<Carte> iteTrophee = instanceMdj.getTrophees().getDeck().iterator();
-							number = 0;
-							while (iteTrophee.hasNext()) {
-								Carte carte = (Carte) iteTrophee.next();
-								CartesNumerotees cartenum = (CartesNumerotees) carte;
-								JLabel lbl = new JLabel("");
-								lbl.setIcon(new ImageIcon(cartenum.getWholeImage().getScaledInstance(100, 140, java.awt.Image.SCALE_SMOOTH)));
-								lbl.setBounds(TROPHEEPOSITION[0]-number*120, TROPHEEPOSITION[1], 100, 140);
-								lbl.setToolTipText(cartenum.getTrophee().getDescription());
-								currentJest.put(lbl,carte);
-								mainGame.add(lbl);
-								number++;
-							}
+						Iterator<Carte> iteHand = instanceMdj.getCurrentPlayer().getHand().getDeck().iterator();
+						
+						Integer number = 0;
+						while (iteHand.hasNext()) {
+							Carte carte = (Carte) iteHand.next();
+							CartesNumerotees cartenum = (CartesNumerotees) carte;
+							JLabel lbl = new JLabel("");
+							lbl.setIcon(new ImageIcon(cartenum.getWholeImage()));
+							lbl.setBounds(FIRSTHANDPOSITION[0]+number*190, FIRSTHANDPOSITION[1], 170, 240);
+							lbl.addMouseListener(new MouseAdapter() {
+								@Override
+								public void mouseClicked(MouseEvent e) {
+									JLabel lbl = (JLabel) e.getSource();
+									Carte hiddenCard = instanceMdj.getCurrentPlayer().getHand().getCard(instanceMdj.getCurrentPlayer().getHand().getDeck().indexOf(currentHand.get(lbl)));
+									instanceMdj.getCurrentPlayer().makeOffer(hiddenCard);
+									instanceMdj.setStatus(Status.choosingForOffer);
+								}
+								@Override
+								public void mouseEntered(MouseEvent e) {
+									JLabel lbl = (JLabel) e.getSource();
+									lbl.setIcon(new ImageIcon(getClass().getResource("/img/card/back.png")));
+								}
+								@Override
+								public void mouseExited(MouseEvent e) {
+									JLabel lbl = (JLabel) e.getSource();
+									CartesNumerotees card = (CartesNumerotees) currentHand.get(lbl);
+									lbl.setIcon(new ImageIcon(card.getWholeImage()));
+								}
+							});
+							currentHand.put(lbl,carte);
+							mainGame.add(lbl);
+							number++;
+						}
+						
+						Iterator<Carte> iteJest = instanceMdj.getCurrentPlayer().getJest().getDeck().iterator();
+						number = 0;
+						while (iteJest.hasNext()) {
+							Carte carte = (Carte) iteJest.next();
+							CartesNumerotees cartenum = (CartesNumerotees) carte;
+							JLabel lbl = new JLabel("");
+							lbl.setIcon(new ImageIcon(cartenum.getWholeImage().getScaledInstance(100, 140, java.awt.Image.SCALE_SMOOTH)));
+							lbl.setBounds(FIRSTJESTPOSITION[0]+number*120, FIRSTJESTPOSITION[1], 100, 140);
+							currentJest.put(lbl,carte);
+							mainGame.add(lbl);
+							number++;
+						}
+						
+						Iterator<Carte> iteTrophee = instanceMdj.getTrophees().getDeck().iterator();
+						number = 0;
+						while (iteTrophee.hasNext()) {
+							Carte carte = (Carte) iteTrophee.next();
+							CartesNumerotees cartenum = (CartesNumerotees) carte;
+							JLabel lbl = new JLabel("");
+							lbl.setIcon(new ImageIcon(cartenum.getWholeImage().getScaledInstance(100, 140, java.awt.Image.SCALE_SMOOTH)));
+							lbl.setBounds(TROPHEEPOSITION[0]-number*120, TROPHEEPOSITION[1], 100, 140);
+							lbl.setToolTipText(cartenum.getTrophee().getDescription());
+							currentJest.put(lbl,carte);
+							mainGame.add(lbl);
+							number++;
 						}
 					}
 					mainGame.repaint();
@@ -374,88 +373,83 @@ public class GraphicView implements Observer {
 				case takingOffer:
 					currPlayer = instanceMdj.getCurrentPlayer();
 					if (currPlayer != null) {
-						if (currPlayer instanceof JoueurVirtuel) {
-							instanceMdj.setCurrentPlayer(((JoueurVirtuel)currPlayer).takeOffer(instanceMdj.getRemainingPlayers()));
-							instanceMdj.setStatus(Status.choosingForTaking);
-						} else {
-							this.clearAll();
-							this.baseSetup();
-							
-							Iterator<Carte> iteJest = instanceMdj.getCurrentPlayer().getJest().getDeck().iterator();
-							
-							lblPlayer = new JLabel("Choisis une carte "+instanceMdj.getCurrentPlayer().getPseudo()+" : ");
-							lblPlayer.setFont(new Font("Tahoma", Font.PLAIN, 20));
-							lblPlayer.setBounds(FIRSTHANDPOSITION[0]+180-150, FIRSTHANDPOSITION[1]+200, 300, 40);
-							mainGame.add(lblPlayer);
-							
-							Iterator<Joueur> itePlayers = instanceMdj.getRemainingPlayers().iterator();
-							int numberp = 0;
-							while (itePlayers.hasNext()) {
-								Joueur joueur = (Joueur) itePlayers.next();
-								if (joueur != instanceMdj.getCurrentPlayer() || instanceMdj.getRemainingPlayers().size() == 1) {
-									Iterator<Carte> iteDeck = joueur.getOffer().getDeck().iterator();
+						this.clearAll();
+						this.baseSetup();
+						
+						Iterator<Carte> iteJest = instanceMdj.getCurrentPlayer().getJest().getDeck().iterator();
+						
+						lblPlayer = new JLabel("Choisis une carte "+instanceMdj.getCurrentPlayer().getPseudo()+" : ");
+						lblPlayer.setFont(new Font("Tahoma", Font.PLAIN, 20));
+						lblPlayer.setBounds(FIRSTHANDPOSITION[0]+180-150, FIRSTHANDPOSITION[1]+200, 300, 40);
+						mainGame.add(lblPlayer);
+						
+						Iterator<Joueur> itePlayers = instanceMdj.getRemainingPlayers().iterator();
+						int numberp = 0;
+						while (itePlayers.hasNext()) {
+							Joueur joueur = (Joueur) itePlayers.next();
+							if (joueur != instanceMdj.getCurrentPlayer() || instanceMdj.getRemainingPlayers().size() == 1) {
+								Iterator<Carte> iteDeck = joueur.getOffer().getDeck().iterator();
+								
+								lblPlayer = new JLabel(joueur.getPseudo()+" : ");
+								lblPlayer.setFont(new Font("Tahoma", Font.PLAIN, 20));
+								lblPlayer.setBounds(PLAYEROFFER[numberp][0], PLAYEROFFER[numberp][1]-40, 200, 40);
+								mainGame.add(lblPlayer);
+								
+								int numberc = 0;
+								while (iteDeck.hasNext()) {
+									Carte carte = (Carte) iteDeck.next();
 									
-									lblPlayer = new JLabel(joueur.getPseudo()+" : ");
-									lblPlayer.setFont(new Font("Tahoma", Font.PLAIN, 20));
-									lblPlayer.setBounds(PLAYEROFFER[numberp][0], PLAYEROFFER[numberp][1]-40, 200, 40);
-									mainGame.add(lblPlayer);
+									CartesNumerotees cartenum = (CartesNumerotees) carte;
 									
-									int numberc = 0;
-									while (iteDeck.hasNext()) {
-										Carte carte = (Carte) iteDeck.next();
-										
-										CartesNumerotees cartenum = (CartesNumerotees) carte;
-										
-										JLabel lbl = new JLabel("");
-										lbl.setIcon(new ImageIcon(cartenum.getWholeImage()));
-										lbl.setBounds(PLAYEROFFER[numberp][0]+numberc*190, PLAYEROFFER[numberp][1], 170, 240);
-										lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
-										lbl.addMouseListener(new MouseAdapter() {
-											@Override
-											public void mouseClicked(MouseEvent e) {
-												JLabel lbl = (JLabel) e.getSource();
-												Joueur chosenFrom = currentOffers.get(lbl);
-												instanceMdj.getRemainingPlayers().remove(chosenFrom);
-												Carte chosen = (chosenFrom.getOffer().getDeck().get(1).getName() == currentHand.get(lbl).getName()) ? chosenFrom.getOffer().getCard(1) : chosenFrom.getOffer().getCard(0);
-												instanceMdj.getCurrentPlayer().takeOffer(chosen);
-												instanceMdj.setCurrentPlayer(chosenFrom);
-												instanceMdj.setStatus(Status.choosingForTaking);
-											}
-										});
-										currentHand.put(lbl,carte);
-										currentOffers.put(lbl,joueur);
-										mainGame.add(lbl);
-										numberc++;
-									}
-									numberp++;
+									JLabel lbl = new JLabel("");
+									lbl.setIcon(new ImageIcon(cartenum.getWholeImage()));
+									lbl.setBounds(PLAYEROFFER[numberp][0]+numberc*190, PLAYEROFFER[numberp][1], 170, 240);
+									lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
+									lbl.addMouseListener(new MouseAdapter() {
+										@Override
+										public void mouseClicked(MouseEvent e) {
+											JLabel lbl = (JLabel) e.getSource();
+											Joueur chosenFrom = currentOffers.get(lbl);
+											instanceMdj.getRemainingPlayers().remove(chosenFrom);
+											Carte chosen = (chosenFrom.getOffer().getDeck().get(1).getName() == currentHand.get(lbl).getName()) ? chosenFrom.getOffer().getCard(1) : chosenFrom.getOffer().getCard(0);
+											instanceMdj.getCurrentPlayer().takeOffer(chosen);
+											instanceMdj.setCurrentPlayer(chosenFrom);
+											instanceMdj.setStatus(Status.choosingForTaking);
+										}
+									});
+									currentHand.put(lbl,carte);
+									currentOffers.put(lbl,joueur);
+									mainGame.add(lbl);
+									numberc++;
 								}
+								numberp++;
 							}
-							
-							int number = 0;
-							while (iteJest.hasNext()) {
-								Carte carte = (Carte) iteJest.next();
-								CartesNumerotees cartenum = (CartesNumerotees) carte;
-								JLabel lbl = new JLabel("");
-								lbl.setIcon(new ImageIcon(cartenum.getWholeImage().getScaledInstance(100, 140, java.awt.Image.SCALE_SMOOTH)));
-								lbl.setBounds(FIRSTJESTPOSITION[0]+number*120, FIRSTJESTPOSITION[1], 100, 140);
-								currentJest.put(lbl,carte);
-								mainGame.add(lbl);
-								number++;
-							}
-							
-							Iterator<Carte> iteTrophee = instanceMdj.getTrophees().getDeck().iterator();
-							number = 0;
-							while (iteTrophee.hasNext()) {
-								Carte carte = (Carte) iteTrophee.next();
-								CartesNumerotees cartenum = (CartesNumerotees) carte;
-								JLabel lbl = new JLabel("");
-								lbl.setIcon(new ImageIcon(cartenum.getWholeImage().getScaledInstance(100, 140, java.awt.Image.SCALE_SMOOTH)));
-								lbl.setBounds(TROPHEEPOSITION[0]-number*120, TROPHEEPOSITION[1], 100, 140);
-								lbl.setToolTipText(cartenum.getTrophee().getDescription());
-								currentJest.put(lbl,carte);
-								mainGame.add(lbl);
-								number++;
-							}
+						}
+						
+						int number = 0;
+						while (iteJest.hasNext()) {
+							Carte carte = (Carte) iteJest.next();
+							CartesNumerotees cartenum = (CartesNumerotees) carte;
+							JLabel lbl = new JLabel("");
+							lbl.setIcon(new ImageIcon(cartenum.getWholeImage().getScaledInstance(100, 140, java.awt.Image.SCALE_SMOOTH)));
+							lbl.setBounds(FIRSTJESTPOSITION[0]+number*120, FIRSTJESTPOSITION[1], 100, 140);
+							currentJest.put(lbl,carte);
+							mainGame.add(lbl);
+							number++;
+						}
+						
+						Iterator<Carte> iteTrophee = instanceMdj.getTrophees().getDeck().iterator();
+						number = 0;
+						while (iteTrophee.hasNext()) {
+							Carte carte = (Carte) iteTrophee.next();
+							CartesNumerotees cartenum = (CartesNumerotees) carte;
+							JLabel lbl = new JLabel("");
+							lbl.setIcon(new ImageIcon(cartenum.getWholeImage().getScaledInstance(100, 140, java.awt.Image.SCALE_SMOOTH)));
+							lbl.setBounds(TROPHEEPOSITION[0]-number*120, TROPHEEPOSITION[1], 100, 140);
+							lbl.setToolTipText(cartenum.getTrophee().getDescription());
+							currentJest.put(lbl,carte);
+							mainGame.add(lbl);
+							number++;
 						}
 					}
 					mainGame.repaint();
