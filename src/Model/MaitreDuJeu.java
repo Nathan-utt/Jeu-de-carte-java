@@ -86,7 +86,12 @@ public class MaitreDuJeu extends Observable implements Serializable{
 				j = remainingPlayers.iterator().next();
 				this.currentPlayer = j;
 				this.remainingPlayers.remove(j);
-				this.setStatus(Status.makingOffer);
+				if (this.currentPlayer instanceof JoueurVirtuel) {
+					((JoueurVirtuel)this.currentPlayer).makeOffer();
+					this.setStatus(Status.choosingForOffer);
+				} else {
+					this.setStatus(Status.makingOffer);
+				}
 			} else {
 				this.currentPlayer = null;
 				this.remainingPlayers = new HashSet<Joueur>(this.Players);
@@ -99,7 +104,12 @@ public class MaitreDuJeu extends Observable implements Serializable{
 					currentPlayer = this.comparePlayersOffer(remainingPlayers);
 				}
 				alreadyChoosePlayers.add(currentPlayer);
-				this.setStatus(Status.takingOffer);
+				if (this.currentPlayer instanceof JoueurVirtuel) {
+					this.setCurrentPlayer(((JoueurVirtuel)currentPlayer).takeOffer(this.getRemainingPlayers()));
+					this.setStatus(Status.choosingForTaking);
+				} else {
+					this.setStatus(Status.takingOffer);
+				}
 			} else {
 				this.currentPlayer = null;
 				this.alreadyChoosePlayers.clear();
