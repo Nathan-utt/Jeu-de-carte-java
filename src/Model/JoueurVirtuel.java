@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.HashSet;
+import java.util.Random;
 
 public class JoueurVirtuel extends Joueur{
 
@@ -8,7 +9,9 @@ public class JoueurVirtuel extends Joueur{
 	
 	public JoueurVirtuel(String pseudo, Integer number) {
 		super(pseudo, number);
-		strat = Math.floor(Math.random()) == 0 ? new HideRandomPickBest() : new HideBestPickRandom(); 
+		Strategy[] strategies = {new HideRandomPickBest(), new HideBestPickRandom(), new Best()};
+		Random r = new Random();
+		strat = strategies[r.nextInt(strategies.length)]; 
 	}
 
 	public void makeOffer() {
