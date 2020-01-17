@@ -20,60 +20,68 @@ import Model.ResourceManager;
 import Model.SaveData;
 
 /**
- * @author Guillaume
- *
+ * Le MDJController sert à faire le lien entre la classe MaitreDuJeu et la vue graphique.
+ * Permettant alors à la vue graphique d'interagir avec les données du jeu.
+ * 
+ * Le controlleur possède des références sur les attributs de la vue graphique. Il peut alors ajouter
+ * des gestionnaire d'événement sur ces objets.
+ * 
+ *  @author Guillaume, Nathan
  */
 public class MDJController {
 	/**
-	 * 
+	 * Une référence sur l'objet MaitreDuJeu qui gère le jeu
 	 */
 	private MaitreDuJeu mdj;
 	/**
-	 * 
+	 * Une référence sur le bouton lancer dans le menu du jeu (interface graphique)
 	 */
 	private JMenuItem launch;
 	/**
-	 * 
+	 * Une référence sur le bouton charger dans le menu du jeu (interface graphique)
 	 */
 	private JMenuItem load;
 	/**
-	 * 
+	 * Une référence sur le bouton sauvegarder dans le menu du jeu (interface graphique)
 	 */
 	private JMenuItem save;
 	/**
-	 * 
+	 * Une référence sur le bouton de choix de mode dans le menu du jeu (interface graphique)
 	 */
 	private JMenu modeMenu;
 	/**
-	 * 
+	 * Une référence sur le bouton mode standard dans le menu du jeu (interface graphique)
 	 */
 	private JMenuItem standard;
 	/**
-	 * 
+	 * Une référence sur le bouton mode standard dans le menu du jeu (interface graphique)
 	 */
 	private JMenuItem reversed;
 	/**
-	 * 
+	 * Une référence sur le bouton mode random dans le menu du jeu (interface graphique)
 	 */
 	private JMenuItem random;
 	/**
-	 * 
+	 * Une référence sur le bouton de choix du nombre de joueur dans le menu du jeu (interface graphique)
 	 */
 	private JMenu playerMenu;
 	/**
-	 * 
+	 * Une référence sur la checkbox d'extension dans le menu du jeu (interface graphique)
 	 */
 	private JCheckBox extension;
 	/**
-	 * 
+	 * Une liste des référence des inputbox des joueurs dans le menu du jeu (interface graphique)
 	 */
 	private ArrayList<JTextField> joueursText;
 	/**
-	 * 
+	 * Une liste des référence des checkbox des joueurs (ordinateur ou non) dans le menu du jeu (interface graphique)
 	 */
 	private ArrayList<JCheckBox> joueursType;
 	
 	/**
+	 * Constructeur du controlleur affectant les références à leur attribut respectif.
+	 * Ce constructeur rajoute aussi les déclencheurs sur les objets qui en on besoin.
+	 * 
 	 * @param mdj
 	 * @param launch
 	 * @param load
@@ -121,9 +129,10 @@ public class MDJController {
 	
 	/**
 	 * 
-	 * @return
-	 * @throws
-	 * @exception
+	 * Méthode permettant la sauvegarde des données actuelles du jeu afin de reprendre plus tard.
+	 * 
+	 * @return void
+	 * @exception FileNotFound
 	 */
 	public void saveGame() {
 		try {
@@ -136,10 +145,10 @@ public class MDJController {
 	}
 
 	/**
+	 * Méthode chargeant le fichier de sauvegarde si il existe afin de reprendre une partie.
 	 * 
-	 * @return
-	 * @throws
-	 * @exception
+	 * @return void
+	 * @exception FileNotFound
 	 */
 	public void loadGame() {
 		try {
@@ -151,10 +160,9 @@ public class MDJController {
 		}
 	}
 	/**
+	 * Si les champs sont bien renseigné demande au MDJ de lancer la partie.
 	 * 
-	 * @return
-	 * @throws
-	 * @exception
+	 * @return void
 	 */
 	public void launchGame() {
 		if (!modeMenu.getText().equals("Mode") && !playerMenu.getText().equals("Joueur")) {

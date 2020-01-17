@@ -1,6 +1,7 @@
 package Enumeration;
 
 /**
+ * Les différents état possible pour le jeu.
  * @author Guillaume
  *
  */

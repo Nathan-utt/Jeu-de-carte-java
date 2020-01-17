@@ -13,16 +13,19 @@ import View.ConsoleView;
 import View.GraphicView;
 
 /**
- * @author Guillaume
+ * La fonction principale lancée au début du programme.
+ * Elle crée un moteur de Jeu et lance le jeu dans les différentes vues.
+ * 
+ * @author Guillaume, Nathan
  *
  */
 public class Main {
 
 	/**
+	 * Crée les deux vues, un moteur de jeu et lance la partie.
+	 * 
 	 * @param args
-	 * @return
-	 * @throws
-	 * @exception
+	 * @return void
 	 */
 	public static void main(String[] args) {
 		MaitreDuJeu mdj = new MaitreDuJeu();

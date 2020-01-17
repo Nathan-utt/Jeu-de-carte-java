@@ -1,6 +1,8 @@
 package Enumeration;
 
 /**
+ * Les 3 variantes possibles pour le jeu ainsi qu'une description de celle-ci.
+ * 
  * @author Guillaume
  *
  */
@@ -10,7 +12,7 @@ public enum Variante {
 	Random("Trophée aléatoire");
 	
 	/**
-	 * 
+	 * Une description du mode de jeu.
 	 */
 	private String shortDesc;
 
@@ -19,6 +21,8 @@ public enum Variante {
 	}
     
 	/**
+	 * Lorsque l'énumération est créé affecte la description renseignée dans son champ description.
+	 * 
 	 * @param shortDesc
 	 */
 	private Variante(String shortDesc) {

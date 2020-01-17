@@ -21,55 +21,69 @@ import Model.JoueurVirtuel;
 import Model.MaitreDuJeu;
 
 /**
- * @author Guillaume
+ * La vue Console, elle permet de suivre l'évolution du jeu dans la console.
+ * C'est un Thread à part afin de ne pas bloquer les autres vues.
+ * Cette vue Observe le MDJ afin de changer lorsque le MDJ est modifier.
+ * 
+ * @author Guillaume, Nathan
  *
  */
 public class ConsoleView implements Observer, Runnable {
 	/**
-	 * 
+	 * Une référence vers le moteur du jeu car cette vue ne dispose pas de controlleur.
 	 */
 	private MaitreDuJeu mdj;
 	
 	/**
-	 * 
+	 * Commande par défaut pour Lancer
+	 * @deprecated jamais utilisé
 	 */
 	public static String START = "Lancer";
 	/**
-	 * 
+	 * Commande par défaut pour quitter
+	 * @deprecated jamais utilisé 
 	 */
 	public static String QUIT = "Quitter";
 	/**
-	 * 
+	 * Commande par défaut pour sauvegarder
+	 * @deprecated jamais utilisé 
 	 */
 	public static String SAVE = "Sauvegarder";
 	/**
-	 * 
+	 * Commande par défaut pour charger
+	 * @deprecated jamais utilisé 
 	 */
 	public static String LOAD = "Charger";
 	/**
-	 * 
+	 * Commande par défaut pour voir sa Main
+	 * @deprecated jamais utilisé 
 	 */
-	public static String HAND = "Sauvegarder";
+	public static String HAND = "Main";
 	/**
-	 * 
+	 * Commande par défaut pour voir son Jest
+	 * @deprecated jamais utilisé 
 	 */
-	public static String JEST = "Sauvegarder";
+	public static String JEST = "Jest";
 	
 	/**
-	 * 
+	 * Le scanner utilisé pour lire dans la console
+	 * @deprecated remplacé par le BufferedReader
 	 */
 	public static Scanner sc = new Scanner(System.in);
 	/**
-	 * 
+	 * Le bufferedReader utilisé pour lire dans la console
 	 */
 	public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	
 	/**
-	 * 
+	 * Contient le thread en cours, si un thread de lecture de console à été lancé.
 	 */
 	public Thread runningThread = null;
 	
 	/**
+	 * Création de la vue avec le moteur de jeu.
+	 * On ajoute cette vue en tant qu'observeur du mdj.
+	 * 
 	 * @param mdj
 	 */
 	public ConsoleView(MaitreDuJeu mdj) {
@@ -78,21 +92,20 @@ public class ConsoleView implements Observer, Runnable {
 	}
 	
 	/**
-	 * @param str
-	 * @return
-	 * @throws
-	 * @exception
+	 * Permet d'écrire une phrase dans la console avec un retour à la ligne.
+	 * @param str la phrase à écrire
+	 * @return void
 	 */
 	public void writeToConsole(String str) {
 		System.out.println(str);
 	}
 	
 	/**
-	 * @param str
-	 * @param newLine
-	 * @return
-	 * @throws
-	 * @exception
+	 * Permet d'écrire une phrase dans la console avec ou sans un retour à la ligne.
+	 * 
+	 * @param str la phrase à écrire
+	 * @param newLine un booléen précisant si une nouvelle ligne doit être ajoutée.
+	 * @return void
 	 */
 	public void writeToConsole(String str, Boolean newLine) {
 		if (newLine) {
@@ -104,10 +117,8 @@ public class ConsoleView implements Observer, Runnable {
 	
 	
 	/**
-	 * 
-	 * @return
-	 * @throws
-	 * @exception
+	 * Méthode permettant la séparation entre deux écriture permettant une meilleure lisibilité.
+	 * @return void
 	 */
 	public void clearConsole() {
 	    this.writeToConsole("===========================================================================");
@@ -115,12 +126,15 @@ public class ConsoleView implements Observer, Runnable {
 	}
 	
 	/**
-	 * @param choices
-	 * @param addOption
-	 * @return
-	 * @return
-	 * @throws
-	 * @exception
+	 * Méthode permettant de demander un choix à l'utilisateur.
+	 * Les choix sont renseigné et on regarde le choix final dans un nouveau Thread pour ne pas bloquer.
+	 * 
+	 * 
+	 * @param choices Un tableau de String contenant les choix possibles pour l'utilisateur.
+	 * @param addOption Un booléen précisant si on doit ajouter les options de base (sauvergarder...).
+	 * @return Un String contenant le choix final de l'utilisateur. 
+	 * @exception InterruptedException
+	 * Intervient lorsque la vue graphique doit stopper l'entrée de nouvelle valeur car le choix à déjà était fait.
 	 */
 	public String askForChoice(ArrayList<String> choices, Boolean addOption) {
 		if (addOption) {
@@ -182,7 +196,8 @@ public class ConsoleView implements Observer, Runnable {
 	}
 
 	/**
-	 *
+	 * La méthode exécuté lorsque l'on crée un Thread de choix.
+	 * Selon l'étape du jeu, soit le statut du moteur de jeu, affiche un choix différent pour l'utilisateur.
 	 */
 	@Override
 	public void run() {
@@ -310,7 +325,8 @@ public class ConsoleView implements Observer, Runnable {
 	}
 
 	/**
-	 *
+	 * Méthode s'éxécutant lorsque le moteur de jeu est update. On regarde alors le statut du mdj.
+	 * Selon ce statut on va mettre à jour la vue en affichant des messages.
 	 */
 	@Override
 	public void update(Observable instance, Object arg) {

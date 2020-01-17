@@ -51,119 +51,125 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- * @author Guillaume
+ * La vue Graphique, elle permet de suivre l'évolution du jeu dans une fenêtre graphique.
+ * C'est un Thread à part afin de ne pas bloquer les autres vues.
+ * Cette vue Observe le MDJ afin de changer lorsque le MDJ est modifier.
+ * 
+ * @author Guillaume, Nathan
  *
  */
 public class GraphicView implements Observer {
 	
 	/**
-	 * 
+	 * Les coordonnées par défaut de la première carte du Jest
 	 */
 	public static Integer[] FIRSTJESTPOSITION = {10,50};
 	/**
-	 * 
+	 * Les coordonnées par défaut de la première carte de la Main
 	 */
 	public Integer[] FIRSTHANDPOSITION = {0,0};
 	/**
-	 * 
+	 * Les coordonnées par défaut de la première carte Trophée
 	 */
 	public Integer[] TROPHEEPOSITION = {0,50};
 	/**
-	 * 
+	 * Les coordonnées par défaut des différentes carte des offres
 	 */
 	public Integer[][] PLAYEROFFER = {{10,400},{400,400},{800,400}};
 
 	/**
-	 * 
+	 * La fenêtre principale
 	 */
 	private JFrame frame;
 	/**
-	 * 
+	 * Le Menu item de lancement du jeu
 	 */
 	private JMenuItem launch;
 	/**
-	 * 
+	 * Le Menu item de chargement du jeu
 	 */
 	private JMenuItem load;
 	/**
-	 * 
+	 * Le Menu item de sauvegarde du jeu
 	 */
 	private JMenuItem save;
 	/**
-	 * 
+	 * Le Menu de mode du jeu
 	 */
 	private JMenu modeMenu;
 	/**
-	 * 
+	 * Le Menu item de mode standard du jeu
 	 */
 	private JMenuItem standard;
 	/**
-	 * 
+	 * Le Menu item de mode reversed du jeu
 	 */
 	private JMenuItem reversed;
 	/**
-	 * 
+	 * Le Menu item de mode random du jeu
 	 */
 	private JMenuItem random;
 	/**
-	 * 
+	 * Le Menu du nombre de joueur du jeu
 	 */
 	private JMenu playerMenu;
 	/**
-	 * 
+	 * Le Menu item de 3 joueurs du jeu
 	 */
 	private JMenuItem p3;
 	/**
-	 * 
+	 * Le Menu item de 4 joueurs du jeu
 	 */
 	private JMenuItem p4;
 	/**
-	 * 
+	 * La checkbox d'extension du jeu
 	 */
 	private JCheckBox extension;
 	/**
-	 * 
+	 * La barre de menu
 	 */
 	private JMenuBar menuBar;
 	/**
-	 * 
+	 * Le Panel principal du jeu
 	 */
 	private JPanel mainGame;
 	
 	/**
-	 * 
+	 * Une liste des texte input pour les noms des joueurs
 	 */
 	private ArrayList<JTextField> joueursText;
 	/**
-	 * 
+	 * Une liste de checkbox pour les types des joueurs
 	 */
 	private ArrayList<JCheckBox> joueursType;
 	/**
-	 * 
+	 * Une map reliant Une carte à son image dans la fenêtre.
+	 * Correspondant à la main courante.
 	 */
 	private HashMap<JLabel,Carte> currentHand;
 	/**
-	 * 
+	 * Une map reliant Une carte à son image dans la fenêtre.
+	 * Correspondant au trophée courant. 
 	 */
 	private HashMap<JLabel,Carte> currentTrophees;
 	/**
-	 * 
+	 * Une map reliant Une carte à son image dans la fenêtre.
+	 * Correspondant au Jest courant. 
 	 */
 	private HashMap<JLabel,Carte> currentJest;
 	/**
-	 * 
+	 * Une map reliant Un joueur à son image dans la fenêtre.
+	 * Correspondant aux offres courantes. 
 	 */
 	private HashMap<JLabel,Joueur> currentOffers;
-	/**
-	 * 
-	 */
+
 	private JLabel label_1;
 
 	/**
-	 * @param number
-	 * @return
-	 * @throws
-	 * @exception
+	 * Une méthode pour ajouter un certain nombre de case pour tapper les noms et types des joueurs.
+	 * 
+	 * @param number le nombre de joueur à ajouter
+	 * @return void
 	 */
 	public void setPlayers(int number) {
 		Iterator<JTextField> iteText = this.joueursText.iterator();
@@ -210,12 +216,8 @@ public class GraphicView implements Observer {
 	
 	/**
 	 * Launch the application.
-	 */
-	/**
-	 * @param args
-	 * @return
-	 * @throws
-	 * @exception
+	 * 
+	 * @deprecated just for testing
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -233,10 +235,9 @@ public class GraphicView implements Observer {
 	}
 
 	/**
-	 * Create the application.
-	 */
-	/**
-	 * @param mdj
+	 * Création de la vue graphique on passe le moteur de jeu en paramètre afin de créer le controlleur.
+	 * 
+	 * @param mdj moteur de jeu
 	 */
 	public GraphicView(MaitreDuJeu mdj) {
 		initialize();
@@ -253,12 +254,6 @@ public class GraphicView implements Observer {
 
 	/**
 	 * Initialize the contents of the frame.
-	 */
-	/**
-	 * 
-	 * @return
-	 * @throws
-	 * @exception
 	 */
 	private void initialize() {
 		
@@ -349,10 +344,9 @@ public class GraphicView implements Observer {
 	}
 	
 	/**
+	 * Retourne la vue graphique à l'état par défaut
 	 * 
-	 * @return
-	 * @throws
-	 * @exception
+	 * @return void
 	 */
 	public void clearAll() {
 		mainGame.removeAll();
@@ -363,10 +357,9 @@ public class GraphicView implements Observer {
 	}
 	
 	/**
+	 * Mets les éléments par défaut sur la vue graphique.
 	 * 
-	 * @return
-	 * @throws
-	 * @exception
+	 * @return void
 	 */
 	public void baseSetup() {
 		JLabel lblNewLabel = new JLabel("Ton Jest");
@@ -381,7 +374,8 @@ public class GraphicView implements Observer {
 	}
 
 	/**
-	 *
+	 * Méthode s'éxécutant lorsque le moteur de jeu est update. On regarde alors le statut du mdj.
+	 * Selon ce statut on va mettre à jour la vue.
 	 */
 	@Override
 	public void update(Observable inst, Object arg) {
