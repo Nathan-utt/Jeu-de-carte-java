@@ -5,10 +5,20 @@ import java.util.Iterator;
 
 import Enumeration.Couleur;
 
+/**
+ * @author Guillaume
+ *
+ */
 public class TropheeHighest extends Trophee {
 
+	/**
+	 * 
+	 */
 	private Couleur color;
 	
+	/**
+	 * @param color
+	 */
 	public TropheeHighest(Couleur color) {
 		this.color = color;
 		this.setImg("/img/trophee/trophe-grand-"+color.getDesc().toLowerCase());
@@ -16,6 +26,9 @@ public class TropheeHighest extends Trophee {
 		this.setDescription("Joueur avec la plus haute valeur de cette couleur");
 	}
 	
+	/**
+	 *
+	 */
 	@Override
 	public Joueur award(ArrayList<Joueur> players) {
 		Joueur awardedPlayer = null;

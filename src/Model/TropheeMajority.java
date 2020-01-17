@@ -7,10 +7,20 @@ import java.util.Iterator;
 import Enumeration.Couleur;
 import Enumeration.Hauteur;
 
+/**
+ * @author Guillaume
+ *
+ */
 public class TropheeMajority extends Trophee {
 	
+	/**
+	 * 
+	 */
 	private Hauteur value;
 	
+	/**
+	 * @param value
+	 */
 	public TropheeMajority(Hauteur value) {
 		this.value = value;
 		this.setImg("/img/trophee/trophe-majorite-"+value.getDesc());
@@ -18,6 +28,9 @@ public class TropheeMajority extends Trophee {
 		this.setDescription("Joueur avec la plus grande quantité de cette hauteur");
 	}
 	
+	/**
+	 *
+	 */
 	@Override
 	public Joueur award(ArrayList<Joueur> players) {
 		HashSet<Joueur> awardedPlayer = new HashSet<Joueur>();

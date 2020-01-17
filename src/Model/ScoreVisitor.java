@@ -7,19 +7,49 @@ import java.util.Iterator;
 import Enumeration.Couleur;
 import Enumeration.Hauteur;
 
+/**
+ * @author Guillaume
+ *
+ */
 public class ScoreVisitor implements Serializable{
+	/**
+	 * 
+	 */
 	private Boolean extension;
+	/**
+	 * 
+	 */
 	private Boolean reversed;
 	
+	/**
+	 * @param extension
+	 * @param reversed
+	 */
 	public ScoreVisitor(Boolean extension, Boolean reversed) {
 		this.extension = extension;
 		this.reversed = reversed;
 	}
 	
+	/**
+	 * @param player
+	 * @param withJoker
+	 * @return
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public Integer getScore(Joueur player,Boolean withJoker) {
 		return player.accept(this, withJoker);
 	}
 	
+	/**
+	 * @param joueur
+	 * @param withJoker
+	 * @return
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public Integer visit(Joueur joueur, Boolean withJoker) {
 		Iterator<Carte> iteCards = joueur.getJest().getDeck().iterator();
 		Integer score = 0;

@@ -6,14 +6,24 @@ import java.util.Iterator;
 
 import Enumeration.Hauteur;
 
+/**
+ * @author Guillaume
+ *
+ */
 public class TropheeJoker extends Trophee {
 	
+	/**
+	 * 
+	 */
 	public TropheeJoker() {
 		this.setName("Joker");
 		this.setImg("/img/trophee/trophe-joker");
 		this.setDescription("Joueur possédant le Joker");
 	}
 	
+	/**
+	 *
+	 */
 	@Override
 	public Joueur award(ArrayList<Joueur> players) {
 		Joueur awardedPlayer = null;

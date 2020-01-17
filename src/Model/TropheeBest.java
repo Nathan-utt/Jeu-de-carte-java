@@ -7,10 +7,20 @@ import java.util.Iterator;
 
 import Enumeration.Couleur;
 
+/**
+ * @author Guillaume
+ *
+ */
 public class TropheeBest extends Trophee {
 	
+	/**
+	 * 
+	 */
 	private ScoreVisitor sv;
 	
+	/**
+	 * @param sv
+	 */
 	public TropheeBest(ScoreVisitor sv) {
 		this.sv = sv;
 		this.setImg("/img/trophee/trophe-premier");
@@ -18,6 +28,9 @@ public class TropheeBest extends Trophee {
 		this.setDescription("Joueur avec le meilleur Jest avec le Joker");
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public Joueur award(ArrayList<Joueur> players) {
 		HashMap<Joueur,Integer> awardedPlayer = new HashMap<Joueur,Integer>();

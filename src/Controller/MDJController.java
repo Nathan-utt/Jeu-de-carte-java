@@ -19,20 +19,74 @@ import Model.MaitreDuJeu;
 import Model.ResourceManager;
 import Model.SaveData;
 
+/**
+ * @author Guillaume
+ *
+ */
 public class MDJController {
+	/**
+	 * 
+	 */
 	private MaitreDuJeu mdj;
+	/**
+	 * 
+	 */
 	private JMenuItem launch;
+	/**
+	 * 
+	 */
 	private JMenuItem load;
+	/**
+	 * 
+	 */
 	private JMenuItem save;
+	/**
+	 * 
+	 */
 	private JMenu modeMenu;
+	/**
+	 * 
+	 */
 	private JMenuItem standard;
+	/**
+	 * 
+	 */
 	private JMenuItem reversed;
+	/**
+	 * 
+	 */
 	private JMenuItem random;
+	/**
+	 * 
+	 */
 	private JMenu playerMenu;
+	/**
+	 * 
+	 */
 	private JCheckBox extension;
+	/**
+	 * 
+	 */
 	private ArrayList<JTextField> joueursText;
+	/**
+	 * 
+	 */
 	private ArrayList<JCheckBox> joueursType;
 	
+	/**
+	 * @param mdj
+	 * @param launch
+	 * @param load
+	 * @param save
+	 * @param modeMenu
+	 * @param standard
+	 * @param reversed
+	 * @param random
+	 * @param playerMenu
+	 * @param extension
+	 * @param joueursText
+	 * @param joueursType
+	 */
 	public MDJController(MaitreDuJeu mdj, JMenuItem launch, JMenuItem load, JMenuItem save, JMenu modeMenu,
 			JMenuItem standard, JMenuItem reversed, JMenuItem random, JMenu playerMenu,
 			JCheckBox extension, ArrayList<JTextField> joueursText, ArrayList<JCheckBox> joueursType) {
@@ -65,6 +119,12 @@ public class MDJController {
 		this.joueursType = joueursType;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public void saveGame() {
 		try {
 			SaveData savedata = new SaveData(mdj.getPlayers(), mdj.getRemainingPlayers(), mdj.getAlreadyChoosePlayers(), mdj.getRemainingDeck(), mdj.getDistributionDeck(), mdj.getTrophees(), mdj.getCurrentPlayer(), mdj.getUsedVariante(), mdj.getPlayingWithExtension(), mdj.getSv(), mdj.getStatus());
@@ -75,6 +135,12 @@ public class MDJController {
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public void loadGame() {
 		try {
 			SaveData savedata = (SaveData) ResourceManager.load("save.txt");
@@ -84,6 +150,12 @@ public class MDJController {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * 
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public void launchGame() {
 		if (!modeMenu.getText().equals("Mode") && !playerMenu.getText().equals("Joueur")) {
 			Boolean abort = false;

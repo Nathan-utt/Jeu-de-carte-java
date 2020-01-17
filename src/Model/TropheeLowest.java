@@ -6,10 +6,20 @@ import java.util.Iterator;
 import Enumeration.Couleur;
 import Enumeration.Hauteur;
 
+/**
+ * @author Guillaume
+ *
+ */
 public class TropheeLowest extends Trophee {
 	
+	/**
+	 * 
+	 */
 	private Couleur color;
 	
+	/**
+	 * @param color
+	 */
 	public TropheeLowest(Couleur color) {
 		this.color = color;
 		this.setImg("/img/trophee/trophe-petit-"+color.getDesc().toLowerCase());
@@ -17,6 +27,9 @@ public class TropheeLowest extends Trophee {
 		this.setDescription("Joueur avec la plus petite valeur de cette couleur");
 	}
 	
+	/**
+	 *
+	 */
 	@Override
 	public Joueur award(ArrayList<Joueur> players) {
 		Joueur awardedPlayer = null;

@@ -20,30 +20,80 @@ import Model.Joueur;
 import Model.JoueurVirtuel;
 import Model.MaitreDuJeu;
 
+/**
+ * @author Guillaume
+ *
+ */
 public class ConsoleView implements Observer, Runnable {
+	/**
+	 * 
+	 */
 	private MaitreDuJeu mdj;
 	
+	/**
+	 * 
+	 */
 	public static String START = "Lancer";
+	/**
+	 * 
+	 */
 	public static String QUIT = "Quitter";
+	/**
+	 * 
+	 */
 	public static String SAVE = "Sauvegarder";
+	/**
+	 * 
+	 */
 	public static String LOAD = "Charger";
+	/**
+	 * 
+	 */
 	public static String HAND = "Sauvegarder";
+	/**
+	 * 
+	 */
 	public static String JEST = "Sauvegarder";
 	
+	/**
+	 * 
+	 */
 	public static Scanner sc = new Scanner(System.in);
+	/**
+	 * 
+	 */
 	public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	
+	/**
+	 * 
+	 */
 	public Thread runningThread = null;
 	
+	/**
+	 * @param mdj
+	 */
 	public ConsoleView(MaitreDuJeu mdj) {
 		this.mdj = mdj;
 		this.mdj.addObserver(this);
 	}
 	
+	/**
+	 * @param str
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public void writeToConsole(String str) {
 		System.out.println(str);
 	}
 	
+	/**
+	 * @param str
+	 * @param newLine
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public void writeToConsole(String str, Boolean newLine) {
 		if (newLine) {
 			System.out.println(str);
@@ -53,11 +103,25 @@ public class ConsoleView implements Observer, Runnable {
 	}
 	
 	
+	/**
+	 * 
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public void clearConsole() {
 	    this.writeToConsole("===========================================================================");
 	    this.writeToConsole("===========================================================================");
 	}
 	
+	/**
+	 * @param choices
+	 * @param addOption
+	 * @return
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public String askForChoice(ArrayList<String> choices, Boolean addOption) {
 		if (addOption) {
 			choices.add(QUIT);
@@ -117,6 +181,9 @@ public class ConsoleView implements Observer, Runnable {
 		return finalChoice;
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void run() {
 		String choice;
@@ -242,6 +309,9 @@ public class ConsoleView implements Observer, Runnable {
 		}
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void update(Observable instance, Object arg) {
 		if (instance instanceof MaitreDuJeu) {

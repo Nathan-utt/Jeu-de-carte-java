@@ -12,8 +12,18 @@ import Model.MaitreDuJeu;
 import View.ConsoleView;
 import View.GraphicView;
 
+/**
+ * @author Guillaume
+ *
+ */
 public class Main {
 
+	/**
+	 * @param args
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public static void main(String[] args) {
 		MaitreDuJeu mdj = new MaitreDuJeu();
 		ConsoleView cv = new ConsoleView(mdj);

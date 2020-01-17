@@ -2,11 +2,30 @@ package Model;
 
 import java.io.Serializable;
 
+/**
+ * @author Guillaume
+ *
+ */
 public abstract class Carte implements Serializable {
+	/**
+	 * 
+	 */
 	private String name;
+	/**
+	 * 
+	 */
 	private Boolean visible;
+	/**
+	 * 
+	 */
 	private Boolean isExtension;
+	/**
+	 * 
+	 */
 	private String img;
+	/**
+	 * 
+	 */
 	private String backImg = "/img/card/back.png";
 	
 	public void setImg(String img) {
@@ -33,6 +52,9 @@ public abstract class Carte implements Serializable {
 		return isExtension;
 	}
 
+	/**
+	 * @param extension
+	 */
 	public Carte(Boolean extension) {
 		this.visible = false;
 		this.isExtension = extension;

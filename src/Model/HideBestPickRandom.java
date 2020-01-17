@@ -7,8 +7,15 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Random;
 
+/**
+ * @author Guillaume
+ *
+ */
 public class HideBestPickRandom extends Strategy {
 	
+	/**
+	 *
+	 */
 	@Override
 	public void makeOffer(Joueur player) {
 		ArrayList<String> choices = new ArrayList<String>();
@@ -36,6 +43,9 @@ public class HideBestPickRandom extends Strategy {
 		player.getOffer().putCardFirst(hiddenCard);
 	}
 	
+	/**
+	 *
+	 */
 	@Override
 	public Joueur takeOffer(HashSet<Joueur> players,Joueur player) {
 		Iterator<Joueur> itePlayers = players.iterator();

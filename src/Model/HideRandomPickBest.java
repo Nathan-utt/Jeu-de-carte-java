@@ -6,8 +6,15 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+/**
+ * @author Guillaume
+ *
+ */
 public class HideRandomPickBest extends Strategy {
 
+	/**
+	 *
+	 */
 	@Override
 	public void makeOffer(Joueur player) {
 		ArrayList<String> choices = new ArrayList<String>();
@@ -25,6 +32,9 @@ public class HideRandomPickBest extends Strategy {
 		player.getOffer().putCardFirst(hiddenCard);
 	}
 	
+	/**
+	 *
+	 */
 	@Override
 	public Joueur takeOffer(HashSet<Joueur> players,Joueur player) {
 		Iterator<Joueur> itePlayers = players.iterator();
