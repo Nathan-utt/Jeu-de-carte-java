@@ -13,7 +13,7 @@ public class CarteRegle extends Carte{
 
 	public CarteRegle(String texte,Boolean extension) {
 		super(extension);
-		this.setName("Règles");
+		this.setName("RÃ¨gles");
 		this.setImg("/img/card/"+this.getName().replace(" ", "").toLowerCase());
 		this.texte = texte;
 	}

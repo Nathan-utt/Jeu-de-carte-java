@@ -78,7 +78,7 @@ public class CartesNumerotees extends Carte {
 		if (this.isVisible()) {
 			return this.getName();
 		} else {
-			return "Carte cachée";
+			return "Carte cachÃ©e";
 		}
 	}
 

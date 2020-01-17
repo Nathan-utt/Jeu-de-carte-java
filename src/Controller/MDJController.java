@@ -1,8 +1,10 @@
 package Controller;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.JCheckBox;
 import javax.swing.JMenu;
@@ -84,31 +86,52 @@ public class MDJController {
 	}
 	public void launchGame() {
 		if (!modeMenu.getText().equals("Mode") && !playerMenu.getText().equals("Joueur")) {
-			int computerCount = 0;
-			mdj.getPlayers().clear();
-			for (int i = 0; i < joueursType.size(); i++) {
-				if (joueursType.get(i).isSelected()) {
-					mdj.addPlayer(new JoueurVirtuel("Ordinateur"+computerCount,i));
-					computerCount++;
-				} else {
-					mdj.addPlayer(new Joueur(joueursText.get(i).getText(),i));
+			Boolean abort = false;
+			Iterator<JTextField> iteJtext = joueursText.iterator();
+			while (iteJtext.hasNext()) {
+				JTextField jTextField = (JTextField) iteJtext.next();
+				if (jTextField.getText().equals("")) {
+					abort = true;
+					jTextField.setBackground(Color.red);
+				}
+				if (!jTextField.getText().equals("ordi")) {
+				Iterator<JTextField> iteJtext2 = joueursText.iterator();
+					while (iteJtext2.hasNext()) {
+						JTextField jTextField2 = (JTextField) iteJtext2.next();
+						if (jTextField != jTextField2 && jTextField.getText().equals(jTextField2.getText())) {
+							abort = true;
+							jTextField2.setBackground(Color.red);
+						}
+					}
 				}
 			}
-			switch (modeMenu.getText()) {
-			case "Normal":
-				mdj.setUsedVariante(Variante.Normal);
-				break;
-			case "Reversed":
-				mdj.setUsedVariante(Variante.Reversed);
-				break;
-			case "Random":
-				mdj.setUsedVariante(Variante.Random);
-				break;
-			default:
-				break;
+			if (!abort) {
+				int computerCount = 0;
+				mdj.getPlayers().clear();
+				for (int i = 0; i < joueursType.size(); i++) {
+					if (joueursType.get(i).isSelected()) {
+						mdj.addPlayer(new JoueurVirtuel("Ordinateur"+computerCount,i));
+						computerCount++;
+					} else {
+						mdj.addPlayer(new Joueur(joueursText.get(i).getText(),i));
+					}
+				}
+				switch (modeMenu.getText()) {
+				case "Normal":
+					mdj.setUsedVariante(Variante.Normal);
+					break;
+				case "Reversed":
+					mdj.setUsedVariante(Variante.Reversed);
+					break;
+				case "Random":
+					mdj.setUsedVariante(Variante.Random);
+					break;
+				default:
+					break;
+				}
+				mdj.setPlayingWithExtension(extension.isSelected());
+				mdj.setStatus(Status.start);
 			}
-			mdj.setPlayingWithExtension(extension.isSelected());
-			mdj.setStatus(Status.start);
 		}
 		
 	}

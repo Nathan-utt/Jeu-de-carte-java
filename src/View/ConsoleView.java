@@ -72,10 +72,10 @@ public class ConsoleView implements Observer, Runnable {
 		HashSet<Integer> idMatched = null;
 		do {
 			if (idMatched != null && idMatched.isEmpty()) {
-				writeToConsole("Aucune similarité avec les choix");
+				writeToConsole("Aucune similaritÃ© avec les choix");
 			}
 			if (idMatched != null && idMatched.size() > 1) {
-				writeToConsole("Similarité avec plusieurs choix");
+				writeToConsole("SimilaritÃ© avec plusieurs choix");
 			for (Integer id : idMatched) {
 					writeToConsole(choices.get(id));
 				}
@@ -136,8 +136,8 @@ public class ConsoleView implements Observer, Runnable {
 							String entered = "";
 							Boolean flag = false;
 							do {
-								if	(flag) this.writeToConsole("Vous devez choisir un pseudo différent pour chaque joueur");
-								this.writeToConsole("Comment voulez vous appeler le joueur "+pn+"? (de 2 à 16 charactères)");
+								if	(flag) this.writeToConsole("Vous devez choisir un pseudo diffÃ©rent pour chaque joueur");
+								this.writeToConsole("Comment voulez vous appeler le joueur "+pn+"? (de 2 Ã  16 charactÃ¨res)");
 								try {
 									while (!br.ready()  /*  ADD SHUTDOWN CHECK HERE */) {
 								          Thread.sleep(200);
@@ -219,7 +219,7 @@ public class ConsoleView implements Observer, Runnable {
 					Iterator<Carte> iteDeck = joueur.getOffer().getDeck().iterator();
 					while (iteDeck.hasNext()) {
 						Carte carte = (Carte) iteDeck.next();
-						offers.put((carte.isVisible() ? carte.getName() : joueur.getPseudo()+" Carte cachée"),joueur);
+						offers.put((carte.isVisible() ? carte.getName() : joueur.getPseudo()+" Carte cachÃ©e"),joueur);
 					}
 					this.writeToConsole(joueur.getPseudo()+" propose "+joueur.seeOffer());
 					choices.addAll(joueur.constructOffer());
@@ -264,7 +264,7 @@ public class ConsoleView implements Observer, Runnable {
 				break;	
 			case extensionChoice:
 				this.clearConsole();
-				this.writeToConsole("Voulez vous jouer avec les cartes normales ou étendues?");
+				this.writeToConsole("Voulez vous jouer avec les cartes normales ou Ã©tendues?");
 				runningThread = new Thread(this);
 				runningThread.start();
 				break;
@@ -283,7 +283,7 @@ public class ConsoleView implements Observer, Runnable {
 					choices.add(currPlayer.getHand().getDeck().get(0).getName());
 					choices.add(currPlayer.getHand().getDeck().get(1).getName());
 					this.writeToConsole("Vous avez un "+choices.get(0)+" et un "+choices.get(1)+" dans votre main.");
-					this.writeToConsole("Choississez la carte que vous souhaitez offrir face cachée, l'autre sera offerte face visible.");
+					this.writeToConsole("Choississez la carte que vous souhaitez offrir face cachÃ©e, l'autre sera offerte face visible.");
 					runningThread = new Thread(this);
 					runningThread.start();
 				}

@@ -262,7 +262,7 @@ public class GraphicView implements Observer {
 		lblNewLabel.setBounds(10, 10, 90, 40);
 		mainGame.add(lblNewLabel);
 		
-		lblNewLabel = new JLabel("Trophées");
+		lblNewLabel = new JLabel("TrophÃ©es");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel.setBounds(TROPHEEPOSITION[0], 10, 90, 40);
 		mainGame.add(lblNewLabel);

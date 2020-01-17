@@ -11,7 +11,7 @@ public class TropheeJoker extends Trophee {
 	public TropheeJoker() {
 		this.setName("Joker");
 		this.setImg("/img/trophee/trophe-joker");
-		this.setDescription("Joueur possédant le Joker");
+		this.setDescription("Joueur possÃ©dant le Joker");
 	}
 	
 	@Override

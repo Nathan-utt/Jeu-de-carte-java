@@ -20,9 +20,5 @@ public class Main {
 		GraphicView gv = new GraphicView(mdj);
 		
 		mdj.setStatus(Status.playerChoice);
-		
-		
-		
 	}
-
 }

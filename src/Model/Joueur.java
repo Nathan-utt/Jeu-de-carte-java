@@ -31,7 +31,7 @@ public class Joueur implements Serializable {
 		String returnMsg = "|";
 		while (iteCards.hasNext()) {
 			Carte carte = (Carte) iteCards.next();
-			returnMsg += (carte.isVisible()) ? carte.getName()+"|" : "Carte cachée|";
+			returnMsg += (carte.isVisible()) ? carte.getName()+"|" : "Carte cachÃ©e|";
 		}
 		return returnMsg;
 	}
@@ -41,7 +41,7 @@ public class Joueur implements Serializable {
 		ArrayList<String> returnMsg = new ArrayList<String>();
 		while (iteCards.hasNext()) {
 			Carte carte = (Carte) iteCards.next();
-			returnMsg.add((carte.isVisible()) ? carte.getName() : this.pseudo+" Carte cachée");
+			returnMsg.add((carte.isVisible()) ? carte.getName() : this.pseudo+" Carte cachÃ©e");
 		}
 		return returnMsg;
 	}

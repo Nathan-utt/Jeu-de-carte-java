@@ -1,7 +1,7 @@
 package Enumeration;
 
 public enum Couleur {
-	Coeur("Coeur"), Carreau("Carreau"), Trefle("Trèfle"), Pique("Pique"), Null("Null");
+	Coeur("Coeur"), Carreau("Carreau"), Trefle("TrÃ¨fle"), Pique("Pique"), Null("Null");
 	
 	private String desc ;  
     
