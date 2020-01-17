@@ -5,10 +5,24 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
+/**
+ * 
+ * Cette classe défini les trophés assignés au joueur ayant le meilleur jest sans le joker.
+ * Cette classe hérite de Trophee car elle reprend plusieur de ses caractéristiques.
+ * 
+ * @author Guillaume et Nathan
+ *
+ */
 public class TropheeBestNoJoker extends Trophee{
 	
+	/**
+	 * 
+	 */
 	private ScoreVisitor sv;
 	
+	/**
+	 * @param sv
+	 */
 	public TropheeBestNoJoker(ScoreVisitor sv) {
 		this.sv = sv;
 		this.setImg("/img/trophee/trophe-premier-sans-joker");
@@ -16,6 +30,9 @@ public class TropheeBestNoJoker extends Trophee{
 		this.setDescription("Joueur avec le meilleur Jest sans le Joker");
 	}
 	
+	/**
+	 *
+	 */
 	@Override
 	public Joueur award(ArrayList<Joueur> players) {
 		HashMap<Joueur,Integer> awardedPlayer = new HashMap<Joueur,Integer>();

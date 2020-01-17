@@ -5,10 +5,24 @@ import java.util.Iterator;
 
 import Enumeration.Couleur;
 
+/**
+ * 
+ * Cette classe va décrire les trophé assigné au joueur ayant une carte de la plus grande valeur d'une famille défini.
+ * Cette classe hérite de Trophee car elle reprend plusieur de ses caractéristiques.
+ * 
+ * @author Guillaume et Nathan
+ *
+ */
 public class TropheeHighest extends Trophee {
 
+	/**
+	 * 
+	 */
 	private Couleur color;
 	
+	/**
+	 * @param color
+	 */
 	public TropheeHighest(Couleur color) {
 		this.color = color;
 		this.setImg("/img/trophee/trophe-grand-"+color.getDesc().toLowerCase());
@@ -16,6 +30,9 @@ public class TropheeHighest extends Trophee {
 		this.setDescription("Joueur avec la plus haute valeur de cette couleur");
 	}
 	
+	/**
+	 *
+	 */
 	@Override
 	public Joueur award(ArrayList<Joueur> players) {
 		Joueur awardedPlayer = null;

@@ -7,18 +7,72 @@ import java.util.HashSet;
 import Enumeration.Status;
 import Enumeration.Variante;
 
+/**
+ * 
+ * Cette classe est une classe de sauvegarde qui va chercher les éléments à sauvegarder et les inscrire dans le fichier où la sauvegarde est stockée.
+ * 
+ * @author Guillaume et Nathan
+ *
+ */
+
 public class SaveData implements Serializable {
+	/**
+	 * 
+	 */
 	private ArrayList<Joueur> Players;
+	/**
+	 * 
+	 */
 	private HashSet<Joueur> remainingPlayers;
+	/**
+	 * 
+	 */
 	private HashSet<Joueur> alreadyChoosePlayers;
+	/**
+	 * 
+	 */
 	private Deck remainingDeck;
+	/**
+	 * 
+	 */
 	private Deck distributionDeck;
+	/**
+	 * 
+	 */
 	private Deck trophees;
+	/**
+	 * 
+	 */
 	private Joueur currentPlayer;
+	/**
+	 * 
+	 */
 	private Variante usedVariante;
+	/**
+	 * 
+	 */
 	private Boolean playingWithExtension;
+	/**
+	 * 
+	 */
 	private ScoreVisitor sv;
+	/**
+	 * 
+	 */
 	private Status status;
+	/**
+	 * @param players
+	 * @param remainingPlayers
+	 * @param alreadyChoosePlayers
+	 * @param remainingDeck
+	 * @param distributionDeck
+	 * @param trophees
+	 * @param currentPlayer
+	 * @param usedVariante
+	 * @param playingWithExtension
+	 * @param sv
+	 * @param status
+	 */
 	public SaveData(ArrayList<Joueur> players, HashSet<Joueur> remainingPlayers, HashSet<Joueur> alreadyChoosePlayers,
 			Deck remainingDeck, Deck distributionDeck, Deck trophees, Joueur currentPlayer, Variante usedVariante,
 			Boolean playingWithExtension, ScoreVisitor sv, Status status) {

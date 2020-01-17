@@ -16,23 +16,74 @@ import Enumeration.Status;
 import Enumeration.Variante;
 
 
+/**
+ * 
+ * Cette méthode permet la cration et le déroulement de la partie en entier.
+ * Cette classe utilise le design pattern Observable pour pouvoir l'observer dans les vues ce qui entraînera ou non une mise à jour des vues.
+ * Cette classe implemente Serializable afin de pouvoir créer une sauvegarde de la partie.
+ * 
+ * 
+ * @author Guillaume et Nathan
+ * 
+ * @serial Serializable
+ *
+ */
 public class MaitreDuJeu extends Observable implements Serializable{
 	
+	/**
+	 * 
+	 */
 	private ArrayList<Joueur> Players;
+	/**
+	 * 
+	 */
 	private HashSet<Joueur> remainingPlayers;
+	/**
+	 * 
+	 */
 	private HashSet<Joueur> alreadyChoosePlayers;
+	/**
+	 * 
+	 */
 	private HashSet<Carte> jeuDeCarte;
+	/**
+	 * 
+	 */
 	private Deck remainingDeck;
+	/**
+	 * 
+	 */
 	private Deck distributionDeck;
+	/**
+	 * 
+	 */
 	private Deck trophees;
+	/**
+	 * 
+	 */
 	private Joueur currentPlayer;
+	/**
+	 * 
+	 */
 	private Variante usedVariante;
+	/**
+	 * 
+	 */
 	private Boolean playingWithExtension;
+	/**
+	 * 
+	 */
 	private ScoreVisitor sv;
+	/**
+	 * 
+	 */
 	private Status status;
 	
 	//Constructor
 	
+	/**
+	 * 
+	 */
 	public MaitreDuJeu() {
 		this.status = null;
 		this.currentPlayer = null;
@@ -44,6 +95,12 @@ public class MaitreDuJeu extends Observable implements Serializable{
 	
 	
 	
+	/**
+	 * 
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public void startGame() {
 		this.clearAll();
 		this.alreadyChoosePlayers = new HashSet<Joueur>();
@@ -58,6 +115,12 @@ public class MaitreDuJeu extends Observable implements Serializable{
 		this.setDistributionDeck();
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public void clearAll() {
 		this.currentPlayer = null;
 		this.jeuDeCarte = new HashSet<Carte>();
@@ -283,6 +346,12 @@ public class MaitreDuJeu extends Observable implements Serializable{
 		return Players;
 	}
 	
+	/**
+	 * @param player
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public void addPlayer(Joueur player) {
 		Players.add(player);
 	}
@@ -304,6 +373,12 @@ public class MaitreDuJeu extends Observable implements Serializable{
 		return remainingPlayers;
 	}
 	
+	/**
+	 * @return
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public HashSet<Joueur> getAlreadyChoosePlayers() {
 		return alreadyChoosePlayers;
 	}
@@ -311,6 +386,12 @@ public class MaitreDuJeu extends Observable implements Serializable{
 	//Function
 	
 
+	/**
+	 * 
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public void distribute() {
 		for (int i = 0; i < 2; i++) {
 			Iterator<Joueur> iteJoueur = this.Players.iterator();
@@ -323,6 +404,12 @@ public class MaitreDuJeu extends Observable implements Serializable{
 		}
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public void getCardsBack() {
 		Iterator<Joueur> iteJoueur = this.Players.iterator();
 		while (iteJoueur.hasNext()) {
@@ -333,6 +420,12 @@ public class MaitreDuJeu extends Observable implements Serializable{
 		}
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public void getCardsRemainingToJest() {
 		Iterator<Joueur> iteJoueur = this.Players.iterator();
 		while (iteJoueur.hasNext()) {
@@ -343,6 +436,13 @@ public class MaitreDuJeu extends Observable implements Serializable{
 		}
 	}
 	
+	/**
+	 * @param players
+	 * @return
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public Joueur comparePlayersOffer(HashSet<Joueur> players) {
 		Iterator<Joueur> itePlayers = players.iterator();
 		Joueur maxJoueur = null;
@@ -357,6 +457,12 @@ public class MaitreDuJeu extends Observable implements Serializable{
 		return maxJoueur;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public void awardTrophees() {
 		Iterator<Carte> iteTrophees = this.trophees.getDeck().iterator();
 		while (iteTrophees.hasNext()) {
@@ -372,6 +478,12 @@ public class MaitreDuJeu extends Observable implements Serializable{
 		}
 	}
 	
+	/**
+	 * @return
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public Joueur getWinner() {
 		Joueur winner = null;
 		Integer scoreWinner = 0;
@@ -394,6 +506,12 @@ public class MaitreDuJeu extends Observable implements Serializable{
 		return winner;
 	}
 
+	/**
+	 * @param savedata
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public void reload(SaveData savedata) {
 		this.Players = savedata.getPlayers();
 		this.remainingPlayers = savedata.getRemainingPlayers();

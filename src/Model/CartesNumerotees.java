@@ -9,9 +9,27 @@ import javax.imageio.ImageIO;
 import Enumeration.Couleur;
 import Enumeration.Hauteur;
 
+/**
+ * 
+ * Cette classe hérite de la classe Carte.
+ * Elle permet la création de toutes les cartes du JEST.
+ * 
+ * @author Guillaume et Nathan
+ * 
+ *
+ */
 public class CartesNumerotees extends Carte {
+	/**
+	 * 
+	 */
 	private Trophee trophee;
+	/**
+	 * 
+	 */
 	private Hauteur hauteur;
+	/**
+	 * 
+	 */
 	private Couleur couleur;
 	
 	//Getter/Setter
@@ -50,6 +68,12 @@ public class CartesNumerotees extends Carte {
     
     //Constructor
 	
+	/**
+	 * @param trophee
+	 * @param hauteur
+	 * @param couleur
+	 * @param extension
+	 */
 	public CartesNumerotees(Trophee trophee, Hauteur hauteur, Couleur couleur,Boolean extension) {
 		super(extension);
 		this.setCouleur(couleur);
@@ -64,6 +88,13 @@ public class CartesNumerotees extends Carte {
 	}
 	
 	
+	/**
+	 * @param carte
+	 * @return
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public boolean isGreaterThan(CartesNumerotees carte) {
 		if (this.hauteur.ordinal() > carte.getHauteur().ordinal()) {
 			return true;
@@ -73,6 +104,9 @@ public class CartesNumerotees extends Carte {
 		return false;
 	}
 	
+	/**
+	 *
+	 */
 	@Override
 	public String toString() {
 		if (this.isVisible()) {
@@ -82,6 +116,9 @@ public class CartesNumerotees extends Carte {
 		}
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -103,6 +140,12 @@ public class CartesNumerotees extends Carte {
 		return true;
 	}
 	
+	/**
+	 * @return
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public BufferedImage getWholeImage() {
 		if (this.isVisible()) {
 			BufferedImage imageCard = null;

@@ -7,10 +7,24 @@ import java.util.Iterator;
 import Enumeration.Couleur;
 import Enumeration.Hauteur;
 
+/**
+ * 
+ * Cette classe décrit les trophés assignés au joueur ayant le plus de carte d'une famille défini.
+ * Cette classe hérite de Trophee car elle reprend plusieur de ses caractéristiques.
+ * 
+ * @author Guillaume et Nathan
+ *
+ */
 public class TropheeMajority extends Trophee {
 	
+	/**
+	 * 
+	 */
 	private Hauteur value;
 	
+	/**
+	 * @param value
+	 */
 	public TropheeMajority(Hauteur value) {
 		this.value = value;
 		this.setImg("/img/trophee/trophe-majorite-"+value.getDesc());
@@ -18,6 +32,9 @@ public class TropheeMajority extends Trophee {
 		this.setDescription("Joueur avec la plus grande quantité de cette hauteur");
 	}
 	
+	/**
+	 *
+	 */
 	@Override
 	public Joueur award(ArrayList<Joueur> players) {
 		HashSet<Joueur> awardedPlayer = new HashSet<Joueur>();

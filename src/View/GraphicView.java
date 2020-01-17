@@ -50,36 +50,121 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * @author Guillaume
+ *
+ */
 public class GraphicView implements Observer {
 	
+	/**
+	 * 
+	 */
 	public static Integer[] FIRSTJESTPOSITION = {10,50};
+	/**
+	 * 
+	 */
 	public Integer[] FIRSTHANDPOSITION = {0,0};
+	/**
+	 * 
+	 */
 	public Integer[] TROPHEEPOSITION = {0,50};
+	/**
+	 * 
+	 */
 	public Integer[][] PLAYEROFFER = {{10,400},{400,400},{800,400}};
 
+	/**
+	 * 
+	 */
 	private JFrame frame;
+	/**
+	 * 
+	 */
 	private JMenuItem launch;
+	/**
+	 * 
+	 */
 	private JMenuItem load;
+	/**
+	 * 
+	 */
 	private JMenuItem save;
+	/**
+	 * 
+	 */
 	private JMenu modeMenu;
+	/**
+	 * 
+	 */
 	private JMenuItem standard;
+	/**
+	 * 
+	 */
 	private JMenuItem reversed;
+	/**
+	 * 
+	 */
 	private JMenuItem random;
+	/**
+	 * 
+	 */
 	private JMenu playerMenu;
+	/**
+	 * 
+	 */
 	private JMenuItem p3;
+	/**
+	 * 
+	 */
 	private JMenuItem p4;
+	/**
+	 * 
+	 */
 	private JCheckBox extension;
+	/**
+	 * 
+	 */
 	private JMenuBar menuBar;
+	/**
+	 * 
+	 */
 	private JPanel mainGame;
 	
+	/**
+	 * 
+	 */
 	private ArrayList<JTextField> joueursText;
+	/**
+	 * 
+	 */
 	private ArrayList<JCheckBox> joueursType;
+	/**
+	 * 
+	 */
 	private HashMap<JLabel,Carte> currentHand;
+	/**
+	 * 
+	 */
 	private HashMap<JLabel,Carte> currentTrophees;
+	/**
+	 * 
+	 */
 	private HashMap<JLabel,Carte> currentJest;
+	/**
+	 * 
+	 */
 	private HashMap<JLabel,Joueur> currentOffers;
+	/**
+	 * 
+	 */
 	private JLabel label_1;
 
+	/**
+	 * @param number
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public void setPlayers(int number) {
 		Iterator<JTextField> iteText = this.joueursText.iterator();
 		Iterator<JCheckBox> iteType = this.joueursType.iterator();
@@ -126,6 +211,12 @@ public class GraphicView implements Observer {
 	/**
 	 * Launch the application.
 	 */
+	/**
+	 * @param args
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -144,6 +235,9 @@ public class GraphicView implements Observer {
 	/**
 	 * Create the application.
 	 */
+	/**
+	 * @param mdj
+	 */
 	public GraphicView(MaitreDuJeu mdj) {
 		initialize();
 		this.joueursText = new ArrayList<JTextField>();
@@ -159,6 +253,12 @@ public class GraphicView implements Observer {
 
 	/**
 	 * Initialize the contents of the frame.
+	 */
+	/**
+	 * 
+	 * @return
+	 * @throws
+	 * @exception
 	 */
 	private void initialize() {
 		
@@ -248,6 +348,12 @@ public class GraphicView implements Observer {
 		menuBar.add(extension);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public void clearAll() {
 		mainGame.removeAll();
 		mainGame.repaint();
@@ -256,6 +362,12 @@ public class GraphicView implements Observer {
 		currentOffers.clear();
 	}
 	
+	/**
+	 * 
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public void baseSetup() {
 		JLabel lblNewLabel = new JLabel("Ton Jest");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -268,6 +380,9 @@ public class GraphicView implements Observer {
 		mainGame.add(lblNewLabel);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void update(Observable inst, Object arg) {
 		if (inst instanceof MaitreDuJeu) {
@@ -486,7 +601,7 @@ public class GraphicView implements Observer {
 						}
 						numberp++;
 					}
-					
+					mainGame.repaint();
 					break;
 				default:
 					break;

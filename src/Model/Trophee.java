@@ -10,9 +10,28 @@ import java.util.Set;
 import Enumeration.Hauteur;
 
 
+/**
+ * Cette classe est la classe décrivant les trophés en générale.
+ * De cette classe plusieurs vont hérité pour spécifier les trophés plus précisement.
+ * Cette classe implémente Serializable afin de sauvegarder les trophés.
+ * 
+ * @author Guillaume et Nathan
+ * 
+ * @serial Serializable.
+ *
+ */
 public class Trophee implements Serializable {
+	/**
+	 * 
+	 */
 	private String name;
+	/**
+	 * 
+	 */
 	private String description;
+	/**
+	 * 
+	 */
 	private String img;
 
 	public String getName() {
@@ -45,10 +64,24 @@ public class Trophee implements Serializable {
 
 
 
+	/**
+	 * @param players
+	 * @return
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public Joueur award(ArrayList<Joueur> players) {
 		return players.get(0);	
 	}
 	
+	/**
+	 * @param players
+	 * @return
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public Joueur breakTies(Set<Joueur> players) {
 		Joueur awardedPlayer = null;
 		Iterator<Joueur> iteJoueur = players.iterator();
@@ -63,6 +96,14 @@ public class Trophee implements Serializable {
 		return awardedPlayer;
 	}
 	
+	/**
+	 * @param players
+	 * @param value
+	 * @return
+	 * @return
+	 * @throws
+	 * @exception
+	 */
 	public Joueur breakTies(HashSet<Joueur> players, Hauteur value) {
 		Joueur awardedPlayer = null;
 		Iterator<Joueur> iteJoueur = players.iterator();
