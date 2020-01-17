@@ -8,7 +8,12 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 /**
- * @author Guillaume
+ * 
+ * Cette classe hérite de Strategy, elle fait partie du Design Pattern Strategy. 
+ * Il s'agit de l'une des trois startégie que le joueur virtuel va être amené à utiliser.
+ * Lorsque le joueur virtuel va avoir cette stratégie, il va cacher sa meilleure carte et en choisir une au hasard sur le plateau de jeu.
+ * 
+ * @author Guillaume et Nathan
  *
  */
 public class HideBestPickRandom extends Strategy {

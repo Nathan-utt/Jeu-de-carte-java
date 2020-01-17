@@ -17,7 +17,15 @@ import Enumeration.Variante;
 
 
 /**
- * @author Guillaume
+ * 
+ * Cette mÃ©thode permet la cration et le dÃ©roulement de la partie en entier.
+ * Cette classe utilise le design pattern Observable pour pouvoir l'observer dans les vues ce qui entraÃ®nera ou non une mise Ã  jour des vues.
+ * Cette classe implemente Serializable afin de pouvoir crÃ©er une sauvegarde de la partie.
+ * 
+ * 
+ * @author Guillaume et Nathan
+ * 
+ * @serial Serializable
  *
  */
 public class MaitreDuJeu extends Observable implements Serializable{
@@ -331,7 +339,7 @@ public class MaitreDuJeu extends Observable implements Serializable{
 			this.jeuDeCarte.add(new CartesNumerotees(new TropheeMajority(Hauteur.Deux),Hauteur.Six,Couleur.Trefle,true));
 			this.jeuDeCarte.add(new CartesNumerotees(new TropheeLowest(Couleur.Trefle),Hauteur.Sept,Couleur.Trefle,true));
 		}	
-		this.jeuDeCarte.add(new CarteRegle("Pique et Trèfle rajoute des points correspondant à leur Hauteur. Un Pique et un Trèfle de même Hauteur rajoute deux points. Les Carreaux enlèvent des points égal à leur Hauteur. Le Joker et les quatres Coeurs ensemblent valent autant de point que la Hauteur des Coeurs, sinon ils enlèvent des points. Le joker sans aucun coeur rapporte quatre points.",false));
+		this.jeuDeCarte.add(new CarteRegle("Pique et TrÃ¨fle rajoute des points correspondant Ã  leur Hauteur. Un Pique et un TrÃ¨fle de mÃªme Hauteur rajoute deux points. Les Carreaux enlÃ¨vent des points Ã©gal Ã  leur Hauteur. Le Joker et les quatres Coeurs ensemblent valent autant de point que la Hauteur des Coeurs, sinon ils enlÃ¨vent des points. Le joker sans aucun coeur rapporte quatre points.",false));
 	}
 
 	public ArrayList<Joueur> getPlayers() {

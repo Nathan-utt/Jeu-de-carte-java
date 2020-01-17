@@ -8,8 +8,8 @@ package Enumeration;
  */
 public enum Variante {
 	Normal("Normal"),
-	Reversed("Calcul de points inversé"),
-	Random("Trophée aléatoire");
+	Reversed("Calcul de points inversÃ©"),
+	Random("TrophÃ©e alÃ©atoire");
 	
 	/**
 	 * Une description du mode de jeu.

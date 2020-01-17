@@ -7,8 +7,12 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 /**
- * @author Guillaume
+ * 
+ * Cette classe hérite de Strategy, elle fait partie du Design Pattern Strategy. 
+ * Il s'agit de l'une des trois startégie que le joueur virtuel va être amené à utiliser.
+ * Lorsque le joueur virtuel a cette stratégie, il va cacher sa mailleure carte et il prend la meilleure carte visible sur le plateau.
  *
+ *  @author Guillaume et Nathan
  */
 public class Best extends Strategy {
 

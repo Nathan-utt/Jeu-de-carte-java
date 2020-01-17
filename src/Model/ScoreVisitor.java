@@ -8,7 +8,13 @@ import Enumeration.Couleur;
 import Enumeration.Hauteur;
 
 /**
- * @author Guillaume
+ * 
+ * Cette classe permet de gérer le Design pattern visitor en lui-même.
+ * Cette classe implémente Serializable afin que le score puisse être sauvegardé.
+ * 
+ * @author Guillaume et Nathan
+ * 
+ * @serial Serializable
  *
  */
 public class ScoreVisitor implements Serializable{

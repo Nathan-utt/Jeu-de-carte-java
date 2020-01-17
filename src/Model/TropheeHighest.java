@@ -6,7 +6,11 @@ import java.util.Iterator;
 import Enumeration.Couleur;
 
 /**
- * @author Guillaume
+ * 
+ * Cette classe va décrire les trophé assigné au joueur ayant une carte de la plus grande valeur d'une famille défini.
+ * Cette classe hérite de Trophee car elle reprend plusieur de ses caractéristiques.
+ * 
+ * @author Guillaume et Nathan
  *
  */
 public class TropheeHighest extends Trophee {

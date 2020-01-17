@@ -10,7 +10,14 @@ import Enumeration.Couleur;
 import Enumeration.Hauteur;
 
 /**
+ * 
+ * Cette classe permet la création des différents joueurs qui vont participer à la partie.
+ * Chaque joueur est décrit par plusieurs caractéristiques et plusieurs capacités.
+ * Cette classe implémente Serializable ce qui va lui permettre de sauvegarder les données des joueurs.
+ * 
  * @author Guillaume
+ * 
+ * @serial Serializable
  *
  */
 public class Joueur implements Serializable {
@@ -56,7 +63,7 @@ public class Joueur implements Serializable {
 		String returnMsg = "|";
 		while (iteCards.hasNext()) {
 			Carte carte = (Carte) iteCards.next();
-			returnMsg += (carte.isVisible()) ? carte.getName()+"|" : "Carte cach�e|";
+			returnMsg += (carte.isVisible()) ? carte.getName()+"|" : "Carte cachée|";
 		}
 		return returnMsg;
 	}
@@ -72,7 +79,7 @@ public class Joueur implements Serializable {
 		ArrayList<String> returnMsg = new ArrayList<String>();
 		while (iteCards.hasNext()) {
 			Carte carte = (Carte) iteCards.next();
-			returnMsg.add((carte.isVisible()) ? carte.getName() : this.pseudo+" Carte cach�e");
+			returnMsg.add((carte.isVisible()) ? carte.getName() : this.pseudo+" Carte cachée");
 		}
 		return returnMsg;
 	}

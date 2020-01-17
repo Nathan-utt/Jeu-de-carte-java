@@ -7,7 +7,11 @@ import Enumeration.Couleur;
 import Enumeration.Hauteur;
 
 /**
- * @author Guillaume
+ * 
+ * Cette classe décrit les trophés assignés au joueur ayant la plus petite carte d'une famille défini.
+ * Cette classe hérite de Trophee car elle reprend plusieur de ses caractéristiques.
+ * 
+ * @author Guillaume et Nathan
  *
  */
 public class TropheeLowest extends Trophee {

@@ -10,7 +10,12 @@ import Enumeration.Couleur;
 import Enumeration.Hauteur;
 
 /**
- * @author Guillaume
+ * 
+ * Cette classe hérite de la classe Carte.
+ * Elle permet la création de toutes les cartes du JEST.
+ * 
+ * @author Guillaume et Nathan
+ * 
  *
  */
 public class CartesNumerotees extends Carte {
@@ -107,7 +112,7 @@ public class CartesNumerotees extends Carte {
 		if (this.isVisible()) {
 			return this.getName();
 		} else {
-			return "Carte cach�e";
+			return "Carte cachée";
 		}
 	}
 

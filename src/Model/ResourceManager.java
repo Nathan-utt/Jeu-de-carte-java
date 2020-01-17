@@ -7,7 +7,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
- * @author Guillaume
+ * 
+ * Cette classe permet de gérer la sauvegarde et le rechargement des données sauvegardées.
+ * 
+ * @author Guillaume et Nathan
  *
  */
 public class ResourceManager {

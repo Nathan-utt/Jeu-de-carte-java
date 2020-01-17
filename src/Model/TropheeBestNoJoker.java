@@ -6,7 +6,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 /**
- * @author Guillaume
+ * 
+ * Cette classe défini les trophés assignés au joueur ayant le meilleur jest sans le joker.
+ * Cette classe hérite de Trophee car elle reprend plusieur de ses caractéristiques.
+ * 
+ * @author Guillaume et Nathan
  *
  */
 public class TropheeBestNoJoker extends Trophee{

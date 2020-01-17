@@ -3,7 +3,14 @@ package Model;
 import java.io.Serializable;
 
 /**
- * @author Guillaume
+ * 
+ * 
+ * Cette classe Carte va permettre de créer le model des carte utilisé dans le jeu JEST.
+ * Elle implémente Serializable ce qui va permettre aux carte d'être sauvegardées.
+ * 
+ * @serial Serializable
+ * 
+ * @author Guillaume et Nathan
  *
  */
 public abstract class Carte implements Serializable {

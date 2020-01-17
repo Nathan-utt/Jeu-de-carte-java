@@ -8,8 +8,12 @@ import java.util.Iterator;
 import Enumeration.Couleur;
 
 /**
- * @author Guillaume
- *
+ * 
+ * Cette classe défini les trophés assignés au joueur ayant le meilleur Jest avec le Joker.
+ * Cette classe hérite de Trophee car elle reprend plusieur de ses caractéristiques.
+ * 
+ * @author Guillaume et Nathan
+ * 
  */
 public class TropheeBest extends Trophee {
 	

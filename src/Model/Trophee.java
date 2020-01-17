@@ -11,7 +11,13 @@ import Enumeration.Hauteur;
 
 
 /**
- * @author Guillaume
+ * Cette classe est la classe décrivant les trophés en générale.
+ * De cette classe plusieurs vont hérité pour spécifier les trophés plus précisement.
+ * Cette classe implémente Serializable afin de sauvegarder les trophés.
+ * 
+ * @author Guillaume et Nathan
+ * 
+ * @serial Serializable.
  *
  */
 public class Trophee implements Serializable {

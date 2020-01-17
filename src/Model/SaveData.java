@@ -7,6 +7,14 @@ import java.util.HashSet;
 import Enumeration.Status;
 import Enumeration.Variante;
 
+/**
+ * 
+ * Cette classe est une classe de sauvegarde qui va chercher les éléments à sauvegarder et les inscrire dans le fichier où la sauvegarde est stockée.
+ * 
+ * @author Guillaume et Nathan
+ *
+ */
+
 public class SaveData implements Serializable {
 	/**
 	 * 

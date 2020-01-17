@@ -8,7 +8,14 @@ import Enumeration.Couleur;
 import Enumeration.Hauteur;
 
 /**
- * @author Guillaume
+ * 
+ * Cette classe permet la création de paquets de cartes qui vont être utilisé pour plusieurs choses.
+ * Tel que la main des joueurs et le paquet de carte dujeu en lui-même.
+ * Cette classe ilmplément Serializable ainsi les données qu'elle contient pourront être sauvegardées.
+ * 
+ * @author Guillaume et Nathan
+ * 
+ * @serial Serializable
  *
  */
 public class Deck implements Serializable{
