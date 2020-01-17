@@ -18,9 +18,9 @@ import Enumeration.Variante;
 
 /**
  * 
- * Cette mÃ©thode permet la cration et le dÃ©roulement de la partie en entier.
- * Cette classe utilise le design pattern Observable pour pouvoir l'observer dans les vues ce qui entraÃ®nera ou non une mise Ã  jour des vues.
- * Cette classe implemente Serializable afin de pouvoir crÃ©er une sauvegarde de la partie.
+ * Cette méthode permet la cration et le déroulement de la partie en entier.
+ * Cette classe utilise le design pattern Observable pour pouvoir l'observer dans les vues ce qui entraînera ou non une mise à jour des vues.
+ * Cette classe implemente Serializable afin de pouvoir créer une sauvegarde de la partie.
  * 
  * 
  * @author Guillaume et Nathan
@@ -31,51 +31,51 @@ import Enumeration.Variante;
 public class MaitreDuJeu extends Observable implements Serializable{
 	
 	/**
-	 * 
+	 * La liste des joueurs
 	 */
 	private ArrayList<Joueur> Players;
 	/**
-	 * 
+	 * La liste des joueurs restant à piocher
 	 */
 	private HashSet<Joueur> remainingPlayers;
 	/**
-	 * 
+	 * La liste des joueurs qui ont déja choisit
 	 */
 	private HashSet<Joueur> alreadyChoosePlayers;
 	/**
-	 * 
+	 * Une collection de toute les cartes du jeu
 	 */
 	private HashSet<Carte> jeuDeCarte;
 	/**
-	 * 
+	 * Le deck restant
 	 */
 	private Deck remainingDeck;
 	/**
-	 * 
+	 * Le deck de distribution
 	 */
 	private Deck distributionDeck;
 	/**
-	 * 
+	 * Le deck de trophée
 	 */
 	private Deck trophees;
 	/**
-	 * 
+	 * Le joueur courant
 	 */
 	private Joueur currentPlayer;
 	/**
-	 * 
+	 * La variante utilisée
 	 */
 	private Variante usedVariante;
 	/**
-	 * 
+	 * Si l'extension est utilisée
 	 */
 	private Boolean playingWithExtension;
 	/**
-	 * 
+	 * Le visiteur de score
 	 */
 	private ScoreVisitor sv;
 	/**
-	 * 
+	 * L'etat du jeu
 	 */
 	private Status status;
 	
@@ -96,10 +96,8 @@ public class MaitreDuJeu extends Observable implements Serializable{
 	
 	
 	/**
-	 * 
-	 * @return
-	 * @throws
-	 * @exception
+	 * Lance le jeu en initialisant les tableaux et les variable selon les paramètres de démarrage.
+	 * @return void
 	 */
 	public void startGame() {
 		this.clearAll();
@@ -116,10 +114,8 @@ public class MaitreDuJeu extends Observable implements Serializable{
 	}
 	
 	/**
-	 * 
-	 * @return
-	 * @throws
-	 * @exception
+	 * Permet de réinitialiser le jeu
+	 * @return void
 	 */
 	public void clearAll() {
 		this.currentPlayer = null;
@@ -130,6 +126,12 @@ public class MaitreDuJeu extends Observable implements Serializable{
 		return status;
 	}
 	
+	/**
+	 * Permet de changer l'état du jeu.
+	 * Lors d'un changement d'état tout les observateur sont notifier.
+	 * On effectue aussi les opérations nécessaires selon l'état.
+	 * @return void
+	 */
 	public void setStatus(Status status) {	
 		this.status = status;
 		this.setChanged();
@@ -258,6 +260,11 @@ public class MaitreDuJeu extends Observable implements Serializable{
 		}
 	}
 
+	/**
+	 * Permet d'initialiser le jeu de carte selon le mode de jeu
+	 * @param random mode de jeu random utilisé?
+	 * @return void
+	 */
 	public void setJeuDeCarte(Boolean random) {
 		if (random) {
 			ArrayList<Trophee> trophees = new ArrayList<Trophee>(Arrays.asList(new Trophee[] {
@@ -339,7 +346,7 @@ public class MaitreDuJeu extends Observable implements Serializable{
 			this.jeuDeCarte.add(new CartesNumerotees(new TropheeMajority(Hauteur.Deux),Hauteur.Six,Couleur.Trefle,true));
 			this.jeuDeCarte.add(new CartesNumerotees(new TropheeLowest(Couleur.Trefle),Hauteur.Sept,Couleur.Trefle,true));
 		}	
-		this.jeuDeCarte.add(new CarteRegle("Pique et TrÃ¨fle rajoute des points correspondant Ã  leur Hauteur. Un Pique et un TrÃ¨fle de mÃªme Hauteur rajoute deux points. Les Carreaux enlÃ¨vent des points Ã©gal Ã  leur Hauteur. Le Joker et les quatres Coeurs ensemblent valent autant de point que la Hauteur des Coeurs, sinon ils enlÃ¨vent des points. Le joker sans aucun coeur rapporte quatre points.",false));
+		this.jeuDeCarte.add(new CarteRegle("Pique et Trèfle rajoute des points correspondant à leur Hauteur. Un Pique et un Trèfle de mÃªme Hauteur rajoute deux points. Les Carreaux enlèvent des points égal à leur Hauteur. Le Joker et les quatres Coeurs ensemblent valent autant de point que la Hauteur des Coeurs, sinon ils enlèvent des points. Le joker sans aucun coeur rapporte quatre points.",false));
 	}
 
 	public ArrayList<Joueur> getPlayers() {
@@ -347,10 +354,9 @@ public class MaitreDuJeu extends Observable implements Serializable{
 	}
 	
 	/**
-	 * @param player
-	 * @return
-	 * @throws
-	 * @exception
+	 * Ajoute un joueur à la liste des joueurs
+	 * @param player le joueur à ajouter
+	 * @return void
 	 */
 	public void addPlayer(Joueur player) {
 		Players.add(player);
@@ -373,12 +379,6 @@ public class MaitreDuJeu extends Observable implements Serializable{
 		return remainingPlayers;
 	}
 	
-	/**
-	 * @return
-	 * @return
-	 * @throws
-	 * @exception
-	 */
 	public HashSet<Joueur> getAlreadyChoosePlayers() {
 		return alreadyChoosePlayers;
 	}
@@ -387,10 +387,8 @@ public class MaitreDuJeu extends Observable implements Serializable{
 	
 
 	/**
-	 * 
-	 * @return
-	 * @throws
-	 * @exception
+	 * Distribue les cartes du paquets de distribution au différents joueurs.
+	 * @return void
 	 */
 	public void distribute() {
 		for (int i = 0; i < 2; i++) {
@@ -405,10 +403,8 @@ public class MaitreDuJeu extends Observable implements Serializable{
 	}
 	
 	/**
-	 * 
-	 * @return
-	 * @throws
-	 * @exception
+	 * Permet de remettre les cartes restantes des offres dans le paquet de distribution
+	 * @return void
 	 */
 	public void getCardsBack() {
 		Iterator<Joueur> iteJoueur = this.Players.iterator();
@@ -421,10 +417,8 @@ public class MaitreDuJeu extends Observable implements Serializable{
 	}
 	
 	/**
-	 * 
-	 * @return
-	 * @throws
-	 * @exception
+	 * Permet de remettre les cartes restantes des offres dans le jest de chaque joueur.
+	 * @return void
 	 */
 	public void getCardsRemainingToJest() {
 		Iterator<Joueur> iteJoueur = this.Players.iterator();
@@ -437,11 +431,9 @@ public class MaitreDuJeu extends Observable implements Serializable{
 	}
 	
 	/**
-	 * @param players
-	 * @return
-	 * @return
-	 * @throws
-	 * @exception
+	 * Permet de choisir le prochain joueur qui doit choisir, selon les offres de chaque joueur.
+	 * @param players les joueurs
+	 * @return Le joueur qui peut choisir
 	 */
 	public Joueur comparePlayersOffer(HashSet<Joueur> players) {
 		Iterator<Joueur> itePlayers = players.iterator();
@@ -458,10 +450,8 @@ public class MaitreDuJeu extends Observable implements Serializable{
 	}
 	
 	/**
-	 * 
-	 * @return
-	 * @throws
-	 * @exception
+	 * Permet d'attribuer les trophées dans le deck de trophée
+	 * @return void
 	 */
 	public void awardTrophees() {
 		Iterator<Carte> iteTrophees = this.trophees.getDeck().iterator();
@@ -479,10 +469,8 @@ public class MaitreDuJeu extends Observable implements Serializable{
 	}
 	
 	/**
-	 * @return
-	 * @return
-	 * @throws
-	 * @exception
+	 * Permet de déterminer le gagnant grâce au visiteur de score.
+	 * @return le gagnant
 	 */
 	public Joueur getWinner() {
 		Joueur winner = null;
@@ -507,10 +495,9 @@ public class MaitreDuJeu extends Observable implements Serializable{
 	}
 
 	/**
+	 * Recharge le jeu grâce à l'objet de recharge et notifie les vues que le jeu a été chargé.
 	 * @param savedata
-	 * @return
-	 * @throws
-	 * @exception
+	 * @return void
 	 */
 	public void reload(SaveData savedata) {
 		this.Players = savedata.getPlayers();

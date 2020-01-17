@@ -8,9 +8,9 @@ import java.util.Map.Entry;
 
 /**
  * 
- * Cette classe hÃ©rite de Strategy, elle fait partie du Design Pattern Strategy. 
- * Il s'agit de l'une des trois startÃ©gie que le joueur virtuel va Ãªtre amenÃ© Ã  utiliser.
- * Lorsque le joueur virtuel va avoir cette stratÃ©gie, il va cahcer une carte au hasard et choisir la meilleure carte visible sur le plateau de jeu.
+ * Cette classe hérite de Strategy, elle fait partie du Design Pattern Strategy. 
+ * Il s'agit de l'une des trois startégie que le joueur virtuel va Ãªtre amené à utiliser.
+ * Lorsque le joueur virtuel va avoir cette stratégie, il va cahcer une carte au hasard et choisir la meilleure carte visible sur le plateau de jeu.
  *
  * @author Guillaume et Nathan
  *
@@ -18,7 +18,7 @@ import java.util.Map.Entry;
 public class HideRandomPickBest extends Strategy {
 
 	/**
-	 *
+	 * Le bot cache une carte au hasard.
 	 */
 	@Override
 	public void makeOffer(Joueur player) {
@@ -38,7 +38,7 @@ public class HideRandomPickBest extends Strategy {
 	}
 	
 	/**
-	 *
+	 * Le bot prend la meilleure carte disponible.
 	 */
 	@Override
 	public Joueur takeOffer(HashSet<Joueur> players,Joueur player) {

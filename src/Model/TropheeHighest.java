@@ -7,8 +7,8 @@ import Enumeration.Couleur;
 
 /**
  * 
- * Cette classe va dÃ©crire les trophÃ© assignÃ© au joueur ayant une carte de la plus grande valeur d'une famille dÃ©fini.
- * Cette classe hÃ©rite de Trophee car elle reprend plusieur de ses caractÃ©ristiques.
+ * Cette classe va décrire les trophé assigné au joueur ayant une carte de la plus grande valeur d'une famille défini.
+ * Cette classe hérite de Trophee car elle reprend plusieur de ses caractéristiques.
  * 
  * @author Guillaume et Nathan
  *
@@ -16,7 +16,7 @@ import Enumeration.Couleur;
 public class TropheeHighest extends Trophee {
 
 	/**
-	 * 
+	 * La couleur de comparaison
 	 */
 	private Couleur color;
 	
@@ -31,7 +31,7 @@ public class TropheeHighest extends Trophee {
 	}
 	
 	/**
-	 *
+	 * On donne ce trophée à la personne avec la plus haute carte d'une couleur
 	 */
 	@Override
 	public Joueur award(ArrayList<Joueur> players) {

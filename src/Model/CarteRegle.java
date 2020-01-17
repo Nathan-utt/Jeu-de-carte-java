@@ -2,16 +2,16 @@ package Model;
 
 /**
  * 
- * Cette classe hÃ©rite de la classe carte.
- * Elle permet la crÃ©ation d'une carte particuliÃ¨re qui est la carte rÃ¨gle.
- * Cette classe prÃ©sente les rÃ¨gles du jeu.
+ * Cette classe hérite de la classe carte.
+ * Elle permet la création d'une carte particulière qui est la carte règle.
+ * Cette classe présente les règles du jeu.
  * 
  * @author Guillaume et Nathan
  *
  */
 public class CarteRegle extends Carte{
 	/**
-	 * 
+	 * Les règles sous forme d'un String
 	 */
 	private String texte;
 
@@ -29,7 +29,7 @@ public class CarteRegle extends Carte{
 	 */
 	public CarteRegle(String texte,Boolean extension) {
 		super(extension);
-		this.setName("RÃ¨gles");
+		this.setName("Règles");
 		this.setImg("/img/card/"+this.getName().replace(" ", "").toLowerCase());
 		this.texte = texte;
 	}

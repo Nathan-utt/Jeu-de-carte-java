@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 
 /**
  * 
- * Cette classe permet de gÃ©rer la sauvegarde et le rechargement des donnÃ©es sauvegardÃ©es.
+ * Cette classe permet de gérer la sauvegarde et le rechargement des données sauvegardées.
  * 
  * @author Guillaume et Nathan
  *
@@ -16,12 +16,11 @@ import java.nio.file.Paths;
 public class ResourceManager {
 	
 	/**
-	 * @param data
-	 * @param fileName
+	 * Permet de sauvergarder l'application
+	 * 
+	 * @param data l'objet à sauvegarder
+	 * @param fileName le lien vers le fichier de sauvergarde
 	 * @throws Exception
-	 * @return
-	 * @throws
-	 * @exception
 	 */
 	public static void save(Serializable data, String fileName) throws Exception {
 		try (ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(Paths.get(fileName)))){
@@ -30,12 +29,10 @@ public class ResourceManager {
 	}
 	
 	/**
-	 * @param fileName
-	 * @return
+	 * Permet de charger l'application
+	 * return un Objet correspondant à l'objet sauvergarder
+	 * @param fileName le lien vers le fichier de sauvergarde
 	 * @throws Exception
-	 * @return
-	 * @throws
-	 * @exception
 	 */
 	public static Object load(String fileName) throws Exception {
 		try (ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(Paths.get(fileName)))){

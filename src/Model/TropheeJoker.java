@@ -8,8 +8,8 @@ import Enumeration.Hauteur;
 
 /**
  * 
- * Cette classe dÃ©fini les trophÃ©s assignÃ©s au joueur ayant le joker.
- * Cette classe hÃ©rite de Trophee car elle reprend plusieur de ses caractÃ©ristiques.
+ * Cette classe défini les trophés assignés au joueur ayant le joker.
+ * Cette classe hérite de Trophee car elle reprend plusieur de ses caractéristiques.
  * 
  * @author Guillaume et Nathan
  *
@@ -22,11 +22,11 @@ public class TropheeJoker extends Trophee {
 	public TropheeJoker() {
 		this.setName("Joker");
 		this.setImg("/img/trophee/trophe-joker");
-		this.setDescription("Joueur possÃ©dant le Joker");
+		this.setDescription("Joueur possédant le Joker");
 	}
 	
 	/**
-	 *
+	 * On donne ce trophée à la personne avec le joker
 	 */
 	@Override
 	public Joueur award(ArrayList<Joueur> players) {

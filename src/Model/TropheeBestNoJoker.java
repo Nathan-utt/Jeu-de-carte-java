@@ -7,8 +7,8 @@ import java.util.Iterator;
 
 /**
  * 
- * Cette classe dÃ©fini les trophÃ©s assignÃ©s au joueur ayant le meilleur jest sans le joker.
- * Cette classe hÃ©rite de Trophee car elle reprend plusieur de ses caractÃ©ristiques.
+ * Cette classe défini les trophés assignés au joueur ayant le meilleur jest sans le joker.
+ * Cette classe hérite de Trophee car elle reprend plusieur de ses caractéristiques.
  * 
  * @author Guillaume et Nathan
  *
@@ -16,7 +16,7 @@ import java.util.Iterator;
 public class TropheeBestNoJoker extends Trophee{
 	
 	/**
-	 * 
+	 * Un score visiteur pour calculer les scores
 	 */
 	private ScoreVisitor sv;
 	
@@ -31,7 +31,7 @@ public class TropheeBestNoJoker extends Trophee{
 	}
 	
 	/**
-	 *
+	 * On donne ce trophée à la personne avec le meilleur score sans le joker
 	 */
 	@Override
 	public Joueur award(ArrayList<Joueur> players) {

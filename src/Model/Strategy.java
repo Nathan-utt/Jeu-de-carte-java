@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.HashSet;
 
 /**
- * Cette classe gÃ©re le design pattern Strategy.
- * Elle implÃ©mente Serializable afin que la stratÃ©gie des joueurs virtuels puisse Ãªtre sauvegardÃ©e.
+ * Cette classe gère le design pattern Strategy.
+ * Elle implémente Serializable afin que la stratégie des joueurs virtuels puisse être sauvegardée.
  * 
  * @author Guillaume et Nathan
  * 
@@ -15,19 +15,15 @@ import java.util.HashSet;
 public abstract class Strategy implements Serializable {
 
 	/**
-	 * @param player
-	 * @return
-	 * @throws
-	 * @exception
+	 * Réimplemente la fonction makeOffer selon la stratégie
+	 * @param player le joueur faisant l'offre
 	 */
 	public abstract void makeOffer(Joueur player);
 	/**
-	 * @param players
-	 * @param player
-	 * @return
-	 * @return
-	 * @throws
-	 * @exception
+	 * Réimplemente la fonction takeOffer selon la stratégie
+	 * @param player le joueur faisant l'offre
+	 * @param players les joueurs chez qui choisir
+	 * return le joueur chez qui on a choisit
 	 */
 	public abstract Joueur takeOffer(HashSet<Joueur> players,Joueur player);
 }

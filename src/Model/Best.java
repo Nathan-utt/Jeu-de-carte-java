@@ -8,16 +8,16 @@ import java.util.Map.Entry;
 
 /**
  * 
- * Cette classe hÃ©rite de Strategy, elle fait partie du Design Pattern Strategy. 
- * Il s'agit de l'une des trois startÃ©gie que le joueur virtuel va Ãªtre amenÃ© Ã  utiliser.
- * Lorsque le joueur virtuel a cette stratÃ©gie, il va cacher sa mailleure carte et il prend la meilleure carte visible sur le plateau.
+ * Cette classe hérite de Strategy, elle fait partie du Design Pattern Strategy. 
+ * Il s'agit de l'une des trois startégie que le joueur virtuel va étre amené à utiliser.
+ * Lorsque le joueur virtuel a cette stratégie, il va cacher sa mailleure carte et il prend la meilleure carte visible sur le plateau.
  *
  *  @author Guillaume et Nathan
  */
 public class Best extends Strategy {
 
 	/**
-	 *
+	 * Le bot offre sa meilleure carte.
 	 */
 	@Override
 	public void makeOffer(Joueur player) {
@@ -47,7 +47,7 @@ public class Best extends Strategy {
 	}
 	
 	/**
-	 *
+	 * Le bot prend la meilleure carte disponible
 	 */
 	@Override
 	public Joueur takeOffer(HashSet<Joueur> players,Joueur player) {

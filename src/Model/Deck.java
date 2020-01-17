@@ -9,9 +9,9 @@ import Enumeration.Hauteur;
 
 /**
  * 
- * Cette classe permet la crÃ©ation de paquets de cartes qui vont Ãªtre utilisÃ© pour plusieurs choses.
+ * Cette classe permet la création de paquets de cartes qui vont Ãªtre utilisé pour plusieurs choses.
  * Tel que la main des joueurs et le paquet de carte dujeu en lui-mÃªme.
- * Cette classe ilmplÃ©ment Serializable ainsi les donnÃ©es qu'elle contient pourront Ãªtre sauvegardÃ©es.
+ * Cette classe implément Serializable ainsi les données qu'elle contient pourront Ãªtre sauvegardées.
  * 
  * @author Guillaume et Nathan
  * 
@@ -20,20 +20,14 @@ import Enumeration.Hauteur;
  */
 public class Deck implements Serializable{
 	/**
-	 * 
+	 * Une liste de carte ordonnée
 	 */
 	private ArrayList<Carte> deck;
 	/**
-	 * 
+	 * Un entier représentant la taille maximale du deck
 	 */
 	private Integer maxCards;
 
-	/**
-	 * @return
-	 * @return
-	 * @throws
-	 * @exception
-	 */
 	public Integer getMaxCards() {
 		return maxCards;
 	}
@@ -51,41 +45,35 @@ public class Deck implements Serializable{
 	}
 	
 	/**
-	 * @param index
-	 * @return
-	 * @return
-	 * @throws
-	 * @exception
+	 * Récupère une carte selon son index, en l'enlevant du deck.
+	 * 
+	 * @param index l'index de la carte à récupérer
+	 * @return La carte récupérer
 	 */
 	public Carte getCard(int index) {
 		return this.deck.remove(index);
 	}
 	
 	/**
-	 * @return
-	 * @return
-	 * @throws
-	 * @exception
+	 * Récupère la première carte du deck, en l'enlevant du deck.
+	 * @return La carte récupérer
 	 */
 	public Carte getFirstCard() {
 		return this.deck.remove(0);
 	}
 	
 	/**
-	 * @return
-	 * @return
-	 * @throws
-	 * @exception
+	 * Récupère la dernière carte du deck, en l'enlevant du deck.
+	 * @return La carte récupérer
 	 */
 	public Carte getLastCard() {
 		return this.deck.remove(this.deck.size()-1);
 	}
 	
 	/**
-	 * @param card
-	 * @return
-	 * @throws
-	 * @exception
+	 * Place une carte en première dans le deck, en vérifiant la taille du deck.
+	 * @param card La carte à placer
+	 * @return void
 	 */
 	public void putCardFirst(Carte card) {
 		if (this.deck.size()+1 <= this.maxCards) {
@@ -94,10 +82,9 @@ public class Deck implements Serializable{
 	}
 	
 	/**
-	 * @param card
-	 * @return
-	 * @throws
-	 * @exception
+	 * Place une carte en dernière dans le deck, en vérifiant la taille du deck.
+	 * @param card La carte à placer
+	 * @return void
 	 */
 	public void putCardLast(Carte card) {
 		if (this.deck.size()+1 <= this.maxCards) {
@@ -106,10 +93,9 @@ public class Deck implements Serializable{
 	}
 	
 	/**
-	 * @param cards
-	 * @return
-	 * @throws
-	 * @exception
+	 * Place une liste de carte devant le deck, en vérifiant la taille du deck.
+	 * @param cards Les cartes à placer
+	 * @return void
 	 */
 	public void putCardFirst(ArrayList<Carte> cards) {
 		if (this.deck.size()+cards.size() <= this.maxCards) {
@@ -118,10 +104,9 @@ public class Deck implements Serializable{
 	}
 	
 	/**
-	 * @param cards
-	 * @return
-	 * @throws
-	 * @exception
+	 * Place une liste de carte derrière le deck, en vérifiant la taille du deck.
+	 * @param cards Les cartes à placer
+	 * @return void
 	 */
 	public void putCardLast(ArrayList<Carte> cards) {
 		if (this.deck.size()+cards.size() <= this.maxCards) {
@@ -139,10 +124,12 @@ public class Deck implements Serializable{
 	}
 	
 	/**
-	 * @param time
-	 * @return
-	 * @throws
-	 * @exception
+	 * Mélange le paquet selon un algorythme simple.
+	 * Pour time fois,
+	 * On prend deux éléments dans le deck et on échange leur place.
+	 * 
+	 * @param time le nombre de mélange à faire
+	 * @return void
 	 */
 	public void shuffleDeck(Integer time) {
 		for (int i = 0; i < time; i++) {
@@ -159,10 +146,9 @@ public class Deck implements Serializable{
 	}
 	
 	/**
-	 * @return
-	 * @return
-	 * @throws
-	 * @exception
+	 * Permet de récuperer la carte la plus haute d'un deck.
+	 * 
+	 * @return la carte la plus haute
 	 */
 	public CartesNumerotees getHighest() {
 		CartesNumerotees returned = null;
@@ -182,11 +168,9 @@ public class Deck implements Serializable{
 	}
 	
 	/**
-	 * @param value
-	 * @return
-	 * @return
-	 * @throws
-	 * @exception
+	 * Permet de récuperer la carte la plus haute d'un deck selon une valeur.
+	 * @param value la valeur des cartes à comparer
+	 * @return la carte la plus haute d'une valeur
 	 */
 	public CartesNumerotees getHighestOfValue(Hauteur value) {
 		CartesNumerotees returned = null;
@@ -210,11 +194,9 @@ public class Deck implements Serializable{
 	}
 	
 	/**
-	 * @param color
-	 * @return
-	 * @return
-	 * @throws
-	 * @exception
+	 * Permet de récuperer la carte la plus haute d'un deck selon une couleur.
+	 * @param color la couleur des cartes à comparer
+	 * @return la carte la plus haute d'une couleur
 	 */
 	public CartesNumerotees getHighestOfColor(Couleur color) {
 		CartesNumerotees returned = null;
@@ -238,6 +220,10 @@ public class Deck implements Serializable{
 	}
 	
 	/**
+	 * Permet de récuperer la carte la plus basse d'un deck selon une couleur.
+	 * @param color la couleur des cartes à comparer
+	 * @return la carte la plus basse d'une couleur
+	 *//**
 	 * @param color
 	 * @return
 	 * @return
@@ -266,11 +252,9 @@ public class Deck implements Serializable{
 	}
 	
 	/**
-	 * @param value
-	 * @return
-	 * @return
-	 * @throws
-	 * @exception
+	 * Permet de récuperer le nombre de carte d'une valeur d'un deck.
+	 * @param value la valeur des cartes à compter.
+	 * @return Le nombre de carte d'une valeur.
 	 */
 	public Integer countValue(Hauteur value) {
 		Integer count = 0;

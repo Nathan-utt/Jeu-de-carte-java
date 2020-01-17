@@ -9,8 +9,8 @@ import Enumeration.Hauteur;
 
 /**
  * 
- * Cette classe dÃ©crit les trophÃ©s assignÃ©s au joueur ayant le plus de carte d'une famille dÃ©fini.
- * Cette classe hÃ©rite de Trophee car elle reprend plusieur de ses caractÃ©ristiques.
+ * Cette classe décrit les trophés assignés au joueur ayant le plus de carte d'une famille défini.
+ * Cette classe hérite de Trophee car elle reprend plusieur de ses caractéristiques.
  * 
  * @author Guillaume et Nathan
  *
@@ -18,7 +18,7 @@ import Enumeration.Hauteur;
 public class TropheeMajority extends Trophee {
 	
 	/**
-	 * 
+	 * La valeur de comparaison
 	 */
 	private Hauteur value;
 	
@@ -28,12 +28,12 @@ public class TropheeMajority extends Trophee {
 	public TropheeMajority(Hauteur value) {
 		this.value = value;
 		this.setImg("/img/trophee/trophe-majorite-"+value.getDesc());
-		this.setName("MajoritÃ©");
-		this.setDescription("Joueur avec la plus grande quantitÃ© de cette hauteur");
+		this.setName("Majorité");
+		this.setDescription("Joueur avec la plus grande quantité de cette hauteur");
 	}
 	
 	/**
-	 *
+	 * On donne ce trophée à la personne avec le plus de carte d'une valeur.
 	 */
 	@Override
 	public Joueur award(ArrayList<Joueur> players) {

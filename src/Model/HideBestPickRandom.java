@@ -9,9 +9,9 @@ import java.util.Random;
 
 /**
  * 
- * Cette classe hÃ©rite de Strategy, elle fait partie du Design Pattern Strategy. 
- * Il s'agit de l'une des trois startÃ©gie que le joueur virtuel va Ãªtre amenÃ© Ã  utiliser.
- * Lorsque le joueur virtuel va avoir cette stratÃ©gie, il va cacher sa meilleure carte et en choisir une au hasard sur le plateau de jeu.
+ * Cette classe hérite de Strategy, elle fait partie du Design Pattern Strategy. 
+ * Il s'agit de l'une des trois startégie que le joueur virtuel va Ãªtre amené à utiliser.
+ * Lorsque le joueur virtuel va avoir cette stratégie, il va cacher sa meilleure carte et en choisir une au hasard sur le plateau de jeu.
  * 
  * @author Guillaume et Nathan
  *
@@ -19,7 +19,7 @@ import java.util.Random;
 public class HideBestPickRandom extends Strategy {
 	
 	/**
-	 *
+	 * Le bot cache sa meilleure carte.
 	 */
 	@Override
 	public void makeOffer(Joueur player) {
@@ -49,7 +49,7 @@ public class HideBestPickRandom extends Strategy {
 	}
 	
 	/**
-	 *
+	 * Le bot prend une offre au hasard.
 	 */
 	@Override
 	public Joueur takeOffer(HashSet<Joueur> players,Joueur player) {

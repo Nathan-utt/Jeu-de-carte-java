@@ -13,8 +13,8 @@ import View.ConsoleView;
 import View.GraphicView;
 
 /**
- * La fonction principale lancï¿½e au dï¿½but du programme.
- * Elle crï¿½e un moteur de Jeu et lance le jeu dans les diffï¿½rentes vues.
+ * La fonction principale lancée au début du programme.
+ * Elle crée un moteur de Jeu et lance le jeu dans les différentes vues.
  * 
  * @author Guillaume, Nathan
  *
@@ -22,7 +22,7 @@ import View.GraphicView;
 public class Main {
 
 	/**
-	 * Crï¿½e les deux vues, un moteur de jeu et lance la partie.
+	 * Crée les deux vues, un moteur de jeu et lance la partie.
 	 * 
 	 * @param args
 	 * @return void

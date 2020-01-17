@@ -9,7 +9,7 @@ import Enumeration.Variante;
 
 /**
  * 
- * Cette classe est une classe de sauvegarde qui va chercher les Ã©lÃ©ments Ã  sauvegarder et les inscrire dans le fichier oÃ¹ la sauvegarde est stockÃ©e.
+ * Cette classe est une classe de sauvegarde qui va chercher les éléments à sauvegarder et les inscrire dans le fichier ou la sauvegarde est stockée.
  * 
  * @author Guillaume et Nathan
  *
@@ -17,47 +17,47 @@ import Enumeration.Variante;
 
 public class SaveData implements Serializable {
 	/**
-	 * 
+	 * La liste des joueurs
 	 */
 	private ArrayList<Joueur> Players;
 	/**
-	 * 
+	 * La liste des joueurs restant à piocher
 	 */
 	private HashSet<Joueur> remainingPlayers;
 	/**
-	 * 
+	 * La liste des joueurs qui ont déja choisit
 	 */
 	private HashSet<Joueur> alreadyChoosePlayers;
 	/**
-	 * 
+	 * Le deck restant
 	 */
 	private Deck remainingDeck;
 	/**
-	 * 
+	 * Le deck de distribution
 	 */
 	private Deck distributionDeck;
 	/**
-	 * 
+	 * Le deck de trophée
 	 */
 	private Deck trophees;
 	/**
-	 * 
+	 * Le joueur courant
 	 */
 	private Joueur currentPlayer;
 	/**
-	 * 
+	 * La variante utilisée
 	 */
 	private Variante usedVariante;
 	/**
-	 * 
+	 * Si l'extension est utilisée
 	 */
 	private Boolean playingWithExtension;
 	/**
-	 * 
+	 * Le visiteur de score
 	 */
 	private ScoreVisitor sv;
 	/**
-	 * 
+	 * L'etat du jeu
 	 */
 	private Status status;
 	/**

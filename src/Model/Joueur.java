@@ -11,9 +11,9 @@ import Enumeration.Hauteur;
 
 /**
  * 
- * Cette classe permet la crÃ©ation des diffÃ©rents joueurs qui vont participer Ã  la partie.
- * Chaque joueur est dÃ©crit par plusieurs caractÃ©ristiques et plusieurs capacitÃ©s.
- * Cette classe implÃ©mente Serializable ce qui va lui permettre de sauvegarder les donnÃ©es des joueurs.
+ * Cette classe permet la création des différents joueurs qui vont participer Ã  la partie.
+ * Chaque joueur est décrit par plusieurs caractéristiques et plusieurs capacités.
+ * Cette classe implémente Serializable ce qui va lui permettre de sauvegarder les données des joueurs.
  * 
  * @author Guillaume
  * 
@@ -22,23 +22,23 @@ import Enumeration.Hauteur;
  */
 public class Joueur implements Serializable {
 	/**
-	 * 
+	 * Le nom du joueur
 	 */
 	private String pseudo;
 	/**
-	 * 
+	 * Le numéro du joueur
 	 */
 	private Integer number;
 	/**
-	 * 
+	 * La main du joueur sous forme d'un deck
 	 */
 	private Deck hand;
 	/**
-	 * 
+	 * L'offre du joueur sous forme d'un deck
 	 */
 	private Deck offer;
 	/**
-	 * 
+	 * Le jest du joueur sous forme d'un deck
 	 */
 	private Deck jest;
 	
@@ -53,26 +53,23 @@ public class Joueur implements Serializable {
 	}
 	
 	/**
-	 * @return
-	 * @return
-	 * @throws
-	 * @exception
+	 * Retourne l'offre du joueur
+	 * 
+	 * @return l'offre de ce joueur sous forme d'un String
 	 */
 	public String seeOffer() {
 		Iterator<Carte> iteCards = this.offer.getDeck().iterator();
 		String returnMsg = "|";
 		while (iteCards.hasNext()) {
 			Carte carte = (Carte) iteCards.next();
-			returnMsg += (carte.isVisible()) ? carte.getName()+"|" : "Carte cachÃ©e|";
+			returnMsg += (carte.isVisible()) ? carte.getName()+"|" : "Carte cachée|";
 		}
 		return returnMsg;
 	}
 	
 	/**
-	 * @return
-	 * @return
-	 * @throws
-	 * @exception
+	 * Retourne l'offre du joueur pour la fonction de demande de choix
+	 * @return l'offre du joueur sous forme d'un tableau de String
 	 */
 	public ArrayList<String> constructOffer() {
 		Iterator<Carte> iteCards = this.offer.getDeck().iterator();
@@ -122,10 +119,10 @@ public class Joueur implements Serializable {
 	//Function
 	
 	/**
-	 * @param hiddenCard
-	 * @return
-	 * @throws
-	 * @exception
+	 * Permet au joueur de faire une offre en choisissant sa carte face cachée
+	 * 
+	 * @param hiddenCard la carte à mettre face cachée
+	 * @return void
 	 */
 	public void makeOffer(Carte hiddenCard) {
 		hiddenCard.setVisible(false);
@@ -136,10 +133,10 @@ public class Joueur implements Serializable {
 	}
 	
 	/**
-	 * @param chosen
-	 * @return
-	 * @throws
-	 * @exception
+	 * Permet au joueur de choisir une carte parmis les offres
+	 * 
+	 * @param chosen la carte choisie
+	 * @return void
 	 */
 	public void takeOffer(Carte chosen) {
 		chosen.setVisible(true);
@@ -147,19 +144,18 @@ public class Joueur implements Serializable {
 	}
 	
 	/**
-	 * @param sv
-	 * @param withJoker
-	 * @return
-	 * @return
-	 * @throws
-	 * @exception
+	 * Cette fonction permet d'accepter la visite du visiteur de score.
+	 * 
+	 * @param sv le visiteur de score
+	 * @param withJoker si l'on veut calculer le score avec ou sans le joker
+	 * @return le score du joueur
 	 */
 	public Integer accept(ScoreVisitor sv,Boolean withJoker) {
 		return sv.visit(this, withJoker);
 	}
 	
 	/**
-	 *
+	 * Renvois le Joueur sous forme d'un String
 	 */
 	@Override
 	public String toString() {

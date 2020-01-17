@@ -9,8 +9,8 @@ import Enumeration.Hauteur;
 
 /**
  * 
- * Cette classe permet de gÃ©rer le Design pattern visitor en lui-mÃªme.
- * Cette classe implÃ©mente Serializable afin que le score puisse Ãªtre sauvegardÃ©.
+ * Cette classe permet de gérer le Design pattern visitor en lui-même.
+ * Cette classe implémente Serializable afin que le score puis être sauvegardé.
  * 
  * @author Guillaume et Nathan
  * 
@@ -19,11 +19,11 @@ import Enumeration.Hauteur;
  */
 public class ScoreVisitor implements Serializable{
 	/**
-	 * 
+	 * L'extension est elle utilisée
 	 */
 	private Boolean extension;
 	/**
-	 * 
+	 * Est on en variante Reversed
 	 */
 	private Boolean reversed;
 	
@@ -37,24 +37,20 @@ public class ScoreVisitor implements Serializable{
 	}
 	
 	/**
-	 * @param player
-	 * @param withJoker
-	 * @return
-	 * @return
-	 * @throws
-	 * @exception
+	 * Methode pour recuperer le score d'un joueur
+	 * @param player le joueur
+	 * @param withJoker si l'on doit prendre en compte le joker
+	 * @return Le score sous forme d'un entier
 	 */
 	public Integer getScore(Joueur player,Boolean withJoker) {
 		return player.accept(this, withJoker);
 	}
 	
 	/**
-	 * @param joueur
-	 * @param withJoker
-	 * @return
-	 * @return
-	 * @throws
-	 * @exception
+	 * Methode pour aller visiter un joueur
+	 * @param joueur le joueur
+	 * @param withJoker si l'on doit prendre en compte le joker
+	 * @return Le score sous forme d'un entier
 	 */
 	public Integer visit(Joueur joueur, Boolean withJoker) {
 		Iterator<Carte> iteCards = joueur.getJest().getDeck().iterator();

@@ -5,8 +5,8 @@ import java.io.Serializable;
 /**
  * 
  * 
- * Cette classe Carte va permettre de crÃ©er le model des carte utilisÃ© dans le jeu JEST.
- * Elle implÃ©mente Serializable ce qui va permettre aux carte d'Ãªtre sauvegardÃ©es.
+ * Cette classe Carte va permettre de créer le model des carte utilisé dans le jeu JEST.
+ * Elle implémente Serializable ce qui va permettre aux carte d'Ãªtre sauvegardées.
  * 
  * @serial Serializable
  * 
@@ -15,23 +15,23 @@ import java.io.Serializable;
  */
 public abstract class Carte implements Serializable {
 	/**
-	 * 
+	 * Le nom de la carte.
 	 */
 	private String name;
 	/**
-	 * 
+	 * Permet de savoir si la carte est face cachée ou non.
 	 */
 	private Boolean visible;
 	/**
-	 * 
+	 * Permet de savoir si la carte fait partie de l'extension.
 	 */
 	private Boolean isExtension;
 	/**
-	 * 
+	 * Le lien vers l'image de cette carte
 	 */
 	private String img;
 	/**
-	 * 
+	 * Le lien de l'image du dos de la carte
 	 */
 	private String backImg = "/img/card/back.png";
 	
@@ -60,6 +60,8 @@ public abstract class Carte implements Serializable {
 	}
 
 	/**
+	 * Crée une carte en precisant si elle fait partie de l'extension
+	 * 
 	 * @param extension
 	 */
 	public Carte(Boolean extension) {

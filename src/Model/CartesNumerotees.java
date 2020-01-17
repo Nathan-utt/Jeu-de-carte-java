@@ -11,8 +11,8 @@ import Enumeration.Hauteur;
 
 /**
  * 
- * Cette classe hÃ©rite de la classe Carte.
- * Elle permet la crÃ©ation de toutes les cartes du JEST.
+ * Cette classe hérite de la classe Carte.
+ * Elle permet la création de toutes les cartes du JEST.
  * 
  * @author Guillaume et Nathan
  * 
@@ -20,15 +20,15 @@ import Enumeration.Hauteur;
  */
 public class CartesNumerotees extends Carte {
 	/**
-	 * 
+	 * Le trophee associé à cette carte
 	 */
 	private Trophee trophee;
 	/**
-	 * 
+	 * La hauteur de cette carte
 	 */
 	private Hauteur hauteur;
 	/**
-	 * 
+	 * La couleur de cette carte
 	 */
 	private Couleur couleur;
 	
@@ -89,11 +89,9 @@ public class CartesNumerotees extends Carte {
 	
 	
 	/**
-	 * @param carte
-	 * @return
-	 * @return
-	 * @throws
-	 * @exception
+	 * Permet de savoir si cette carte est plus grande que la carte passée en paramètre.
+	 * @param carte la carte à comparé
+	 * @return Un booléen signifiant si la carte est plus grande ou non
 	 */
 	public boolean isGreaterThan(CartesNumerotees carte) {
 		if (this.hauteur.ordinal() > carte.getHauteur().ordinal()) {
@@ -105,20 +103,17 @@ public class CartesNumerotees extends Carte {
 	}
 	
 	/**
-	 *
+	 * Retourne la carte sous forme d'un String
 	 */
 	@Override
 	public String toString() {
 		if (this.isVisible()) {
 			return this.getName();
 		} else {
-			return "Carte cachÃ©e";
+			return "Carte cachée";
 		}
 	}
 
-	/**
-	 *
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -141,10 +136,10 @@ public class CartesNumerotees extends Carte {
 	}
 	
 	/**
-	 * @return
-	 * @return
-	 * @throws
-	 * @exception
+	 * Cette méthode renvois une image construite à partir de ces liens.
+	 * 
+	 * @return Une image en buffer créer à partir de l'image du trophée et de la carte.
+	 * @exception FileNotFound fichier non trouvé
 	 */
 	public BufferedImage getWholeImage() {
 		if (this.isVisible()) {

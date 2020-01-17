@@ -9,8 +9,8 @@ import Enumeration.Couleur;
 
 /**
  * 
- * Cette classe dÃ©fini les trophÃ©s assignÃ©s au joueur ayant le meilleur Jest avec le Joker.
- * Cette classe hÃ©rite de Trophee car elle reprend plusieur de ses caractÃ©ristiques.
+ * Cette classe défini les trophés assignés au joueur ayant le meilleur Jest avec le Joker.
+ * Cette classe hérite de Trophee car elle reprend plusieur de ses caractéristiques.
  * 
  * @author Guillaume et Nathan
  * 
@@ -18,7 +18,7 @@ import Enumeration.Couleur;
 public class TropheeBest extends Trophee {
 	
 	/**
-	 * 
+	 * Un visiteur de score pour calculer le score
 	 */
 	private ScoreVisitor sv;
 	
@@ -33,7 +33,7 @@ public class TropheeBest extends Trophee {
 	}
 
 	/**
-	 *
+	 * On donne ce trophée à la personne avec le meilleur score
 	 */
 	@Override
 	public Joueur award(ArrayList<Joueur> players) {
